@@ -2,14 +2,12 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true,
-  optionSuccessStatus: 200,
-}
+// Routes
+const loginRouter = require('./controllers/login')
 
-app.use(cors(corsOptions))
-
+app.use(cors())
 app.use(express.json())
+
+app.use('/login', loginRouter)
 
 module.exports = app
