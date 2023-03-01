@@ -1,15 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-  	"./src/**/*.{js,jsx,ts,tsx}"
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-			backgroundImage: {
-				'landing-bg': "url('../public/landing-bg.jpg')"
-			}
-		},
-		fontFamily: {
+      colors: {
+        red: '#810000',
+      },
+      backgroundImage: {
+        'landing-bg': "url('../public/landing-bg.jpg')",
+      },
+    },
+    fontFamily: {
       montserrat: ['Montserrat', 'sans-serif'],
     },
   },
