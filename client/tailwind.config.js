@@ -4,7 +4,14 @@ module.exports = {
   	"./src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+			backgroundImage: {
+				'landing-bg': "url('../public/landing-bg.jpg')"
+			}
+		},
+		fontFamily: {
+      montserrat: ['Montserrat', 'sans-serif'],
+    },
   },
   plugins: [],
 }
