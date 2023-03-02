@@ -4,7 +4,7 @@ import moviesService from '../services/movies'
 import MovieCard from '../components/movieList/MovieCard'
 
 const Movies = () => {
-  const [allMovies, setAllMovies] = useState({})
+  const [allMovies, setAllMovies] = useState([])
 
   useEffect(() => {
     const getAllMovies = async () => {
