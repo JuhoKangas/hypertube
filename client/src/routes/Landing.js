@@ -10,7 +10,7 @@ const Landing = () => {
       </p>
       <div className='flex flex-row justify-center gap-36 mt-40'>
         <div>
-          <button className='w-32  h-12 bg-red font-bold text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline font-montserrat'>
+          <button className='w-32  h-12 bg-dark-red font-bold text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline font-montserrat'>
             Log in
           </button>
         </div>

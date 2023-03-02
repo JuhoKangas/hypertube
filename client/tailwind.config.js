@@ -4,7 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        red: '#810000',
+        'dark-red': '#AF0404',
+        'black': '#252525',
+        'gray': '#414141',
+        'light-red': '#FF0000',
       },
       backgroundImage: {
         'landing-bg': "url('../public/landing-bg.jpg')",
