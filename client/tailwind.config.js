@@ -5,8 +5,8 @@ module.exports = {
     extend: {
       colors: {
         'dark-red': '#AF0404',
-        'black': '#252525',
-        'gray': '#414141',
+        'hyper-black': '#252525',
+        'hyper-gray': '#414141',
         'light-red': '#FF0000',
       },
       backgroundImage: {
