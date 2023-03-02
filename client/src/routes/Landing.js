@@ -16,7 +16,7 @@ const Landing = () => {
         </div>
         <div className='bg-white after:block after:w-[1px] after:h-10 after:mx-auto after:my-2'></div>
         <div>
-          <button className='w-32 h-12 bg-red font-bold text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline font-montserrat'>
+          <button className='w-32 h-12 bg-dark-red font-bold text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline font-montserrat'>
             Sign up
           </button>
         </div>
