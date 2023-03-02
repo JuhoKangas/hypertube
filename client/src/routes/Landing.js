@@ -5,8 +5,8 @@ const Landing = () => {
   //const navigate = useNavigate()
   return (
     <div className='flex flex-col h-screen bg-cover bg-landing-bg'>
-      <p className='text-white font-montserrat text-center font-bold mt-16 p-5 text-4xl'>
-        Watch the Latest Movies on Hypertube
+      <p className='text-white font-montserrat text-center font-thin mt-16 p-5 text-5xl'>
+        WATCH THE LATEST MOVIES ON HYPERTUBE
       </p>
       <div className='flex flex-row justify-center gap-36 mt-40'>
         <div>
