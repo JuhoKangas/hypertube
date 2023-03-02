@@ -1,15 +1,25 @@
+import { useEffect, useState } from 'react'
 import moviesService from '../services/movies'
 
-const Movies = () => {
-  const getAllMovies = async () => {
-    console.log(await moviesService.getAllMovies())
-  }
+import MovieCard from '../components/movieList/MovieCard'
 
-  getAllMovies()
+const Movies = () => {
+  const [allMovies, setAllMovies] = useState({})
+
+  useEffect(() => {
+    const getAllMovies = async () => {
+      const movieData = await moviesService.getAllMovies()
+      console.log(movieData)
+      setAllMovies(movieData.movies)
+    }
+    getAllMovies()
+  }, [])
 
   return (
-    <div>
-      <h1>MOVIES HERE</h1>
+    <div className='flex flex-wrap gap-16'>
+      {allMovies.map((movie) => (
+        <MovieCard key={movie.id} movie={movie} />
+      ))}
     </div>
   )
 }
