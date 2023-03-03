@@ -1,12 +1,11 @@
 import { useContext } from 'react'
-import { LanguageContext } from '../LanguageContext'
+import { LanguageContext } from '../context/LanguageContext'
 
 const LanguageButton = ({ children }) => {
-  const { changeLanguage: whateverLanguage } = useContext(LanguageContext)
+  const { changeLanguage } = useContext(LanguageContext)
 
   const handleLanguageButton = (e) => {
-    console.log(e.target.innerHTML)
-    whateverLanguage(e.target.innerHTML)
+    changeLanguage(e.target.innerHTML)
   }
 
   return (

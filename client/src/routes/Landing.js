@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import LanguageButton from '../components/LanguageButton'
-import { useMyLanguage } from '../LanguageContext'
+import { useMyLanguage } from '../context/LanguageContext'
 
 const Landing = () => {
   const navigate = useNavigate()
@@ -17,11 +17,13 @@ const Landing = () => {
 
   return (
     <div className="flex flex-col h-screen bg-cover bg-landing-bg">
+      {/* Language testing Components/buttons div: */}
       <div className="text-white text-right font-montserrat font-thin m-2">
         <LanguageButton>en</LanguageButton>
         <LanguageButton>fi</LanguageButton>
         <LanguageButton>es</LanguageButton>
       </div>
+      {/* Language testing preview div:  */}
       <div className="text-white">Your language is {language}</div>
       <p className="text-white font-montserrat text-center font-thin mt-16 p-5 text-5xl">
         WATCH THE LATEST MOVIES ON HYPERTUBE
