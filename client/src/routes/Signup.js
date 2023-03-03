@@ -89,14 +89,15 @@ const Signup = () => {
       return
     }
 
-/*     const errors = await validateForm(formData)
+     const errors = await validateForm(formData)
+		 console.log(errors)
 
     if (errors !== {}) {
       for (const error in errors) {
         toast.error(errors[error])
         return
       }
-    } */
+    } 
 
     const newUser = {
       firstname: formData.firstname,

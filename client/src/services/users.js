@@ -35,7 +35,7 @@ const upload = (userPhoto) => {
 }
 
 const getUserByUsername = (username) => {
-  return axios.get(`${baseUrl}/user/${username}`, { withCredentials: true })
+  return axios.get(`${baseUrl}/user/${username}`)
 }
 
 const logout = (userId) => {
