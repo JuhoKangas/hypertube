@@ -21,6 +21,7 @@ export const enUK = {
 
   //messages
   m_landing: 'WATCH THE LATEST MOVIES ON HYPERTUBE',
+  m_movies_search: 'Search for your movies here',
 
   //errors
 }
