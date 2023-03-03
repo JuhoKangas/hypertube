@@ -20,7 +20,11 @@ export const fiFI = {
   sortBy: 'Lajittele',
 
   //messages
-  m_landing: 'KATSO UUSIMMAT ELOKUVAT HYPERTUBE:SSA',
+  m_landing: 'KATSO UUSIMMAT ELOKUVAT HYPERTUBESTA',
+  m_movies_search: 'Search for your movies here',
+  m_loading: 'Vittu oota...',
+  m_page_end:
+    "You arrived to the bottom of the page! Please search for the movie if you couldn't find what you were looking for yet",
 
   //errors
 }
