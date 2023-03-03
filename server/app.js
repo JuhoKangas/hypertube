@@ -6,12 +6,16 @@ require('dotenv').config()
 
 // Routes
 const loginRouter = require('./controllers/login')
+const emailRouter = require('./controllers/email')
+const usersRouter = require('./controllers/users')
 
 app.use(cors())
 app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use('/login', loginRouter)
+app.use('/email', emailRouter)
+app.use('/users', usersRouter)
 
 app.use(middleware.unknownEndpoint)
 

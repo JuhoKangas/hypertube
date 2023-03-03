@@ -5,10 +5,10 @@ CREATE TABLE IF NOT EXISTS users (
   lastname VARCHAR(1000) NOT NULL,
 	email VARCHAR(1000), 
 	password VARCHAR(1000) NOT NULL,
-	profile_picture VARCHAR(1000),
+	profile_picture VARCHAR(1000) DEFAULT 'none',
 	completed BOOLEAN DEFAULT 'f',
 	token VARCHAR(1000),
-	language VARCHAR(255) DEFAULT 'en',
+	language VARCHAR(255) DEFAULT 'en'
 );
 
 CREATE TABLE IF NOT EXISTS comments (
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS comments (
 	user_id INT NOT NULL,
 	imdb_id VARCHAR(255) NOT NULL,
 	content VARCHAR(1000) NOT NULL,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS downloads (

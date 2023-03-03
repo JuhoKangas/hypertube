@@ -1,16 +1,19 @@
 import React from 'react'
 import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import userService from '../services/users'
 import { checkUser } from '../utils/checkUser'
 
 const Login = () => {
+  const navigate = useNavigate()
+
   const login = async (event) => {
     event.preventDefault()
     const username = event.target.username.value
     const password = event.target.password.value
     if (await checkUser(username, password)) {
       userService.loginUser(username, password)
+      navigate('/login')
     } else {
       toast.error('Username or password was incorrect')
     }

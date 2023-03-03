@@ -89,14 +89,14 @@ const Signup = () => {
       return
     }
 
-    const errors = await validateForm(formData)
+/*     const errors = await validateForm(formData)
 
     if (errors !== {}) {
       for (const error in errors) {
         toast.error(errors[error])
         return
       }
-    }
+    } */
 
     const newUser = {
       firstname: formData.firstname,
@@ -106,14 +106,14 @@ const Signup = () => {
       email: formData.email,
     }
 
-    userService.create(newUser)
+    await userService.create(newUser)
 
-    setRegistrationLinkSent(true)
+    //setRegistrationLinkSent(true)
   }
 
   if (registrationLinkSent) {
     return (
-      <div className='flex flex-col gap-5 justify-center items-center h-screen'>
+      <div className='flex flex-col gap-5 justify-center items-center h-screen bg-hyper-black'>
         <p className='text-xl text-gray-500'>{'<img />'}</p>
         <h1 className='text-3xl text-white'>The link has been sent</h1>
         <p className='text-l text-gray-500'>
@@ -213,14 +213,14 @@ const Signup = () => {
             <div className='mb-4'>
               <label
                 className=' font-montserrat font-medium mb-2 text-white'
-                htmlFor='firstName'
+                htmlFor='firstname'
               >
                 First Name
               </label>
               <input
                 type='text'
                 id='first-name'
-                name='firstName'
+                name='firstname'
                 placeholder='e.g Pedro'
                 className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.firstname}
@@ -232,14 +232,14 @@ const Signup = () => {
             <div className='mb-4'>
               <label
                 className=' font-montserrat font-medium mb-2 text-white'
-                htmlFor='lastName'
+                htmlFor='lastname'
               >
                 Last Name
               </label>
               <input
                 type='text'
                 id='last-name'
-                name='lastName'
+                name='lastname'
                 placeholder='e.g. Pascal'
                 className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.lastname}
