@@ -2,8 +2,9 @@ const moviesRouter = require('express').Router()
 const axios = require('axios')
 
 moviesRouter.get('/', async (req, res) => {
+  console.log(req.query)
   const allMovies = await axios.get(
-    'https://yts.torrentbay.to/api/v2/list_movies.jsonp?sort_by=like_count'
+    'https://yts.torrentbay.to/api/v2/list_movies.json?sort_by=like_count'
   )
   const stringified = JSON.stringify(allMovies.data.data)
 
