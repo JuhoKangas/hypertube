@@ -14,8 +14,13 @@ export const skSK = {
   subtitles: 'Titulky',
 
   //Buttons
-  login: 'Prihlásenie',
+  logIn: 'Prihlásenie',
   signUp: 'Registrácia',
-  search: '',
-  sortBy: '',
+  search: 'Search',
+  sortBy: 'Sort by',
+
+  //messages
+  m_landing: 'WATCH THE LATEST MOVIES ON HYPERTUBE',
+
+  //errors
 }

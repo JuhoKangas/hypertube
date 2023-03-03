@@ -20,6 +20,7 @@ export const enUK = {
   sortBy: 'Sort by',
 
   //messages
+  m_landing: 'WATCH THE LATEST MOVIES ON HYPERTUBE',
 
   //errors
 }

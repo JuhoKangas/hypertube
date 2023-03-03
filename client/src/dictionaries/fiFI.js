@@ -12,4 +12,15 @@ export const fiFI = {
   comments: 'Kommentit',
   resolution: 'Resoluutio',
   subtitles: 'Tekstitykset',
+
+  //Buttons
+  logIn: 'Kirjaudu sisään',
+  signUp: 'Rekisteröidy',
+  search: 'Haku',
+  sortBy: 'Lajittele',
+
+  //messages
+  m_landing: 'KATSO UUSIMMAT ELOKUVAT HYPERTUBE:SSA',
+
+  //errors
 }

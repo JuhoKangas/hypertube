@@ -12,4 +12,15 @@ export const esES = {
   comments: 'Comentarios',
   resolution: 'Resolución',
   subtitles: 'Subtitulos',
+
+  //Buttons
+  logIn: 'Iniciar sesión',
+  signUp: 'Registrar',
+  search: 'Buscar',
+  sortBy: 'Ordenar',
+
+  //messages
+  m_landing: 'MIRA LAS ÚLTIMAS PELÍCULAS EN HYPERTUBE',
+
+  //errors
 }
