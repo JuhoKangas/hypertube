@@ -30,7 +30,10 @@ export const fiFI = {
   m_signup_email:
     'Please follow the instructions on the email to finish setting up your profile',
   m_create_account: 'Create an account',
+  m_create_account_join: 'Not yet a member? Create an account!',
   m_already_account: 'Already have an account? Log in!',
+  m_login_account: 'Log in to your account',
+  m_password_forgot: 'Forgot password? Reset it here',
 
   //Signup errors
   e_firstname_add: 'Please add first name',

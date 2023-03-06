@@ -30,7 +30,10 @@ export const esES = {
   m_signup_email:
     'Por favor, sigue las instrucciones en el correo electrónico para acabar de configurar tu cuenta.',
   m_create_account: 'Crea una cuenta',
+  m_create_account_join: 'Aún no eres miembro? Crea una cuenta!',
   m_already_account: 'Ya tienes una cuenta? Conéctate',
+  m_login_account: 'Inicia sesión con tu cuenta',
+  m_password_forgot: 'Se te olvidó la contraseña?',
 
   //Signup errors
   e_firstname_add: 'Por favor, añade un nombre',
