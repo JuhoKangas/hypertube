@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const MovieCard = ({ movie }) => {
   const [coverImage, setCoverImage] = useState('')
+  const navigate = useNavigate()
 
   const checkIfImageExists = (url, callback) => {
     const img = new Image()
@@ -31,8 +33,15 @@ const MovieCard = ({ movie }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const handleClick = () => {
+    navigate(`/movies/${movie.id}`)
+  }
+
   return (
-    <div className='rounded-md w-96 font-montserrat text-white hover:scale-105 transition-all cursor-pointer group'>
+    <div
+      onClick={handleClick}
+      className='rounded-md w-96 font-montserrat text-white hover:scale-105 transition-all cursor-pointer group'
+    >
       <div className='relative w-full h-full'>
         <img className='rounded-lg w-full h-full' src={coverImage} alt='' />
         <div className='absolute flex flex-col justify-end bg-gradient-to-t from-black/70 gap-4 w-full h-full opacity-0 bottom-0 group-hover:opacity-100 transition-all rounded-lg p-8'>

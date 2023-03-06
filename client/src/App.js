@@ -1,6 +1,6 @@
 import React from 'react'
 import { LanguageProvider } from './context/LanguageContext'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useMatch } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
 import Landing from './routes/Landing'
@@ -9,13 +9,18 @@ import Login from './routes/Login'
 import Signup from './routes/Signup'
 import Footer from './components/Footer'
 import ResetPassword from './routes/ResetPassword'
+import MoviePage from './routes/MoviePage'
 
 const App = () => {
+  const match = useMatch('/movies/:id')
+  const movieId = match ? match.params.id : ''
+
   return (
     <div>
       <LanguageProvider>
         <Toaster position='top-center' reverseOrder={false} />
         <Routes>
+          <Route path='/movies/:id' element={<MoviePage id={movieId} />} />
           <Route path={'/'} element={<Landing />}></Route>
           <Route path={'/movies'} element={<Movies />} />
           <Route path={'/login'} element={<Login />}></Route>

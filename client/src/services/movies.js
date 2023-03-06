@@ -11,7 +11,7 @@ const getNextMovies = (page) => {
 }
 
 const getMovieData = (id) => {
-  return axios.get(`${baseUrl}/movies/${id}`).then((res) => res.data)
+  return axios.get(`${baseUrl}/id/${id}`).then((res) => res.data)
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
