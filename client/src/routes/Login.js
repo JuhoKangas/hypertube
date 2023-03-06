@@ -13,7 +13,7 @@ const Login = () => {
     const password = event.target.password.value
     if (await checkUser(username, password)) {
       await userService.loginUser(username, password)
-      navigate('/home')
+      navigate('/movies')
     } else {
       toast.error('Username or password was incorrect')
     }
