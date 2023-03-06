@@ -6,6 +6,7 @@ import { useLoggedUser } from '../context/UserContext'
 import userService from '../services/users'
 import { checkUser } from '../utils/checkUser'
 import { translate } from '../dictionaries/translate'
+import LanguageOptions from '../components/LanguageOptions'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -30,6 +31,7 @@ const Login = () => {
   }
   return (
     <div className='md:h-screen h-full flex flex-col bg-hyper-black'>
+      <LanguageOptions></LanguageOptions>
       <div>
         <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-20'>
           {dictionary.m_login_account}

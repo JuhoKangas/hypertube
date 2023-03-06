@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import LanguageButton from '../components/LanguageButton'
+import LanguageOptions from '../components/LanguageOptions'
 import { useMyLanguage } from '../context/LanguageContext'
 import { useLoggedUser } from '../context/UserContext'
 import { translate } from '../dictionaries/translate'
@@ -21,19 +21,14 @@ const Landing = () => {
   }
   return (
     <div className='flex flex-col h-screen bg-cover bg-landing-bg'>
-      {/* Language testing Components/buttons div: */}
-      <div className='text-white text-right font-montserrat font-thin m-2'>
-        <LanguageButton>en</LanguageButton>
-        <LanguageButton>fi</LanguageButton>
-        <LanguageButton>es</LanguageButton>
-        <LanguageButton>sk</LanguageButton>
-      </div>
-      {/* Language testing preview div:  */}
+      <LanguageOptions></LanguageOptions>
+      {/* div for testing state: */}
       <div className='text-white'>
         Your language is {language}, so email is {dictionary.email}.
         <br />
         LoggedUser language is {loggedUser.language}.
       </div>
+      {/* end of div for testing state */}
       <p className='text-white font-montserrat text-center font-thin mt-16 p-5 text-5xl'>
         {dictionary.m_landing}
       </p>

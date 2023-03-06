@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
+import LanguageOptions from '../components/LanguageOptions'
 import { useMyLanguage } from '../context/LanguageContext'
 import { translate } from '../dictionaries/translate'
 import emailService from '../services/email'
@@ -125,6 +126,7 @@ const Signup = () => {
 
   return (
     <div className='md:h-screen h-full flex flex-col bg-hyper-black'>
+      <LanguageOptions></LanguageOptions>
       <div>
         <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-10'>
           {dictionary.m_create_account}
