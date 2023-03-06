@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
+import { useMyLanguage } from '../context/LanguageContext'
+import { translate } from '../dictionaries/translate'
 import emailService from '../services/email'
 import userService from '../services/users'
 
 const Signup = () => {
+  const { language } = useMyLanguage()
+  const dictionary = translate(language)
+
   const [confirmPassword, setConfirmPassword] = useState('')
   const [formData, setFormData] = useState({
     firstname: '',
@@ -20,52 +25,48 @@ const Signup = () => {
     const errors = {}
 
     if (!formData.firstname) {
-      errors.firstname = 'Please add first name'
+      errors.firstname = dictionary.e_firstname_add
     } else if (formData.firstname.length > 1000) {
-      errors.firstname =
-        "Your first name can't realistically be over 1000 characters"
+      errors.firstname = dictionary.e_firstname_length
     }
 
     if (!formData.lastname) {
-      errors.lastname = 'Please add last name'
+      errors.lastname = dictionary.e_lastname_add
     } else if (formData.lastname.length > 1000) {
-      errors.lastname =
-        "Your last name can't realistically be over 1000 characters"
+      errors.lastname = dictionary.e_lastname_length
     }
 
     if (!formData.username) {
-      errors.username = 'Please add username'
+      errors.username = dictionary.e_lastname_add
     } else if (formData.username.length > 60) {
-      errors.username =
-        "Your username can't be over 60 characters. It's just arbitary limit that I came up with, in fact our database would handle usernames up to 1000 characters but it would probably break the styling of the page so we just gonna have it like this now."
+      errors.username = dictionary.e_username_length
     } else {
       const findUserByUsername = await userService.getUserByUsername(
         formData.username
       )
       if (findUserByUsername.data.user.rowCount > 0) {
-        errors.username = 'Username is already taken'
+        errors.username = dictionary.e_username_taken
       }
     }
 
     if (!formData.password) {
-      errors.password = 'Please add password'
+      errors.password = dictionary.e_password_add
     } else if (
       !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(formData.password)
     ) {
-      errors.password =
-        'Password must be at least 8 characters and contain only letters and numbers'
+      errors.password = dictionary.e_password_requirements
     }
 
     if (!formData.email) {
-      errors.email = 'Please add your email'
+      errors.email = dictionary.e_email_add
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formData.email)
     ) {
-      errors.email = 'Please add proper email'
+      errors.email = dictionary.e_email_proper
     } else {
       const userExists = await emailService.getUserByEmail(formData.email)
       if (userExists.userFound) {
-        errors.email = 'Email already in use'
+        errors.email = dictionary.e_email_taken
       }
     }
 
@@ -85,19 +86,19 @@ const Signup = () => {
   const handleRegister = async (e) => {
     e.preventDefault()
     if (formData.password !== confirmPassword) {
-      toast.error('Passwords do not match!')
+      toast.error(dictionary.e_password_match)
       return
     }
 
-     const errors = await validateForm(formData)
-		 console.log(errors)
+    const errors = await validateForm(formData)
+    console.log(errors)
 
     if (errors !== {}) {
       for (const error in errors) {
         toast.error(errors[error])
         return
       }
-    } 
+    }
 
     const newUser = {
       firstname: formData.firstname,
@@ -116,11 +117,8 @@ const Signup = () => {
     return (
       <div className='flex flex-col gap-5 justify-center items-center h-screen bg-hyper-black'>
         <p className='text-xl text-gray-500'>{'<img />'}</p>
-        <h1 className='text-3xl text-white'>The link has been sent</h1>
-        <p className='text-l text-gray-500'>
-          Please follow the instructions on the email to finish setting up your
-          profile
-        </p>
+        <h1 className='text-3xl text-white'>{dictionary.m_link_sent}</h1>
+        <p className='text-l text-gray-500'>{dictionary.m_signup_email}</p>
       </div>
     )
   }
@@ -129,7 +127,7 @@ const Signup = () => {
     <div className='md:h-screen h-full flex flex-col bg-hyper-black'>
       <div>
         <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-10'>
-          Create an account
+          {dictionary.m_create_account}
         </h1>
       </div>
       <div className='flex justify-center'>
@@ -143,7 +141,7 @@ const Signup = () => {
                 className='font-montserrat font-medium mb-2 text-white'
                 htmlFor='username'
               >
-                Username
+                {dictionary.username}
               </label>
               <input
                 type='text'
@@ -161,7 +159,7 @@ const Signup = () => {
                 className='font-montserrat font-medium mb-2 text-white'
                 htmlFor='email'
               >
-                Email
+                {dictionary.email}
               </label>
               <input
                 type='email'
@@ -179,7 +177,7 @@ const Signup = () => {
                 className=' font-montserrat font-medium mb-2 text-white'
                 htmlFor='password'
               >
-                Password
+                {dictionary.password}
               </label>
               <input
                 type='password'
@@ -197,7 +195,7 @@ const Signup = () => {
                 className=' font-montserrat font-medium mb-2 text-white'
                 htmlFor='password'
               >
-                Repeat Password
+                {dictionary.password_repeat}
               </label>
               <input
                 type='password'
@@ -216,7 +214,7 @@ const Signup = () => {
                 className=' font-montserrat font-medium mb-2 text-white'
                 htmlFor='firstname'
               >
-                First Name
+                {dictionary.firstname}
               </label>
               <input
                 type='text'
@@ -235,7 +233,7 @@ const Signup = () => {
                 className=' font-montserrat font-medium mb-2 text-white'
                 htmlFor='lastname'
               >
-                Last Name
+                {dictionary.lastname}
               </label>
               <input
                 type='text'
@@ -253,7 +251,7 @@ const Signup = () => {
             <input
               className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
               type='submit'
-              value='Register'
+              value={dictionary.signUp}
             />
           </div>
           <hr />
@@ -264,7 +262,7 @@ const Signup = () => {
           className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
           to='/login'
         >
-          Already have an account? Log in!
+          {dictionary.m_already_account}
         </Link>
       </div>
     </div>
