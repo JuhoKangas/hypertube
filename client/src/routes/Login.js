@@ -1,24 +1,31 @@
 import React from 'react'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
+import { useMyLanguage } from '../context/LanguageContext'
+import { useLoggedUser } from '../context/UserContext'
 import userService from '../services/users'
 import { checkUser } from '../utils/checkUser'
 
 const Login = () => {
   const navigate = useNavigate()
+  const { changeLoggedUser } = useLoggedUser()
+  const { changeLanguage } = useMyLanguage()
 
   const login = async (event) => {
     event.preventDefault()
     const username = event.target.username.value
     const password = event.target.password.value
     if (await checkUser(username, password)) {
-      await userService.loginUser(username, password)
+      const res = await userService.loginUser(username, password)
+      const user = res.data
+      changeLoggedUser(user)
+      //check login worked?
+      changeLanguage(user.language)
       navigate('/movies')
     } else {
       toast.error('Username or password was incorrect')
     }
   }
-
   return (
     <div className='md:h-screen h-full flex flex-col bg-hyper-black'>
       <div>
