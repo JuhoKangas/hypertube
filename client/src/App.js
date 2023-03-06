@@ -7,7 +7,6 @@ import Landing from './routes/Landing'
 import Movies from './routes/Movies'
 import Login from './routes/Login'
 import Signup from './routes/Signup'
-import Home from './routes/Home'
 import Footer from './components/Footer'
 import ResetPassword from './routes/ResetPassword'
 
