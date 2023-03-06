@@ -10,22 +10,25 @@ import Signup from './routes/Signup'
 import Home from './routes/Home'
 import Footer from './components/Footer'
 import ResetPassword from './routes/ResetPassword'
+import { UserProvider } from './context/UserContext'
 
 const App = () => {
   return (
     <div>
-			 <LanguageProvider>
-        <Toaster position='top-center' reverseOrder={false} />
-        <Routes>
-          <Route path={'/'} element={<Landing />}></Route>
-					<Route path={'/movies'} element={<Movies />} />
-          <Route path={'/login'} element={<Login />}></Route>
-          <Route path={'/signup'} element={<Signup />}></Route>
-          <Route path={'/reset_password'} element={<ResetPassword />}></Route>
-					<Route path={'/home'} element={<Home />}></Route>
-        </Routes>
-      <Footer />
-			</LanguageProvider>
+      <LanguageProvider>
+        <UserProvider>
+          <Toaster position='top-center' reverseOrder={false} />
+          <Routes>
+            <Route path={'/'} element={<Landing />}></Route>
+            <Route path={'/movies'} element={<Movies />} />
+            <Route path={'/login'} element={<Login />}></Route>
+            <Route path={'/signup'} element={<Signup />}></Route>
+            <Route path={'/reset_password'} element={<ResetPassword />}></Route>
+            <Route path={'/home'} element={<Home />}></Route>
+          </Routes>
+          <Footer />
+        </UserProvider>
+      </LanguageProvider>
     </div>
   )
 }
