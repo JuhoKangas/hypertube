@@ -7,25 +7,23 @@ import Landing from './routes/Landing'
 import Movies from './routes/Movies'
 import Login from './routes/Login'
 import Signup from './routes/Signup'
-import Home from './routes/Home'
 import Footer from './components/Footer'
 import ResetPassword from './routes/ResetPassword'
 
 const App = () => {
   return (
     <div>
-			 <LanguageProvider>
+      <LanguageProvider>
         <Toaster position='top-center' reverseOrder={false} />
         <Routes>
           <Route path={'/'} element={<Landing />}></Route>
-					<Route path={'/movies'} element={<Movies />} />
+          <Route path={'/movies'} element={<Movies />} />
           <Route path={'/login'} element={<Login />}></Route>
           <Route path={'/signup'} element={<Signup />}></Route>
           <Route path={'/reset_password'} element={<ResetPassword />}></Route>
-					<Route path={'/home'} element={<Home />}></Route>
         </Routes>
-      <Footer />
-			</LanguageProvider>
+        <Footer />
+      </LanguageProvider>
     </div>
   )
 }
