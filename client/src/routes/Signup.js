@@ -107,6 +107,7 @@ const Signup = () => {
       username: formData.username,
       password: formData.password,
       email: formData.email,
+      language: language,
     }
 
     await userService.create(newUser)
