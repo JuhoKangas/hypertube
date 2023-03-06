@@ -109,7 +109,7 @@ const Signup = () => {
 
     await userService.create(newUser)
 
-    //setRegistrationLinkSent(true)
+    setRegistrationLinkSent(true)
   }
 
   if (registrationLinkSent) {

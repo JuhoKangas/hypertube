@@ -37,7 +37,7 @@ emailRouter.get('/:email', async (req, res) => {
       )
 
       if (updateToken.rowCount === 1) {
-        sendEmail('reset', email, token, 0, 0)
+        sendEmail('reset', email, token)
       } else {
         throw 'Something went wrong'
       }

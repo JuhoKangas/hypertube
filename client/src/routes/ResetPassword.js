@@ -75,7 +75,7 @@ const ResetPassword = () => {
 
   if (validToken) {
     return (
-      <div className='flex flex-col gap-5 justify-center items-center h-screen'>
+      <div className='bg-hyper-black flex flex-col gap-5 justify-center items-center h-screen'>
         <p className='text-xl text-gray-500'>{'<Succezione! />'}</p>
         <h1 className='text-3xl text-white'>Time to change the password!</h1>
         <p className='text-l text-gray-500'>Type in your new password!</p>
@@ -85,8 +85,7 @@ const ResetPassword = () => {
             onChange={(e) => setNewPassword(e.target.value)}
             type='password'
             placeholder='New Password'
-            className='mt-10 font-montserrat block w-full rounded-md border-gray-300 shadow-sm text-gray-700
-            focus:border-chitty-chitty focus:ring focus:ring-chitty-chitty focus:ring-opacity-20'
+            className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
             required
           />
           <input
@@ -94,13 +93,11 @@ const ResetPassword = () => {
             onChange={(e) => setNewPasswordAgain(e.target.value)}
             type='password'
             placeholder='New Password again'
-            className='mt-10 font-montserrat block w-full rounded-md border-gray-300 shadow-sm text-gray-700
-            focus:border-chitty-chitty focus:ring focus:ring-chitty-chitty focus:ring-opacity-20'
+            className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
             required
           />
           <input
-            className='bg-gradient-to-r from-chitty-chitty to-bang-bang hover:bg-gradient-to-l py-3 px-5 
-              mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl'
+            className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
             type='submit'
             value='Reset Password'
           />
