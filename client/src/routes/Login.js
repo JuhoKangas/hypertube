@@ -19,9 +19,9 @@ const Login = () => {
     const username = event.target.username.value
     const password = event.target.password.value
     if (await checkUser(username, password)) {
-      await userService.loginUser(username, password)
       const res = await userService.loginUser(username, password)
       const user = res.data
+      localStorage.setItem('loggedUser', JSON.stringify(user))
       changeLoggedUser(user)
       //check login worked?
       changeLanguage(user.language)

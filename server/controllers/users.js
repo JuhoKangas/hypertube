@@ -60,19 +60,22 @@ usersRouter.post('/', async (request, response) => {
   }
 })
 
-usersRouter.post('/logout', async (request, response) => {
-  /*   await db.query('UPDATE users SET online = 0 WHERE id = $1', [
-    request.body.userId,
-  ]) */
-  response
-    .cookie('authorization', '', {
-      maxAge: 1,
-      path: '/',
-      sameSite: 'none',
-      secure: true,
-      httpOnly: false,
+usersRouter.get('/:id', async (request, response) => {
+  try {
+    const data = await db.query('SELECT * FROM users WHERE id = $1', [
+      request.params.id,
+    ])
+
+    const user = data.rows[0]
+		console.log(user)
+    response.json({
+      ...user,
+      profilePicture: user.profile_picture,
+      password: '',
     })
-    .send({})
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 module.exports = usersRouter

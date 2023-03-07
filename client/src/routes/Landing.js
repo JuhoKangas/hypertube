@@ -2,14 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import LanguageOptions from '../components/LanguageOptions'
 import { useMyLanguage } from '../context/LanguageContext'
-import { useLoggedUser } from '../context/UserContext'
 import { translate } from '../dictionaries/translate'
 
 const Landing = () => {
   const navigate = useNavigate()
   const { language } = useMyLanguage()
-  const { loggedUser } = useLoggedUser()
-  console.log('LANDING loggedUser: ', loggedUser)
   const dictionary = translate(language)
 
   const navigateLogin = () => {
@@ -22,13 +19,6 @@ const Landing = () => {
   return (
     <div className='flex flex-col h-screen bg-cover bg-landing-bg'>
       <LanguageOptions></LanguageOptions>
-      {/* div for testing state: */}
-      <div className='text-white'>
-        Your language is {language}, so email is {dictionary.email}.
-        <br />
-        LoggedUser language is {loggedUser.language}.
-      </div>
-      {/* end of div for testing state */}
       <p className='text-white font-montserrat text-center font-thin mt-16 p-5 text-5xl'>
         {dictionary.m_landing}
       </p>

@@ -1,23 +1,23 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import userService from '../services/users'
+import { useLoggedUser } from '../context/UserContext'
 
 const Navbar = () => {
   const navigate = useNavigate()
+  const { loggedUser, changeLoggedUser } = useLoggedUser()
 
-  const navigation = [
-    { name: 'Movies', href: '/movies' },
-    //{ name: 'Profile', href: '/profile' },
-  ]
+  const navigation = [{ name: 'Movies', href: '/movies' }]
 
   const handleLogout = async (event) => {
     event.preventDefault()
-    userService.logout()
-    //dispatch(logoutUser(loggedInUser.id))
+    window.localStorage.clear()
+    changeLoggedUser({})
     navigate('/')
   }
+
+  if (!loggedUser.id) return
 
   return (
     <Disclosure as='nav' className='bg-hyper-black'>
@@ -53,8 +53,8 @@ const Navbar = () => {
               </div>
               <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
                 <div className='flex gap-4 mr-2'>
-                  <p className='font-montserrat text-white pt-1'>
-                    USERNAME HERE
+                  <p className='font-montserrat text-white pt-1 uppercase'>
+                    {loggedUser.username}
                   </p>
                 </div>
                 {/* Profile dropdown */}
@@ -65,7 +65,7 @@ const Navbar = () => {
                       {/* USER PHOTO */}
                       <img
                         className='h-8 w-8 rounded-full'
-                        /* src={`http://localhost:3001/uploads/${loggedInUser.profilePicture}`} */
+                        /* src={`http://localhost:3001/uploads/${loggedUser.profilePicture}`} */
                         src='dog.png'
                         alt='user profilepicture'
                       />

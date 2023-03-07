@@ -32,7 +32,6 @@ const Movies = () => {
     setAllMovies(allMovies.concat(newMovies.movies))
     setPage((prev) => prev + 1)
   }
-
   return (
     <div className='bg-hyper-black'>
       <MovieSearch />
