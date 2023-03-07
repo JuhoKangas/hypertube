@@ -8,12 +8,14 @@ import Movies from './routes/Movies'
 import Login from './routes/Login'
 import Signup from './routes/Signup'
 import Footer from './components/Footer'
+import Navbar from './components/Navbar'
 import ResetPassword from './routes/ResetPassword'
 
 const App = () => {
   return (
     <div>
       <LanguageProvider>
+        <Navbar />
         <Toaster position='top-center' reverseOrder={false} />
         <Routes>
           <Route path={'/'} element={<Landing />}></Route>
