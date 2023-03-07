@@ -24,7 +24,7 @@ moviesRouter.get('/page/:page', async (req, res) => {
 moviesRouter.get('/id/:id', async (req, res) => {
   const movieId = req.params.id
   const movieData = await axios.get(
-    `https://yts.torrentbay.to/api/v2/movie_details.json?movie_id=${movieId}`
+    `https://yts.torrentbay.to/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`
   )
 
   const stringified = JSON.stringify(movieData.data.data)
