@@ -8,8 +8,10 @@ import Movies from './routes/Movies'
 import Login from './routes/Login'
 import Signup from './routes/Signup'
 import Footer from './components/Footer'
+import Navbar from './components/Navbar'
 import ResetPassword from './routes/ResetPassword'
 import MoviePage from './routes/MoviePage'
+import { UserProvider } from './context/UserContext'
 
 const App = () => {
   const match = useMatch('/movies/:id')
@@ -18,16 +20,19 @@ const App = () => {
   return (
     <div>
       <LanguageProvider>
-        <Toaster position='top-center' reverseOrder={false} />
-        <Routes>
-          <Route path='/movies/:id' element={<MoviePage id={movieId} />} />
-          <Route path={'/'} element={<Landing />}></Route>
-          <Route path={'/movies'} element={<Movies />} />
-          <Route path={'/login'} element={<Login />}></Route>
-          <Route path={'/signup'} element={<Signup />}></Route>
-          <Route path={'/reset_password'} element={<ResetPassword />}></Route>
-        </Routes>
-        <Footer />
+        <UserProvider>
+          <Navbar />
+          <Toaster position='top-center' reverseOrder={false} />
+          <Routes>
+            <Route path='/movies/:id' element={<MoviePage id={movieId} />} />
+            <Route path={'/'} element={<Landing />}></Route>
+            <Route path={'/movies'} element={<Movies />} />
+            <Route path={'/login'} element={<Login />}></Route>
+            <Route path={'/signup'} element={<Signup />}></Route>
+            <Route path={'/reset_password'} element={<ResetPassword />}></Route>
+          </Routes>
+          <Footer />
+        </UserProvider>
       </LanguageProvider>
     </div>
   )

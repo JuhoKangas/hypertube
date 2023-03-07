@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/users'
 const loginUrl = 'http://localhost:3001/login'
-const logoutUrl = 'http://localhost:3001/users/logout'
 const settingsUrl = 'http://localhost:3001/settings'
 const uploadUrl = 'http://localhost:3001/photos'
 const uploadPicUrl = 'http://localhost:3001/upload'
@@ -38,15 +37,10 @@ const getUserByUsername = (username) => {
   return axios.get(`${baseUrl}/user/${username}`)
 }
 
-const logout = (userId) => {
-  return axios.post(logoutUrl, { userId: userId }, { withCredentials: true })
-}
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   create,
   loginUser,
-  logout,
   update,
   getUserByUsername,
   upload,

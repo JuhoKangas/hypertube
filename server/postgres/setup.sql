@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
   lastname VARCHAR(1000) NOT NULL,
 	email VARCHAR(1000), 
 	password VARCHAR(1000) NOT NULL,
-	profile_picture VARCHAR(1000) DEFAULT 'none',
+	profile_picture VARCHAR(1000) DEFAULT 'dog.png',
 	completed BOOLEAN DEFAULT 'f',
 	token VARCHAR(1000),
 	language VARCHAR(255) DEFAULT 'en'

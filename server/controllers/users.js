@@ -24,12 +24,13 @@ usersRouter.post('/', async (request, response) => {
     data.email &&
     data.firstname &&
     data.lastname &&
-    data.username
+    data.username &&
+    data.language
   ) {
     try {
       //Create Token for the email, use jwt and the email
       const token = jwt.sign({ email: data.email }, process.env.SECRET)
-			console.log(token)
+      console.log(token)
 
       //Send email to the user with the token
       sendEmail('activate', data.email, token)
@@ -47,7 +48,7 @@ usersRouter.post('/', async (request, response) => {
           hashedPassword,
           sanitizedEmail,
           token,
-          'en',
+          data.language,
         ]
       )
       response.status(201).json({ results })
@@ -59,19 +60,22 @@ usersRouter.post('/', async (request, response) => {
   }
 })
 
-usersRouter.post('/logout', async (request, response) => {
-/*   await db.query('UPDATE users SET online = 0 WHERE id = $1', [
-    request.body.userId,
-  ]) */
-  response
-    .cookie('authorization', '', {
-      maxAge: 1,
-      path: '/',
-      sameSite: 'none',
-      secure: true,
-      httpOnly: false,
+usersRouter.get('/:id', async (request, response) => {
+  try {
+    const data = await db.query('SELECT * FROM users WHERE id = $1', [
+      request.params.id,
+    ])
+
+    const user = data.rows[0]
+		console.log(user)
+    response.json({
+      ...user,
+      profilePicture: user.profile_picture,
+      password: '',
     })
-    .send({})
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 module.exports = usersRouter

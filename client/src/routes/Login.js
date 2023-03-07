@@ -1,29 +1,41 @@
 import React from 'react'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
+import { useMyLanguage } from '../context/LanguageContext'
+import { useLoggedUser } from '../context/UserContext'
 import userService from '../services/users'
 import { checkUser } from '../utils/checkUser'
+import { translate } from '../dictionaries/translate'
+import LanguageOptions from '../components/LanguageOptions'
 
 const Login = () => {
   const navigate = useNavigate()
+  const { changeLoggedUser } = useLoggedUser()
+  const { language, changeLanguage } = useMyLanguage()
+  const dictionary = translate(language)
 
   const login = async (event) => {
     event.preventDefault()
     const username = event.target.username.value
     const password = event.target.password.value
     if (await checkUser(username, password)) {
-      await userService.loginUser(username, password)
+      const res = await userService.loginUser(username, password)
+      const user = res.data
+      localStorage.setItem('loggedUser', JSON.stringify(user))
+      changeLoggedUser(user)
+      //check login worked?
+      changeLanguage(user.language)
       navigate('/movies')
     } else {
       toast.error('Username or password was incorrect')
     }
   }
-
   return (
     <div className='md:h-screen h-full flex flex-col bg-hyper-black'>
+      <LanguageOptions></LanguageOptions>
       <div>
         <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-20'>
-          Log in to your account
+          {dictionary.m_login_account}
         </h1>
       </div>
 
@@ -37,7 +49,7 @@ const Login = () => {
               className='text-white font-montserrat font-medium mb-2'
               htmlFor='username'
             >
-              Username
+              {dictionary.username}
             </label>
             <input
               type='text'
@@ -54,7 +66,7 @@ const Login = () => {
               className='text-white font-montserrat font-medium mb-2'
               htmlFor='password'
             >
-              Password
+              {dictionary.password}
             </label>
             <input
               type='password'
@@ -80,7 +92,7 @@ const Login = () => {
               className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
               to='/reset_password'
             >
-              Forgot password?
+              {dictionary.m_password_forgot}
             </Link>
           </div>
           <hr />
@@ -89,7 +101,7 @@ const Login = () => {
               className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
               href='/signup'
             >
-              Not yet a member? Create an account!
+              {dictionary.m_create_account_join}
             </a>
           </div>
         </form>
