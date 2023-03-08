@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import moviesServices from '../services/movies'
+import VideoPlayer from '../components/VideoPlayer'
 
 const MoviePage = ({ id }) => {
   const [movieData, setMovieData] = useState({})
@@ -28,6 +29,7 @@ const MoviePage = ({ id }) => {
           <div>{movieData.rating}</div>
           <div>{movieData.description_full}</div>
           <img src={movieData.background_image} alt='background' />
+          <VideoPlayer />
           <div>
             genres:
             {movieData.genres.map((genre) => (
