@@ -32,4 +32,25 @@ moviesRouter.get('/id/:id', async (req, res) => {
   res.status(200).json(JSON.parse(stringified))
 })
 
+moviesRouter.get('/download/:id', async (req, res) => {
+  const movieId = req.params.id
+  const ytsData = await axios.get(
+    `https://yts.torrentbay.to/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`
+  )
+	const movieData = ytsData.data.data.movie;
+  // const stringified = JSON.stringify(ytsData.data.data)
+	//filter movieData.torrents with 1080p
+	//check that something returned
+	//if more than 1 torrents, sort by seeds
+	//do magnet link with hash from torrent 
+//require torrent-stream https://www.npmjs.com/package/torrent-stream
+//make engine listeres for 'ready', 'download', 'idle'
+  res.status(200).json(JSON.parse(movieData))
+})
+
+moviesRouter.get('/stream/:id', async (req, res) => {
+  const movieId = req.params.id
+ 
+})
+
 module.exports = moviesRouter
