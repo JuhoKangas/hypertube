@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 
 const VideoPlayer = () => {
   return (
-    <div>
+    <div className='z-10'>
       <ReactPlayer
         //url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
         //playIcon={<PlayCircleIcon />}
