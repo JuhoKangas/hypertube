@@ -87,9 +87,37 @@ const Login = () => {
           </div>
           <hr />
           <div className='flex items-center justify-center mt-5 mb-5'>
+            <p className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red font-montserrat'>
+              Log in with:
+            </p>
+          </div>
+          <div className='flex items-center justify-center mt-5 mb-5'>
+            <div className='flex gap-10'>
+              <a
+                href={`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}&redirect_uri=${process.env.GITHUB_OAUTH_REDIRECT_URL}&response_type=code&scope=user`}
+              >
+                <img
+                  className='w-20 h-20 cursor-pointer'
+                  src='github.png'
+                  alt='github-img'
+                ></img>
+              </a>
+              <a
+                href={`https://api.intra.42.fr/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&response_type=code&state=jxfgldf33gysg47skg86sdgsk2d`}
+              >
+                <img
+                  className='w-20 h-20 rounded-full cursor-pointer'
+                  src='42.jpeg'
+                  alt='42-img'
+                ></img>
+              </a>
+            </div>
+          </div>
+          <hr />
+          <div className='flex items-center justify-center mt-5 mb-5'>
             {/* TODO: Create a path for forgot password */}
             <Link
-              className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
+              className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red font-montserrat'
               to='/reset_password'
             >
               {dictionary.m_password_forgot}
@@ -98,7 +126,7 @@ const Login = () => {
           <hr />
           <div className='flex items-center justify-center mt-5'>
             <a
-              className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
+              className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red font-montserrat'
               href='/signup'
             >
               {dictionary.m_create_account_join}

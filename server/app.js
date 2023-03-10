@@ -13,6 +13,7 @@ const moviesRouter = require('./controllers/movies')
 const emailRouter = require('./controllers/email')
 const usersRouter = require('./controllers/users')
 const activateRouter = require('./controllers/activate')
+const oauthRouter = require('./controllers/oauth')
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
@@ -28,6 +29,7 @@ app.use('/movies', moviesRouter)
 app.use('/email', emailRouter)
 app.use('/users', usersRouter)
 app.use('/activate', activateRouter)
+app.use('/oauth', oauthRouter)
 
 app.use(middleware.unknownEndpoint)
 
