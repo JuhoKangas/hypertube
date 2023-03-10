@@ -16,7 +16,7 @@ const sendEmail = (type, email, token) => {
   if (type === 'activate') {
     subject = 'Matcha account activation'
     to = email
-    html = `<h1>Welcome to Matcha</h1><br/><p>Click <a href="http://localhost:3001/activate/${token}">here</a> to activate your account!</p><br/><br/><br/><small>Please reply to this email, we are very lonely in the data center</small>`
+    html = `<h1>Welcome to Hyoertube</h1><br/><p>Click <a href="http://localhost:3001/activate/${token}">here</a> to activate your account!</p><br/><br/><br/><small>Please reply to this email, we are very lonely in the data center</small>`
   } else if (type === 'reset') {
     subject = 'Password reset'
     to = email

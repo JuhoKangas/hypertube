@@ -17,6 +17,8 @@ const Navbar = () => {
     navigate('/')
   }
 
+	console.log("Logged user from Navbar", loggedUser)
+
   if (!loggedUser.id) return
 
   return (
@@ -53,9 +55,9 @@ const Navbar = () => {
               </div>
               <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
                 <div className='flex gap-4 mr-2'>
-                  <p className='font-montserrat text-white pt-1 uppercase'>
+ {/*                  <p className='font-montserrat text-white pt-1 uppercase'>
                     {loggedUser.username}
-                  </p>
+                  </p> */}
                 </div>
                 {/* Profile dropdown */}
                 <Menu as='div' className='relative ml-3'>
