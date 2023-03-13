@@ -53,4 +53,7 @@ export const esES = {
   e_email_proper: 'Por favor, pon un correo electrónico real',
   e_email_taken: 'Ese correo electrónico no está disponible',
   e_password_match: 'Las contraseñas no son iguales!',
+
+  // Movie info
+  mov_cast: 'TODO:Main cast: ',
 }

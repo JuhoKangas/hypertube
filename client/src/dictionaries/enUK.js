@@ -53,4 +53,7 @@ export const enUK = {
   e_email_proper: 'Please add proper email',
   e_email_taken: 'Email already in use',
   e_password_match: 'Passwords do not match!',
+
+  // Movie info
+  mov_cast: 'Main cast:',
 }
