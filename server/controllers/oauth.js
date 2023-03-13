@@ -2,21 +2,50 @@ const oauthRouter = require('express').Router()
 const jwt = require('jsonwebtoken')
 const db = require('../db/index')
 const axios = require('axios')
+const passport = require('passport')
 
-const loginUser = async (userData) => {
-  //const id = userData.id
+const loginUser = async (user) => {
+  const userForToken = {
+    username: user.username,
+    id: user.id,
+  }
+  const userData = await db.query(
+    'SELECT * FROM users WHERE fortytwo_id = $1',
+    [user.id]
+  )
+
+  const foundUser = userData.rows[0]
 
   const token = jwt.sign(userForToken, process.env.SECRET)
-  res.status(200).send({
+  const data = {
     token,
-    id: user.fortytwo_id,
-    language: user.language,
-    profilePicture: user.profile_picture,
-  })
+    id: foundUser.fortytwo_id,
+    language: foundUser.language,
+    profilePicture: foundUser.profile_picture,
+  }
+  return data
 }
 
-oauthRouter.get('/oauth/42direct', async (request, response) => {
+oauthRouter.get(
+  '/auth/google',
+  // initiate authentication on google server, asking for user's profile
+  passport.authenticate('google', { scope: ['profile'] })
+)
+
+// google redirects user back to our app and make a get request
+oauthRouter.get(
+  '/auth/google/hypertube',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/movies')
+  }
+)
+
+oauthRouter.get('/42direct', async (request, response) => {
   let code = request.query.code
+
+  console.log('REDIRECT 42')
 
   const tokenResponse = await axios.post(
     'https://api.intra.42.fr/oauth/token',
@@ -47,13 +76,20 @@ oauthRouter.get('/oauth/42direct', async (request, response) => {
 
   const userFound = await db.query(
     'SELECT * FROM users WHERE fortytwo_id = $1',
-    [id]
+    [userData.id]
   )
 
-  if (userFound.length) {
-    loginUser(userData, response)
+  //console.log(userFound)
+
+  //console.log(userData)
+
+  if (userFound.rowCount > 0) {
+    console.log('HERE')
+    const user = await loginUser(userData, response)
+    //response.send(user)
+    response.redirect('http://localhost:3000/movies')
   } else {
-    createUser(userData, response)
+    console.log(userData)
   }
 })
 

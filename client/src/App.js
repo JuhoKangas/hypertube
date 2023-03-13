@@ -12,6 +12,7 @@ import Navbar from './components/Navbar'
 import ResetPassword from './routes/ResetPassword'
 import MoviePage from './routes/MoviePage'
 import { UserProvider } from './context/UserContext'
+import Settings from './routes/Settings'
 
 const App = () => {
   const match = useMatch('/movies/:id')
@@ -30,6 +31,7 @@ const App = () => {
             <Route path={'/login'} element={<Login />}></Route>
             <Route path={'/signup'} element={<Signup />}></Route>
             <Route path={'/reset_password'} element={<ResetPassword />}></Route>
+            <Route path={'/settings'} element={<Settings />}></Route>
           </Routes>
           <Footer />
         </UserProvider>

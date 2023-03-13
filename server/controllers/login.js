@@ -73,6 +73,10 @@ loginRouter.post('/', async (req, res) => {
     id: updatedUser.id,
     language: updatedUser.language,
     profilePicture: updatedUser.profile_picture,
+		username: updatedUser.username,
+		firstname: updatedUser.firstname,
+		lastname: updatedUser.lastname, 
+		email: updatedUser.email
   })
 })
 
