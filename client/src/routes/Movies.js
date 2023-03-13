@@ -14,21 +14,51 @@ const Movies = () => {
   const [allMovies, setAllMovies] = useState([])
   const [page, setPage] = useState(2)
   // URI query params
-  const [minimumRating, setMinimumRating] = useState(0)
-  const [queryTerm, setQueryTerm] = useState('')
-  const [genre, setGenre] = useState('')
-  const [sorting, setSorting] = useState('')
+  const [sortAndFilter, setSortAndFilter] = useState({
+    minimum_rating: 0,
+    query_term: '',
+    quality: 'All', //string, 720p 1080p 2160p 3D
+    genre: '',
+    sort_by: 'like_count', //title, year, rating
+    order_by: 'desc',
+  })
+
+  // Popular movies by genre list :
+  // Action
+  // Adventure
+  // Animation
+  // Biography
+  // Comedy
+  // Crime
+  // Documentary
+  // Drama
+  // Family
+  // Fantasy
+  // Film Noir
+  // History
+  // Horror
+  // Music
+  // Musical
+  // Mystery
+  // Romance
+  // Sci-Fi
+  // Short Film
+  // Sport
+  // Superhero
+  // Thriller
+  // War
+  // Western
 
   useEffect(() => {
     const getAllMovies = async () => {
-      const movieData = await moviesService.getAllMovies()
+      const movieData = await moviesService.getFilteredMovies(sortAndFilter)
       setAllMovies(movieData.movies)
     }
     getAllMovies()
-  }, [])
+  }, [sortAndFilter])
 
   const fetchNextMovies = async () => {
-    const newMovies = await moviesService.getNextMovies(page)
+    const newMovies = await moviesService.getNextMovies(page, sortAndFilter)
     setAllMovies(allMovies.concat(newMovies.movies))
     setPage((prev) => prev + 1)
   }

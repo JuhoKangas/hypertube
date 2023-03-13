@@ -56,4 +56,6 @@ export const fiFI = {
 
   // Movie info
   mov_cast: 'Näyttelijät',
+  mov_director: 'Ohjaus: ',
+  mov_writer: 'Käsikirjoitus: ',
 }

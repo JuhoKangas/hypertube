@@ -4,16 +4,15 @@ import { translate } from '../dictionaries/translate'
 const MovieInfo = ({ movieData }) => {
   const { language } = useMyLanguage()
   const dictionary = translate(language)
-  console.log(movieData)
 
   return (
     <>
       <img
-        className='absolute top-0 left-0 z-0 w-full min-w-[1600px]'
+        className='absolute top-0 left-0 z-0 w-full min-w-[1600px] max-h-[95vh]'
         src={movieData.background_image}
         alt=''
       />
-      <div className='z-10 px-12'>
+      <div className='z-10 px-12 ml-5'>
         <div className='flex font-bold gap-4 text-sm mb-5'>
           <div>{movieData.year}</div>
           <div>{movieData.runtime} min</div>
@@ -42,6 +41,14 @@ const MovieInfo = ({ movieData }) => {
               {member.name} as {member.character_name}
             </div>
           ))}
+        </div>
+        <div className='mb-4'>
+          {dictionary.mov_director}
+          {movieData.additionalData.Director}
+        </div>
+        <div className='mb-7'>
+          {dictionary.mov_writer}
+          {movieData.additionalData.Writer}
         </div>
         <div className='lg:w-1/2 mb-12'>{movieData.description_full}</div>
       </div>

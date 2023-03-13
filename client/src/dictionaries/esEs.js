@@ -56,4 +56,6 @@ export const esES = {
 
   // Movie info
   mov_cast: 'TODO:Main cast: ',
+  mov_director: 'TODO:Director(s): ',
+  mov_writer: 'TODO:Writer(s): ',
 }

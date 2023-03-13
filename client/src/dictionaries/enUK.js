@@ -56,4 +56,6 @@ export const enUK = {
 
   // Movie info
   mov_cast: 'Main cast:',
+  mov_director: 'Director(s): ',
+  mov_writer: 'Writer(s): ',
 }
