@@ -43,9 +43,11 @@ moviesRouter.get('/id/:id', async (req, res) => {
     `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`
   )
 
-  const additionalData = await axios.get(
-    `http://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&i=${movieData.data.data.movie.imdb_code}`
-  )
+  // Uncomment to fetch additional data
+  // const additionalData = await axios.get(
+  //   `http://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&i=${movieData.data.data.movie.imdb_code}`
+  // )
+  const additionalData = {}
 
   const stringified = JSON.stringify(movieData.data.data)
 
