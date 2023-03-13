@@ -22,14 +22,14 @@ const MoviePage = ({ id }) => {
   }, [id])
 
   return (
-    <div className='text-white bg-hyper-black min-h-[97vh] relative'>
+    <div className='text-gray-300 bg-hyper-black min-h-[97vh] relative'>
       {isLoading ? (
         <div>{dictionary.m_loading}</div>
       ) : (
-        <div className=' flex flex-col max-w-screen-2xl mx-auto'>
+        <div className='flex flex-col max-w-screen-2xl mx-auto'>
           <MovieHeader movieData={movieData} />
-          <VideoPlayer />
           <MovieInfo movieData={movieData} />
+          <VideoPlayer />
         </div>
       )}
     </div>

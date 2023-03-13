@@ -55,5 +55,5 @@ export const enUK = {
   e_password_match: 'Passwords do not match!',
 
   // Movie info
-  mov_cast: 'Main cast: ',
+  mov_cast: 'Main cast:',
 }

@@ -55,5 +55,5 @@ export const fiFI = {
   e_password_match: 'Passwords do not match!',
 
   // Movie info
-  mov_cast: 'TODO: Main cast: ',
+  mov_cast: 'Näyttelijät',
 }
