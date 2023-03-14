@@ -4,7 +4,7 @@ const db = require('../db/index')
 const axios = require('axios')
 const passport = require('passport')
 
-const loginUser = async (user) => {
+const loginUser = async (user, response) => {
   const userForToken = {
     username: user.username,
     id: user.id,
@@ -20,10 +20,19 @@ const loginUser = async (user) => {
   const data = {
     token,
     id: foundUser.fortytwo_id,
-    language: foundUser.language,
-    profilePicture: foundUser.profile_picture,
   }
-  return data
+
+  response.cookie('oauthLogin', data.token, {
+    httpOnly: false,
+    maxAge: 24 * 60 * 60 * 1000,
+  })
+
+  const thisUser = await db.query(
+    'UPDATE users SET token = $1 WHERE fortytwo_id = $2',
+    [data.token, data.id]
+  )
+
+  return
 }
 
 oauthRouter.get(
@@ -85,12 +94,11 @@ oauthRouter.get('/42direct', async (request, response) => {
 
   if (userFound.rowCount > 0) {
     console.log('HERE')
-    const user = await loginUser(userData, response)
-    //response.send(user)
-    response.redirect('http://localhost:3000/movies')
+    await loginUser(userData, response)
   } else {
     console.log(userData)
   }
+  response.redirect(`http://localhost:3000/movies`)
 })
 
 module.exports = oauthRouter
