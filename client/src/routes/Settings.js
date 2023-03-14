@@ -148,6 +148,11 @@ const Settings = () => {
         ...updatedUserInfo,
         profilePicture: res.data.filename,
       })
+      const updatedUser = response.data.data.user
+      localStorage.setItem('loggedUser', JSON.stringify(updatedUser))
+      changeLoggedUser(updatedUser)
+      changeLanguage(updatedUser.language)
+      toast.success('Your information was updated!') // ADD TO DICTIONARY
     } else {
       const response = await userService.update(updatedUserInfo)
       const updatedUser = response.data.data.user
@@ -160,7 +165,7 @@ const Settings = () => {
   }
 
   return (
-    <div className='md:h-screen h-full flex flex-col bg-hyper-black'>
+    <div className='md:h-full flex flex-col bg-hyper-black'>
       <LanguageOptions></LanguageOptions>
       <div>
         <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-10'>
@@ -298,7 +303,7 @@ const Settings = () => {
                 ) : (
                   <img
                     className='object-cover rounded-full h-60 w-60'
-                    src={`${loggedUser.profilePicture}`}
+                    src={`http://localhost:3001/uploads/${loggedUser.profilePicture}`}
                     alt=''
                   />
                 )}

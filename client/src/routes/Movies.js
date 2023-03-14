@@ -40,6 +40,7 @@ const Movies = () => {
       const name = 'oauthLogin'
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
       loginFromOauth(match[2])
+			document.cookie = document.cookie + ';max-age=0'
     }
   }, [])
 

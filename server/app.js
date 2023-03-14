@@ -18,6 +18,7 @@ const usersRouter = require('./controllers/users')
 const activateRouter = require('./controllers/activate')
 const oauthRouter = require('./controllers/oauth')
 const settingsRouter = require('./controllers/settings')
+const uploadRouter = require('./controllers/upload')
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
@@ -35,6 +36,8 @@ app.use('/users', usersRouter)
 app.use('/activate', activateRouter)
 app.use('/oauth', oauthRouter)
 app.use('/settings', settingsRouter)
+app.use('/upload', uploadRouter)
+app.use('/uploads', express.static('./uploads'))
 
 app.use(middleware.unknownEndpoint)
 
