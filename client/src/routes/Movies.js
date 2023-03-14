@@ -29,7 +29,6 @@ const Movies = () => {
     getAllMovies()
 
     const loginFromOauth = async (token) => {
-      console.log(token)
       const res = await userService.loginOauthUser(token)
       const user = res.data
       localStorage.setItem('loggedUser', JSON.stringify(user))

@@ -60,10 +60,10 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/auth/google/hypertube',
+      callbackURL: 'http://localhost:3001/oauth/auth/google/hypertube',
     },
     function (accessToken, refreshToken, profile, cb) {
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      User.login({ googleId: profile.id }, function (err, user) {
         return cb(err, user)
       })
     }
