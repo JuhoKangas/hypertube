@@ -315,6 +315,7 @@ const Settings = () => {
               </div>
             </div>
           </div>
+					{/* ADD LANGUAGES  */}
           <div className='flex items-center justify-center'>
             <input
               className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
