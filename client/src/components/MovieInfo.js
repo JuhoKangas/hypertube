@@ -36,7 +36,7 @@ const MovieInfo = ({ movieData }) => {
         </div>
         <div className='flex flex-col gap-1 mb-5'>
           {dictionary.mov_cast}
-          {movieData.cast.map((member) => (
+          {movieData.cast?.map((member) => (
             <div key={member.name}>
               {member.name} as {member.character_name}
             </div>
