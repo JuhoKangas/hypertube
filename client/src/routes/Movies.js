@@ -23,32 +23,6 @@ const Movies = () => {
     order_by: 'desc',
   })
 
-  // Popular movies by genre list :
-  // Action
-  // Adventure
-  // Animation
-  // Biography
-  // Comedy
-  // Crime
-  // Documentary
-  // Drama
-  // Family
-  // Fantasy
-  // Film Noir
-  // History
-  // Horror
-  // Music
-  // Musical
-  // Mystery
-  // Romance
-  // Sci-Fi
-  // Short Film
-  // Sport
-  // Superhero
-  // Thriller
-  // War
-  // Western
-
   useEffect(() => {
     const getAllMovies = async () => {
       const movieData = await moviesService.getFilteredMovies(sortAndFilter)
@@ -59,12 +33,23 @@ const Movies = () => {
 
   const fetchNextMovies = async () => {
     const newMovies = await moviesService.getNextMovies(page, sortAndFilter)
-    setAllMovies(allMovies.concat(newMovies.movies))
-    setPage((prev) => prev + 1)
+    console.log(newMovies)
+    if (newMovies.movies) {
+      setAllMovies(allMovies.concat(newMovies.movies))
+      setPage((prev) => prev + 1)
+    } else {
+      setPage(10)
+    }
   }
+
+  const handleSearch = (params) => {
+    setPage(2)
+    setSortAndFilter(params)
+  }
+
   return (
     <div className='bg-hyper-black'>
-      <MovieSearch />
+      <MovieSearch onSearch={handleSearch} searchParams={sortAndFilter} />
       <InfiniteScroll
         className='flex flex-wrap gap-16 justify-center px-5 pt-4'
         dataLength={allMovies.length} //This is important field to render the next data
@@ -76,7 +61,7 @@ const Movies = () => {
           </h4>
         }
         endMessage={
-          <p className='text-white p-8'>
+          <p className='text-white p-8 basis-full text-center'>
             <b>{dictionary.m_page_end}</b>
           </p>
         }
