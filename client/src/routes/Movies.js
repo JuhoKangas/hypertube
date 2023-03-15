@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import moviesService from '../services/movies'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import toast from 'react-hot-toast'
 
 import MovieCard from '../components/movieList/MovieCard'
 import MovieSearch from '../components/movieList/MovieSearch'
@@ -12,27 +13,31 @@ const Movies = () => {
   const dictionary = translate(language)
 
   const [allMovies, setAllMovies] = useState([])
-  const [page, setPage] = useState(2)
+  const [page, setPage] = useState(1)
   // URI query params
   const [sortAndFilter, setSortAndFilter] = useState({
     minimum_rating: 0,
     query_term: '',
     quality: 'All', //string, 720p 1080p 2160p 3D
     genre: '',
-    sort_by: 'like_count', //title, year, rating
+    sort_by: 'like_count', //title, year, rating, like_count
     order_by: 'desc',
   })
 
   useEffect(() => {
     const getAllMovies = async () => {
       const movieData = await moviesService.getFilteredMovies(sortAndFilter)
-      setAllMovies(movieData.movies)
+      if (movieData.movie_count > 0) {
+        setAllMovies(movieData.movies)
+      } else {
+        toast.error('No movies found!')
+      }
     }
     getAllMovies()
   }, [sortAndFilter])
 
   const fetchNextMovies = async () => {
-    const newMovies = await moviesService.getNextMovies(page, sortAndFilter)
+    const newMovies = await moviesService.getNextMovies(page + 1, sortAndFilter)
     console.log(newMovies)
     if (newMovies.movies) {
       setAllMovies(allMovies.concat(newMovies.movies))
@@ -43,7 +48,7 @@ const Movies = () => {
   }
 
   const handleSearch = (params) => {
-    setPage(2)
+    setPage(1)
     setSortAndFilter(params)
   }
 
