@@ -34,7 +34,7 @@ const MovieSearch = ({ onSearch, searchParams }) => {
   const [search, setSearch] = useState('')
   const [genre, setGenre] = useState('')
   const [rating, setRating] = useState(0)
-  const [sortBy, setSortBy] = useState('like_count')
+  const [sortBy, setSortBy] = useState('title')
   const [orderBy, setOrderBy] = useState('desc')
 
   const handleClick = () => {
@@ -109,7 +109,7 @@ const MovieSearch = ({ onSearch, searchParams }) => {
           </label>
           <select
             onChange={(e) => setSortBy(e.target.value)}
-            defaultValue='like_count'
+            defaultValue='title'
             id='sort_by'
             className='bg-transparent border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
           >
