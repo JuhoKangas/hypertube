@@ -15,7 +15,7 @@ settingsRouter.put('/', async (req, res) => {
     let results = ''
     if (hashedPassword !== '') {
       results = await db.query(
-        'UPDATE users SET firstname = $1, lastname = $2, username = $3, password = $4, email = $5, profile_picture = $6 WHERE id = $7 returning *',
+        'UPDATE users SET firstname = $1, lastname = $2, username = $3, password = $4, email = $5, profile_picture = $6, language = $7 WHERE id = $8 returning *',
         [
           formData.firstname,
           formData.lastname,
@@ -23,18 +23,20 @@ settingsRouter.put('/', async (req, res) => {
           hashedPassword,
           sanitizedEmail,
           formData.profilePicture,
+          formData.language,
           formData.id,
         ]
       )
     } else {
       results = await db.query(
-        'UPDATE users SET firstname = $1, lastname = $2, username = $3, email = $4, profile_picture = $5 WHERE id = $6 returning *',
+        'UPDATE users SET firstname = $1, lastname = $2, username = $3, email = $4, profile_picture = $5, language = $6 WHERE id = $7 returning *',
         [
           formData.firstname,
           formData.lastname,
           formData.username,
           sanitizedEmail,
           formData.profilePicture,
+          formData.language,
           formData.id,
         ]
       )

@@ -18,7 +18,7 @@ const Settings = () => {
   const initialLastname = useField('text', loggedUser.lastname)
   const initialUsername = useField('text', loggedUser.username)
   const initialEmail = useField('email', loggedUser.email)
-  const initialPassword = useField('password')
+  //const initialPassword = useField('password')
 
   const [confirmPassword, setConfirmPassword] = useState('')
   const [file, setFile] = useState('')
@@ -71,9 +71,12 @@ const Settings = () => {
         "Your username can't be over 60 characters. It's just arbitary limit that I came up with, in fact our database would handle usernames up to 1000 characters but it would probably break the styling of the page so we just gonna have it like this now."
     } else {
       const findUserByUsername = await userService.getUserByUsername(
-        formData.userName
+        formData.username
       )
-      if (findUserByUsername.data.user.rowCount > 0) {
+      if (
+        findUserByUsername.data.user.rowCount > 0 &&
+        loggedUser.username !== formData.username
+      ) {
         errors.username = 'Username is already taken'
       }
     }
@@ -115,7 +118,8 @@ const Settings = () => {
       lastname: initialLastname.value,
       username: initialUsername.value,
       email: initialEmail.value,
-      password: initialPassword.value,
+      password: formData.password,
+      language: language,
       profilePicture: dbPhotoFile,
     }
 
@@ -143,7 +147,6 @@ const Settings = () => {
         toast.error(res.data.error)
         return
       }
-      // CHANGING PIC NOT WORKING YET
       const response = await userService.update({
         ...updatedUserInfo,
         profilePicture: res.data.filename,
@@ -166,7 +169,6 @@ const Settings = () => {
 
   return (
     <div className='md:h-full flex flex-col bg-hyper-black'>
-      <LanguageOptions></LanguageOptions>
       <div>
         <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-10'>
           Update my information {/* add to dictionary */}
@@ -286,6 +288,17 @@ const Settings = () => {
                 {...initialLastname}
               />
             </div>
+            <div className='mb-4'>
+              <label
+                className='font-montserrat font-medium mb-2 text-white'
+                htmlFor='language'
+              >
+                Preferred Language {/* add to dictionary */}
+              </label>
+              <div className='flex'>
+                <LanguageOptions></LanguageOptions>
+              </div>
+            </div>
             <div className='flex flex-col'>
               <label
                 className=' font-montserrat font-medium mb-2 text-white'
@@ -315,7 +328,6 @@ const Settings = () => {
               </div>
             </div>
           </div>
-					{/* ADD LANGUAGES  */}
           <div className='flex items-center justify-center'>
             <input
               className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'

@@ -9,12 +9,12 @@ const LanguageButton = ({ children }) => {
   }
 
   return (
-    <button
-      className="m-2 rounded-lg border border-red-900 p-1"
+    <div
+      className="m-2 rounded-lg border border-red-900 p-1 cursor-pointer"
       onClick={handleLanguageButton}
     >
       {children}
-    </button>
+    </div>
   )
 }
 
