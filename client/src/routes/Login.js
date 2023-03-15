@@ -94,31 +94,24 @@ const Login = () => {
           </div>
           <div className='flex items-center justify-center mt-5 mb-5'>
             <div className='flex gap-10'>
-              {/*               <a
-                href={`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}&redirect_uri=${process.env.GITHUB_OAUTH_REDIRECT_URL}&response_type=code&scope=user`}
+              <a
+                //href={`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}&redirect_uri=${process.env.GITHUB_OAUTH_REDIRECT_URL}&response_type=code&scope=user`}
+								href={`https://github.com/login/oauth/authorize?&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`}
               >
                 <img
                   className='w-20 h-20 cursor-pointer'
                   src='github.png'
                   alt='github-img'
                 ></img>
-              </a> */}
+              </a>
 
-              <a href='http://localhost:3001/oauth/auth/google'>
+{/*               <a href='http://localhost:3001/oauth/auth/google'>
                 <img
                   className='w-20 h-20 rounded-full cursor-pointer p-1 bg-white'
                   src='google.png'
                   alt='google-img'
                 ></img>
-              </a>
-
-              {/* 							<button onClick={login42}>
-							<img
-                  className='w-20 h-20 rounded-full cursor-pointer'
-                  src='42.jpeg'
-                  alt='42-img'
-                ></img>
-							</button> */}
+              </a> */}
 
               <a
                 href={`https://api.intra.42.fr/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&response_type=code&state=jxfgldf33gysg47skg86sdgsk2d`}
