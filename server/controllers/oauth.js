@@ -2,7 +2,7 @@ const oauthRouter = require('express').Router()
 const jwt = require('jsonwebtoken')
 const db = require('../db/index')
 const axios = require('axios')
-const passport = require('passport')
+const { Octokit } = require('octokit')
 
 const makeId = (length) => {
   let result = ''
@@ -17,88 +17,116 @@ const makeId = (length) => {
   return result
 }
 
-const loginUser = async (user, response) => {
+const loginUser = async (user, response, checker) => {
+  let userData = {}
+  let data = {}
   const userForToken = {
     username: user.username,
     id: user.id,
   }
-  const userData = await db.query(
-    'SELECT * FROM users WHERE fortytwo_id = $1',
-    [user.id]
-  )
+  checker === 1
+    ? (userData = await db.query('SELECT * FROM users WHERE fortytwo_id = $1', [
+        user.id,
+      ]))
+    : (userData = await db.query('SELECT * FROM users WHERE github_id = $1', [
+        user.id,
+      ]))
 
   const foundUser = userData.rows[0]
 
   const token = jwt.sign(userForToken, process.env.SECRET)
-  const data = {
-    token,
-    id: foundUser.fortytwo_id,
-  }
+
+  checker === 1
+    ? (data = {
+        token,
+        id: foundUser.fortytwo_id,
+      })
+    : (data = {
+        token,
+        id: foundUser.github_id,
+      })
 
   response.cookie('oauthLogin', data.token, {
     httpOnly: false,
     maxAge: 24 * 60 * 60 * 1000,
   })
 
-  const thisUser = await db.query(
-    'UPDATE users SET token = $1 WHERE fortytwo_id = $2',
-    [data.token, data.id]
-  )
+  checker === 1
+    ? await db.query('UPDATE users SET token = $1 WHERE fortytwo_id = $2', [
+        data.token,
+        data.id,
+      ])
+    : await db.query('UPDATE users SET token = $1 WHERE github_id = $2', [
+        data.token,
+        data.id,
+      ])
 }
 
-const createUser = async (user, response) => {
+const createUser = async (user, response, checker) => {
   const password = makeId(10)
-  const newUser = await db.query(
-    'INSERT INTO users (fortytwo_id, username, firstname, lastname, email, password, completed) VALUES ($1, $2, $3, $4, $5, $6, true) RETURNING *',
-    [user.id, user.username, user.firstname, user.lastname, user.email, password]
-  )
+  let newUser = {}
+  let userForToken = {}
+  checker === 1
+    ? (newUser = await db.query(
+        'INSERT INTO users (fortytwo_id, username, firstname, lastname, email, password, completed) VALUES ($1, $2, $3, $4, $5, $6, true) RETURNING *',
+        [
+          user.id,
+          user.username,
+          user.firstname,
+          user.lastname,
+          user.email,
+          password,
+        ]
+      ))
+    : (newUser = await db.query(
+        'INSERT INTO users (github_id, username, firstname, lastname, email, password, completed) VALUES ($1, $2, $3, $4, $5, $6, true) RETURNING *',
+        [
+          user.id,
+          user.username,
+          user.firstname,
+          user.lastname,
+          user.email,
+          password,
+        ]
+      ))
 
-	console.log("NEW USER", newUser.rows)
+  console.log('NEW USER', newUser.rows)
 
-	const userForToken = {
-    username: user.username,
-    id: user.fortytwo_id,
-  }
+  checker === 1
+    ? (userForToken = {
+        username: user.username,
+        id: user.fortytwo_id,
+      })
+    : (userForToken = {
+        username: user.username,
+        id: user.github_id,
+      })
 
-	const token = jwt.sign(userForToken, process.env.SECRET)
+  const token = jwt.sign(userForToken, process.env.SECRET)
   const data = {
     token,
     id: user.id,
   }
 
-	console.log("DATA ID", data.id)
-
   response.cookie('oauthLogin', data.token, {
     httpOnly: false,
     maxAge: 24 * 60 * 60 * 1000,
   })
 
-  const thisUser = await db.query(
-    'UPDATE users SET token = $1 WHERE fortytwo_id = $2',
-    [data.token, data.id]
-  )
-
-	console.log("THIS USER", thisUser)
+  checker == 1
+    ? await db.query('UPDATE users SET token = $1 WHERE fortytwo_id = $2', [
+        data.token,
+        data.id,
+      ])
+    : await db.query('UPDATE users SET token = $1 WHERE github_id = $2', [
+        data.token,
+        data.id,
+      ])
 }
-
-oauthRouter.get(
-  '/auth/google',
-  // initiate authentication on google server, asking for user's profile
-  passport.authenticate('google', { scope: ['profile'] })
-)
-
-// google redirects user back to our app and make a get request
-oauthRouter.get(
-  '/auth/google/hypertube',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function (req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/movies')
-  }
-)
 
 oauthRouter.get('/42direct', async (request, response) => {
   let code = request.query.code
+  const checker = 1
 
   const tokenResponse = await axios.post(
     'https://api.intra.42.fr/oauth/token',
@@ -133,10 +161,53 @@ oauthRouter.get('/42direct', async (request, response) => {
   )
 
   if (userFound.rowCount > 0) {
-    await loginUser(userData, response)
+    await loginUser(userData, response, checker)
   } else {
-    console.log("USER DATA", userData)
-    await createUser(userData, response)
+    console.log('USER DATA', userData)
+    await createUser(userData, response, checker)
+  }
+  response.redirect(`http://localhost:3000/movies`)
+})
+
+oauthRouter.get('/github', async (request, response) => {
+  let code = request.query.code
+  const checker = 2
+
+  const tokenResponse = await axios({
+    method: 'POST',
+    url: `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_OAUTH_CLIENT_SECRET}&code=${code}`,
+    headers: { Accept: 'application/json' },
+  })
+  //console.log('tokenResponse', tokenResponse)
+
+  const octokit = new Octokit({ auth: tokenResponse.data.access_token })
+
+  const user = await octokit.request('GET /user', {})
+  const email = await octokit.request('GET /user/emails', {})
+
+  /* 	console.log("USER", user)
+	console.log("email", email.data[0].email) */
+
+  let userData = {
+    id: user.data.id,
+    username: user.data.login,
+    firstname: user.data.name.split(' ')[0],
+    lastname: user.data.name.split(' ')[1],
+    email: email.data[0].email,
+  }
+
+  //console.log("userData", userData)
+
+  const userFound = await db.query('SELECT * FROM users WHERE github_id = $1', [
+    userData.id,
+  ])
+
+  if (userFound.rowCount > 0) {
+    console.log('LOGIN USER DATA', userData)
+    await loginUser(userData, response, checker)
+  } else {
+    console.log('CREATE USER DATA', userData)
+    await createUser(userData, response, checker)
   }
   response.redirect(`http://localhost:3000/movies`)
 })

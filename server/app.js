@@ -1,5 +1,5 @@
 const express = require('express')
-var passport = require('passport')
+//var passport = require('passport')
 var GoogleStrategy = require('passport-google-oauth20').Strategy
 
 const app = express()
@@ -40,37 +40,5 @@ app.use('/upload', uploadRouter)
 app.use('/uploads', express.static('./uploads'))
 
 app.use(middleware.unknownEndpoint)
-
-// save user's login session with passport's serialize & deserialize functions
-passport.serializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, {
-      id: user.id,
-      username: user.username,
-      picture: user.picture
-    });
-  });
-});
-
-passport.deserializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, user);
-  });
-});
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: 'http://localhost:3001/oauth/auth/google/hypertube',
-    },
-    function (accessToken, refreshToken, profile, cb) {
-      User.login({ googleId: profile.id }, function (err, user) {
-        return cb(err, user)
-      })
-    }
-  )
-)
 
 module.exports = app

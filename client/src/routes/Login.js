@@ -96,7 +96,7 @@ const Login = () => {
             <div className='flex gap-10'>
               <a
                 //href={`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}&redirect_uri=${process.env.GITHUB_OAUTH_REDIRECT_URL}&response_type=code&scope=user`}
-								href={`https://github.com/login/oauth/authorize?&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`}
+								href={`https://github.com/login/oauth/authorize?&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&scope=user:email`}
               >
                 <img
                   className='w-20 h-20 cursor-pointer'
