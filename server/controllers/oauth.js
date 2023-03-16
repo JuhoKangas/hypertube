@@ -165,7 +165,6 @@ oauthRouter.get('/42direct', async (request, response) => {
   if (userFound.rowCount > 0) {
     await loginUser(userData, response, checker)
   } else {
-    console.log('USER DATA', userData)
     await createUser(userData, response, checker)
   }
   response.redirect(`http://localhost:3000/movies`)
@@ -199,10 +198,8 @@ oauthRouter.get('/github', async (request, response) => {
   ])
 
   if (userFound.rowCount > 0) {
-    console.log('LOGIN USER DATA', userData)
     await loginUser(userData, response, checker)
   } else {
-    console.log('CREATE USER DATA', userData)
     await createUser(userData, response, checker)
   }
   response.redirect(`http://localhost:3000/movies`)
