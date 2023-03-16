@@ -130,6 +130,11 @@ oauthRouter.get('/42direct', async (request, response) => {
   let code = request.query.code
   const checker = 1
 
+  if (!code) {
+    response.redirect('http://localhost:3000')
+    return
+  }
+
   const tokenResponse = await axios.post(
     'https://api.intra.42.fr/oauth/token',
     {
@@ -140,6 +145,11 @@ oauthRouter.get('/42direct', async (request, response) => {
       redirect_uri: `${process.env.REACT_APP_REDIRECT_URL}`,
     }
   )
+
+  if (tokenResponse.response?.error) {
+    response.redirect(`http://localhost:3000`)
+    return
+  }
 
   const accessToken = tokenResponse.data.access_token
 
@@ -174,11 +184,21 @@ oauthRouter.get('/github', async (request, response) => {
   let code = request.query.code
   const checker = 2
 
+  if (!code) {
+    response.redirect('http://localhost:3000')
+    return
+  }
+
   const tokenResponse = await axios({
     method: 'POST',
     url: `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_OAUTH_CLIENT_SECRET}&code=${code}`,
     headers: { Accept: 'application/json' },
   })
+
+  if (tokenResponse.response?.error) {
+    response.redirect(`http://localhost:3000`)
+    return
+  }
 
   const octokit = new Octokit({ auth: tokenResponse.data.access_token })
 
