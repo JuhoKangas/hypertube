@@ -155,14 +155,14 @@ const Settings = () => {
       localStorage.setItem('loggedUser', JSON.stringify(updatedUser))
       changeLoggedUser(updatedUser)
       changeLanguage(updatedUser.language)
-      toast.success('Your information was updated!') // ADD TO DICTIONARY
+      toast.success(dictionary.update_success) // ADD TO DICTIONARY
     } else {
       const response = await userService.update(updatedUserInfo)
       const updatedUser = response.data.data.user
       localStorage.setItem('loggedUser', JSON.stringify(updatedUser))
       changeLoggedUser(updatedUser)
       changeLanguage(updatedUser.language)
-      toast.success('Your information was updated!') // ADD TO DICTIONARY
+      toast.success(dictionary.update_success) // ADD TO DICTIONARY
     }
     navigate('/movies')
   }

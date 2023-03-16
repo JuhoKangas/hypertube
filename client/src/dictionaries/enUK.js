@@ -35,6 +35,9 @@ export const enUK = {
   m_login_account: 'Log in to your account',
   m_password_forgot: 'Forgot password? Reset it here',
 
+  // settings
+  update_success: 'Your information was updated!',
+
   //Signup errors
   e_firstname_add: 'Please add first name',
   e_firstname_length:

@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken')
 const db = require('../db/index')
 const axios = require('axios')
 const { Octokit } = require('octokit')
+const bcrypt = require('bcrypt')
 
-const makeId = (length) => {
+const makePassword = async (length) => {
   let result = ''
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -14,7 +15,10 @@ const makeId = (length) => {
     result += characters.charAt(Math.floor(Math.random() * charactersLength))
     counter += 1
   }
-  return result
+
+  const hashedPassword = await bcrypt.hash(result, 10)
+
+  return hashedPassword
 }
 
 const loginUser = async (user, response, checker) => {
@@ -63,7 +67,7 @@ const loginUser = async (user, response, checker) => {
 }
 
 const createUser = async (user, response, checker) => {
-  const password = makeId(10)
+  const password = await makePassword(10)
   let newUser = {}
   let userForToken = {}
   checker === 1
@@ -89,8 +93,6 @@ const createUser = async (user, response, checker) => {
           password,
         ]
       ))
-
-  console.log('NEW USER', newUser.rows)
 
   checker === 1
     ? (userForToken = {
@@ -178,15 +180,11 @@ oauthRouter.get('/github', async (request, response) => {
     url: `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_OAUTH_CLIENT_SECRET}&code=${code}`,
     headers: { Accept: 'application/json' },
   })
-  //console.log('tokenResponse', tokenResponse)
 
   const octokit = new Octokit({ auth: tokenResponse.data.access_token })
 
   const user = await octokit.request('GET /user', {})
   const email = await octokit.request('GET /user/emails', {})
-
-  /* 	console.log("USER", user)
-	console.log("email", email.data[0].email) */
 
   let userData = {
     id: user.data.id,
@@ -195,8 +193,6 @@ oauthRouter.get('/github', async (request, response) => {
     lastname: user.data.name.split(' ')[1],
     email: email.data[0].email,
   }
-
-  //console.log("userData", userData)
 
   const userFound = await db.query('SELECT * FROM users WHERE github_id = $1', [
     userData.id,
