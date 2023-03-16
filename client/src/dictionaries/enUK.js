@@ -36,6 +36,7 @@ export const enUK = {
   m_password_forgot: 'Forgot password? Reset it here',
 
   // settings
+  update_h: 'Update my information',
   update_success: 'Your information was updated!',
 
   //Signup errors
@@ -56,4 +57,5 @@ export const enUK = {
   e_email_proper: 'Please add proper email',
   e_email_taken: 'Email already in use',
   e_password_match: 'Passwords do not match!',
+  e_photo_format: 'Only jpg/jpeg or pngs please',
 }

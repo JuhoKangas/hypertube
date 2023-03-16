@@ -43,7 +43,7 @@ const Settings = () => {
       setFile('')
       setFormImage('')
       setDbPhotoFile('')
-      toast.error('Only jpg/jpeg or pngs please')
+      toast.error(dictionary.e_photo_format)
     }
   }
 
@@ -51,24 +51,21 @@ const Settings = () => {
     const errors = {}
 
     if (!formData.firstname) {
-      errors.firstname = 'Please add first name'
+      errors.firstname = dictionary.e_firstname_add
     } else if (formData.firstname.length > 1000) {
-      errors.firstname =
-        "Your first name can't realistically be over 1000 characters"
+      errors.firstname = dictionary.e_firstname_length
     }
 
     if (!formData.lastname) {
-      errors.lastname = 'Please add last name'
+      errors.lastname = dictionary.e_lastname_add
     } else if (formData.lastname.length > 1000) {
-      errors.lastname =
-        "Your last name can't realistically be over 1000 characters"
+      errors.lastname = dictionary.e_lastname_length
     }
 
     if (!formData.username) {
-      errors.username = 'Please add username'
+      errors.username = dictionary.e_username_add
     } else if (formData.username.length > 60) {
-      errors.username =
-        "Your username can't be over 60 characters. It's just arbitary limit that I came up with, in fact our database would handle usernames up to 1000 characters but it would probably break the styling of the page so we just gonna have it like this now."
+      errors.username = dictionary.e_username_length
     } else {
       const findUserByUsername = await userService.getUserByUsername(
         formData.username
@@ -77,23 +74,22 @@ const Settings = () => {
         findUserByUsername.data.user.rowCount > 0 &&
         loggedUser.username !== formData.username
       ) {
-        errors.username = 'Username is already taken'
+        errors.username = dictionary.e_username_taken
       }
     }
 
     if (formData.password) {
       if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(formData.password)) {
-        errors.password =
-          'Password must be at least 8 characters and contain only letters and numbers'
+        errors.password = dictionary.e_password_requirements
       }
     }
 
     if (!formData.email) {
-      errors.email = 'Please add your email'
+      errors.email = dictionary.e_email_add
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formData.email)
     ) {
-      errors.email = 'Please add proper email'
+      errors.email = dictionary.e_email_proper
     }
 
     return errors
@@ -124,7 +120,7 @@ const Settings = () => {
     }
 
     if (updatedUserInfo.password !== confirmPassword) {
-      toast.error('Passwords do not match!')
+      toast.error(dictionary.e_password_match)
       return
     }
 
@@ -155,14 +151,14 @@ const Settings = () => {
       localStorage.setItem('loggedUser', JSON.stringify(updatedUser))
       changeLoggedUser(updatedUser)
       changeLanguage(updatedUser.language)
-      toast.success(dictionary.update_success) // ADD TO DICTIONARY
+      toast.success(dictionary.update_success)
     } else {
       const response = await userService.update(updatedUserInfo)
       const updatedUser = response.data.data.user
       localStorage.setItem('loggedUser', JSON.stringify(updatedUser))
       changeLoggedUser(updatedUser)
       changeLanguage(updatedUser.language)
-      toast.success(dictionary.update_success) // ADD TO DICTIONARY
+      toast.success(dictionary.update_success)
     }
     navigate('/movies')
   }
@@ -171,7 +167,7 @@ const Settings = () => {
     <div className='md:h-full flex flex-col bg-hyper-black'>
       <div>
         <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-10'>
-          Update my information {/* add to dictionary */}
+          {dictionary.update_h} {/* add to dictionary */}
         </h1>
       </div>
       <div className='flex justify-center'>

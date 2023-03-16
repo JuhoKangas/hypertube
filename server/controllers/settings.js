@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 
 settingsRouter.put('/', async (req, res) => {
   const formData = req.body
-  console.log('Form data', formData)
   let hashedPassword = ''
   if (formData.password !== '') {
     hashedPassword = await bcrypt.hash(formData.password, 10)
