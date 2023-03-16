@@ -6,7 +6,7 @@ export const isImage = async (file) => {
         resolve(reader.result)
       }
       reader.onerror = reject
-      reader.readAsArrayBuffer(file.slice(start, end))
+      file ? reader.readAsArrayBuffer(file.slice(start, end)) : <></>
     })
   }
 
