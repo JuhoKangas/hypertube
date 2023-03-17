@@ -35,6 +35,10 @@ export const enUK = {
   m_login_account: 'Log in to your account',
   m_password_forgot: 'Forgot password? Reset it here',
 
+  // settings
+  update_h: 'Update my information',
+  update_success: 'Your information was updated!',
+
   //Signup errors
   e_firstname_add: 'Please add first name',
   e_firstname_length:
@@ -56,4 +60,5 @@ export const enUK = {
 
   // Movie info
   mov_cast: 'Main cast:',
+  e_photo_format: 'Only jpg/jpeg or pngs please',
 }

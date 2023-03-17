@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import moviesService from '../services/movies'
+import userService from '../services/users'
 import InfiniteScroll from 'react-infinite-scroll-component'
-
+import { useLoggedUser } from '../context/UserContext'
 import MovieCard from '../components/movieList/MovieCard'
 import MovieSearch from '../components/movieList/MovieSearch'
 import { useMyLanguage } from '../context/LanguageContext'
 import { translate } from '../dictionaries/translate'
 
 const Movies = () => {
-  const { language } = useMyLanguage()
+  const { language, changeLanguage } = useMyLanguage()
   const dictionary = translate(language)
+  const { changeLoggedUser } = useLoggedUser()
 
   const [allMovies, setAllMovies] = useState([])
   const [page, setPage] = useState(2)
@@ -25,6 +27,21 @@ const Movies = () => {
       setAllMovies(movieData.movies)
     }
     getAllMovies()
+
+    const loginFromOauth = async (token) => {
+      const res = await userService.loginOauthUser(token)
+      const user = res.data
+      localStorage.setItem('loggedUser', JSON.stringify(user))
+      changeLoggedUser(user)
+      //check login worked?
+      changeLanguage(user.language)
+    }
+    if (document.cookie) {
+      const name = 'oauthLogin'
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+      loginFromOauth(match[2])
+			document.cookie = document.cookie + ';max-age=0'
+    }
   }, [])
 
   const fetchNextMovies = async () => {

@@ -19,7 +19,17 @@ const loginUser = (username, password) => {
     loginUrl,
     {
       username,
-      password
+      password,
+    },
+    { withCredentials: true }
+  )
+}
+
+const loginOauthUser = (token) => {
+  return axios.post(
+    `${loginUrl}/oauth`,
+    {
+      token,
     },
     { withCredentials: true }
   )
@@ -44,5 +54,6 @@ export default {
   update,
   getUserByUsername,
   upload,
-  uploadPhoto
+  uploadPhoto,
+  loginOauthUser,
 }

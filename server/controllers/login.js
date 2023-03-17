@@ -73,7 +73,48 @@ loginRouter.post('/', async (req, res) => {
     id: updatedUser.id,
     language: updatedUser.language,
     profilePicture: updatedUser.profile_picture,
+    username: updatedUser.username,
+    firstname: updatedUser.firstname,
+    lastname: updatedUser.lastname,
+    email: updatedUser.email,
   })
 })
 
+loginRouter.post('/oauth', async (req, res) => {
+  const oauthToken = req.body.token
+
+  const data = await db.query('SELECT * FROM users WHERE token = $1', [
+    oauthToken,
+  ])
+  const user = data.rows[0]
+
+  if (!user) {
+    return res.status(401).json({
+      error: 'error occured',
+    })
+  }
+
+  db.query('UPDATE users SET token = 0 WHERE username = $1', [user.username])
+  const userForToken = {
+    username: user.username,
+    id: user.id,
+  }
+  const userData = await db.query('SELECT * FROM users WHERE username = $1', [
+    user.username,
+  ])
+
+  const updatedUser = userData.rows[0]
+
+  const token = jwt.sign(userForToken, process.env.SECRET)
+  res.status(200).send({
+    token,
+    id: updatedUser.id,
+    language: updatedUser.language,
+    profilePicture: updatedUser.profile_picture,
+    username: updatedUser.username,
+    firstname: updatedUser.firstname,
+    lastname: updatedUser.lastname,
+    email: updatedUser.email,
+  })
+})
 module.exports = loginRouter
