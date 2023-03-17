@@ -189,6 +189,7 @@ oauthRouter.get('/github', async (request, response) => {
     return
   }
 
+  // after user clicks authorize application on Github, the page redirects back to our app, returning a session code
   const tokenResponse = await axios({
     method: 'POST',
     url: `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_OAUTH_CLIENT_SECRET}&code=${code}`,
@@ -200,6 +201,8 @@ oauthRouter.get('/github', async (request, response) => {
     return
   }
 
+  // our app makes a server to server request and exchange the session code and our app's client secret for an oauth access token
+  // we use the access token with octokit to make API requests
   const octokit = new Octokit({ auth: tokenResponse.data.access_token })
 
   const user = await octokit.request('GET /user', {})
