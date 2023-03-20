@@ -61,7 +61,7 @@ const MovieSearch = ({ onSearch, searchParams }) => {
             htmlFor='genre'
             className='block text-sm font-medium text-white mb-2'
           >
-            Movie Genre
+            {dictionary.mov_genre}
           </label>
           <select
             onChange={(e) => setGenre(e.target.value)}
@@ -69,7 +69,7 @@ const MovieSearch = ({ onSearch, searchParams }) => {
             id='genre'
             className='bg-transparent border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
           >
-            <option value=''>Choose a genre</option>
+            <option value=''>{dictionary.mov_choose_genre}</option>
             {genreList.map((genre) => (
               <option key={genre} value={genre}>
                 {genre}
@@ -81,7 +81,7 @@ const MovieSearch = ({ onSearch, searchParams }) => {
             htmlFor='minimum_rating'
             className='block text-sm font-medium text-white mt-6 lg:mt-0 mb-2'
           >
-            Minimum rating
+            {dictionary.mov_min_rating}
           </label>
           <select
             onChange={(e) => setRating(e.target.value)}
@@ -89,7 +89,7 @@ const MovieSearch = ({ onSearch, searchParams }) => {
             id='minimum_rating'
             className='bg-transparent border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
           >
-            <option value=''>Choose a value</option>
+            <option value=''>{dictionary.mov_choose_value}</option>
             <option value='0'>0</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -106,7 +106,7 @@ const MovieSearch = ({ onSearch, searchParams }) => {
             htmlFor='sort_by'
             className='block text-sm font-medium text-white mt-6 lg:mt-0 mb-2'
           >
-            Sort by
+            {dictionary.mov_sort_by}
           </label>
           <select
             onChange={(e) => setSortBy(e.target.value)}
@@ -114,17 +114,17 @@ const MovieSearch = ({ onSearch, searchParams }) => {
             id='sort_by'
             className='bg-transparent border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
           >
-            <option value='like_count'>Like count</option>
-            <option value='title'>Title</option>
-            <option value='year'>Year</option>
-            <option value='rating'>Rating</option>
+            <option value='like_count'>{dictionary.mov_like_count}</option>
+            <option value='title'>{dictionary.mov_title}</option>
+            <option value='year'>{dictionary.mov_year}</option>
+            <option value='rating'>{dictionary.mov_rating}</option>
           </select>
 
           <label
             htmlFor='order_by'
             className='block text-sm font-medium text-white mt-6 lg:mt-0 mb-2'
           >
-            Order by
+            {dictionary.mov_order_by}
           </label>
           <select
             onChange={(e) => setOrderBy(e.target.value)}
@@ -132,8 +132,8 @@ const MovieSearch = ({ onSearch, searchParams }) => {
             id='order_by'
             className='bg-transparent border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
           >
-            <option value='desc'>Descending</option>
-            <option value='asc'>Ascending</option>
+            <option value='desc'>{dictionary.mov_order_desc}</option>
+            <option value='asc'>{dictionary.mov_order_asc}</option>
           </select>
         </div>
 
@@ -149,7 +149,7 @@ const MovieSearch = ({ onSearch, searchParams }) => {
           onClick={handleClick}
           className='mt-10 bg-dark-red py-2 px-6 rounded-lg cursor-pointer hover:bg-dark-red/80'
         >
-          Search
+          {dictionary.mov_search}
         </button>
       </div>
     </div>
