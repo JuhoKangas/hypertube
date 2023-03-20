@@ -15,7 +15,11 @@ const MovieInfo = ({ movieData }) => {
       <div className='z-10 px-12 ml-5'>
         <div className='flex font-bold gap-4 text-sm mb-5'>
           <div>{movieData.year}</div>
-          <div>{movieData.runtime} min</div>
+          <div>
+            {movieData.runtime > 0
+              ? `${movieData.runtime} min`
+              : `${movieData.additionalData.Runtime}`}
+          </div>
           <div>
             <svg
               xmlns='http://www.w3.org/2000/svg'
