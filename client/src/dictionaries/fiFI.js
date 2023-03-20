@@ -47,7 +47,7 @@ export const fiFI = {
     'Salasanan pittää olla ainaki 8 merkkiä pitkä ja saa sisältää ainoastaan kirjaimia ja numeroita',
   e_email_add: 'Pliis lissää sähköposti',
   e_email_proper: 'Lissää kunnon sähköpostiosote. Pliis.',
-  e_email_taken: 'Email already in use',
+  e_email_taken: 'Sähköposti on jo käytössä',
   e_password_match: 'Salasanat ei täsmää!',
 
   // Movie info
