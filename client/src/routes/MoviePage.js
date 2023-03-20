@@ -12,6 +12,7 @@ import moment from 'moment'
 
 const MoviePage = ({ id }) => {
   const [movieData, setMovieData] = useState({})
+  const [allComments, setAllComments] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [newComment, setNewComment] = useState('')
   const { language } = useMyLanguage
@@ -24,7 +25,16 @@ const MoviePage = ({ id }) => {
       setMovieData(fetchedMovieData.movie)
       setIsLoading(false)
     }
+
+    const getMovieComments = async (id) => {
+      const comments = await commentsServices.getAllComments(id)
+      if (comments) {
+        setAllComments(comments)
+				console.log("allComments", allComments)
+      }
+    }
     getMovieData(id)
+    getMovieComments(id)
   }, [id])
 
   const handleCommentChange = (e) => {
@@ -63,6 +73,12 @@ const MoviePage = ({ id }) => {
           <MovieHeader movieData={movieData} />
           <MovieInfo movieData={movieData} />
           <VideoPlayer />
+          <h1 className='mt-10 text-2xl font-semibold z-0'>Comments</h1>
+{/*           {allComments?.map((comment) => (
+						<div className='border border-white bg-white'>
+
+						</div>
+					))} */}
           <h1 className='mt-10 text-xl font-semibold z-0'>Submit a Comment</h1>
           <div className='border-gray-300 rounded-lg border bg-white flex justify-between font-montserrat z-0 m-5'>
             <input

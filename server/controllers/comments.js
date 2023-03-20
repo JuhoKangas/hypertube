@@ -30,4 +30,25 @@ commentsRouter.post('/', async (req, res) => {
   }
 })
 
+commentsRouter.get('/', async (req, res) => {
+  const data = req.query
+  console.log('COMMENTS', data.id)
+
+  if (data) {
+    try {
+      const result = await db.query(
+        'SELECT * FROM comments WHERE movie_id = $1',
+        [data.id]
+      )
+			const allComments = result.rows
+      res.status(200).json({ allComments })
+      console.log('RESULT', result.rows)
+    } catch (err) {
+      console.log(err)
+    }
+  } else {
+    res.status(400).json({ msg: 'bad request' })
+  }
+})
+
 module.exports = commentsRouter
