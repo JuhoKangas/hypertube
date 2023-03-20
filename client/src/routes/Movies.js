@@ -3,6 +3,8 @@ import moviesService from '../services/movies'
 import userService from '../services/users'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useLoggedUser } from '../context/UserContext'
+import toast from 'react-hot-toast'
+
 import MovieCard from '../components/movieList/MovieCard'
 import MovieSearch from '../components/movieList/MovieSearch'
 import { useMyLanguage } from '../context/LanguageContext'
@@ -14,19 +16,28 @@ const Movies = () => {
   const { changeLoggedUser } = useLoggedUser()
 
   const [allMovies, setAllMovies] = useState([])
-  const [page, setPage] = useState(2)
+  const [page, setPage] = useState(1)
   // URI query params
-  const [minimumRating, setMinimumRating] = useState(0)
-  const [queryTerm, setQueryTerm] = useState('')
-  const [genre, setGenre] = useState('')
-  const [sorting, setSorting] = useState('')
+  const [sortAndFilter, setSortAndFilter] = useState({
+    minimum_rating: 0,
+    query_term: '',
+    quality: 'All', //string, 720p 1080p 2160p 3D
+    genre: '',
+    sort_by: 'like_count', //title, year, rating, like_count
+    order_by: 'desc',
+  })
 
   useEffect(() => {
     const getAllMovies = async () => {
-      const movieData = await moviesService.getAllMovies()
-      setAllMovies(movieData.movies)
+      const movieData = await moviesService.getFilteredMovies(sortAndFilter)
+      if (movieData.movie_count > 0) {
+        setAllMovies(movieData.movies)
+      } else {
+        toast.error('No movies found!')
+      }
     }
     getAllMovies()
+<<<<<<< HEAD
 
     const loginFromOauth = async (token) => {
       const res = await userService.loginOauthUser(token)
@@ -43,15 +54,29 @@ const Movies = () => {
 			document.cookie = document.cookie + ';max-age=0'
     }
   }, [])
+=======
+  }, [sortAndFilter])
+>>>>>>> juho-sortingAndFiltering
 
   const fetchNextMovies = async () => {
-    const newMovies = await moviesService.getNextMovies(page)
-    setAllMovies(allMovies.concat(newMovies.movies))
-    setPage((prev) => prev + 1)
+    const newMovies = await moviesService.getNextMovies(page + 1, sortAndFilter)
+    console.log(newMovies)
+    if (newMovies.movies) {
+      setAllMovies(allMovies.concat(newMovies.movies))
+      setPage((prev) => prev + 1)
+    } else {
+      setPage(10)
+    }
   }
+
+  const handleSearch = (params) => {
+    setPage(1)
+    setSortAndFilter(params)
+  }
+
   return (
     <div className='bg-hyper-black'>
-      <MovieSearch />
+      <MovieSearch onSearch={handleSearch} searchParams={sortAndFilter} />
       <InfiniteScroll
         className='flex flex-wrap gap-16 justify-center px-5 pt-4'
         dataLength={allMovies.length} //This is important field to render the next data
@@ -63,7 +88,7 @@ const Movies = () => {
           </h4>
         }
         endMessage={
-          <p className='text-white p-8'>
+          <p className='text-white p-8 basis-full text-center'>
             <b>{dictionary.m_page_end}</b>
           </p>
         }

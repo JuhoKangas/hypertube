@@ -15,7 +15,8 @@ const MoviePage = ({ id }) => {
   useEffect(() => {
     const getMovieData = async (id) => {
       const fetchedMovieData = await moviesServices.getMovieData(id)
-      setMovieData(fetchedMovieData.movie)
+      console.log(fetchedMovieData)
+      setMovieData(fetchedMovieData)
       setIsLoading(false)
     }
     getMovieData(id)
