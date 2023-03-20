@@ -6,8 +6,14 @@ const getAllMovies = () => {
   return axios.get(`${baseUrl}`).then((res) => res.data)
 }
 
-const getNextMovies = (page) => {
-  return axios.get(`${baseUrl}/page/${page}`).then((res) => res.data)
+const getFilteredMovies = (queryParams) => {
+  return axios.post(baseUrl, queryParams).then((res) => res.data)
+}
+
+const getNextMovies = (page, queryParams) => {
+  return axios
+    .post(`${baseUrl}/page/${page}`, queryParams)
+    .then((res) => res.data)
 }
 
 const getMovieData = (id) => {
@@ -15,4 +21,4 @@ const getMovieData = (id) => {
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAllMovies, getNextMovies, getMovieData }
+export default { getAllMovies, getNextMovies, getMovieData, getFilteredMovies }

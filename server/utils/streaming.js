@@ -38,7 +38,7 @@ const streamMovie = async (movieId, range) => {
 
   // use the file system library to create the readstream, using the video path as an argument and the start and end as an options in the options object
   const videoStream = fs.createReadStream(movieFound.path, { start, end })
-  console.log('failure to create read stream')
+
   videoStream.on('error', (err) => {
     void err
     if (!videoStream.destroyed) videoStream.destroy()

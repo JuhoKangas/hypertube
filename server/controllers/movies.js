@@ -9,9 +9,9 @@ var torrentStream = require('torrent-stream')
 const { getSubtitleFiles } = require('../utils/subtitles')
 //require open-subtitles-api https://www.npmjs.com/package/opensubtitles-api
 // const OS = require('opensubtitles-api')
+const querystring = require('node:querystring')
 
 moviesRouter.get('/', async (req, res) => {
-  console.log(req.query)
   const allMovies = await axios.get(
     'https://yts.mx/api/v2/list_movies.json?sort_by=like_count'
   )
@@ -20,10 +20,22 @@ moviesRouter.get('/', async (req, res) => {
   res.status(200).json(JSON.parse(stringified))
 })
 
-moviesRouter.get('/page/:page', async (req, res) => {
+moviesRouter.post('/', async (req, res) => {
+  const params = querystring.stringify(req.body)
+  console.log(params)
+  const allMovies = await axios.get(
+    `https://yts.mx/api/v2/list_movies.json?${params}`
+  )
+  const stringified = JSON.stringify(allMovies.data.data)
+
+  res.status(200).json(JSON.parse(stringified))
+})
+
+moviesRouter.post('/page/:page', async (req, res) => {
   const page = req.params.page
+  const params = querystring.stringify(req.body)
   const movieData = await axios.get(
-    `https://yts.mx/api/v2/list_movies.jsonp?sort_by=like_count&page=${page}`
+    `https://yts.mx/api/v2/list_movies.json?${params}&page=${page}`
   )
   const stringified = JSON.stringify(movieData.data.data)
 
@@ -36,9 +48,22 @@ moviesRouter.get('/id/:id', async (req, res) => {
     `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`
   )
 
+  const additionalData = process.env.OMDB_API_KEY
+    ? await axios.get(
+        `http://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&i=${movieData.data.data.movie.imdb_code}`
+      )
+    : {}
+
   const stringified = JSON.stringify(movieData.data.data)
 
-  res.status(200).json(JSON.parse(stringified))
+  let returnData = JSON.parse(stringified)
+  returnData = {
+    ...returnData.movie,
+    additionalData: { ...additionalData.data },
+  }
+  console.log(returnData)
+
+  res.status(200).json(returnData)
 })
 
 moviesRouter.get('/download/:id', async (req, res) => {
