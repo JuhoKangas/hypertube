@@ -6,44 +6,12 @@ const fs = require('fs')
 const { Console } = require('console')
 //require torrent-stream https://www.npmjs.com/package/torrent-stream
 var torrentStream = require('torrent-stream')
-const { getSubtitleFiles } = require('../utils/subtitles')
-//require open-subtitles-api https://www.npmjs.com/package/opensubtitles-api
+// //require open-subtitles-api https://www.npmjs.com/package/opensubtitles-api
 // const OS = require('opensubtitles-api')
 
-moviesRouter.get('/', async (req, res) => {
-  console.log(req.query)
-  const allMovies = await axios.get(
-    'https://yts.mx/api/v2/list_movies.json?sort_by=like_count'
-  )
-  const stringified = JSON.stringify(allMovies.data.data)
-
-  res.status(200).json(JSON.parse(stringified))
-})
-
-moviesRouter.get('/page/:page', async (req, res) => {
-  const page = req.params.page
-  const movieData = await axios.get(
-    `https://yts.mx/api/v2/list_movies.jsonp?sort_by=like_count&page=${page}`
-  )
-  const stringified = JSON.stringify(movieData.data.data)
-
-  res.status(200).json(JSON.parse(stringified))
-})
-
-moviesRouter.get('/id/:id', async (req, res) => {
+moviesRouter.get('/subtitles/:id', async (req, res) => {
   const movieId = req.params.id
-  const movieData = await axios.get(
-    `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`
-  )
-
-  const stringified = JSON.stringify(movieData.data.data)
-
-  res.status(200).json(JSON.parse(stringified))
-})
-
-moviesRouter.get('/download/:id', async (req, res) => {
-  const movieId = req.params.id
-  // console.log(`params: `, req.params)
+  console.log(`params: `, req.params)
   let downloadingFile = null
   let resSent = false
 
@@ -83,6 +51,9 @@ moviesRouter.get('/download/:id', async (req, res) => {
       res.status(200).json({ error: 'No torrents found' })
     }
 
+    const imdbId = movieData.imdb_code.substring(2)
+    const subHash = torrents[0].hash
+
     const longNamePlus = movieData.title_long.split(' ').join('+')
     const magnetLink = `magnet:?xt=urn:btih:${torrents[0].hash}&dn=${longNamePlus}`
 
@@ -115,11 +86,45 @@ moviesRouter.get('/download/:id', async (req, res) => {
       )
       if (files.length > 0) {
         downloadingFile = files[0]
-        // console.log(`downloadingFile: `, downloadingFile)
+        const subSize = downloadingFile.length
+        const subName = downloadingFile.name
+        console.log(`downloadingFile: `, downloadingFile)
         console.log(`STARTING download of: `, downloadingFile.path)
-        // console.log('That files full size is: ', downloadingFile.length)
-        // console.log('That files name is: ', downloadingFile.name)
+        console.log('That files full size is: ', downloadingFile.length)
+        console.log('That files name is: ', downloadingFile.name)
+        // subtitle download start:
+        const OpenSubtitles = new OS('UserAgent')
 
+        // OpenSubtitles.api.LogIn('username', 'password', 'en', 'UserAgent').then...
+        // sublanguageid: 'eng, fin, esp, slo' ??
+
+        const params = { file_id: imdbId, sub_format: 'webvtt' }
+        const config = {
+          headers: {
+            Accept: 'application/json',
+            'Api-Key': process.env.OPENSUB_API_KEY,
+            'Content-Type': 'application/json',
+          },
+        }
+        const res = axios
+          .post(
+            `https://api.opensubtitles.com/api/v1/download`,
+            { ...params },
+            config
+          )
+          .then((res) => console.log(`HEHH: `, res.data.link))
+
+        // OpenSubtitles.api
+        //   .SearchSubtitles({
+        //     sublanguageid: 'eng',
+        //     hash: `${torrents[0].hash}`,
+        //     filesize: `${downloadingFile.length}`,
+        //     filename: `${downloadingFile.name}`,
+        //     imdbid: `${imdbId}`,
+        //   })
+        //   .then((data) => console.log(`DATA: `, data))
+
+        // subtitle download end
         downloadingFile.select()
       } else {
         engine.destroy()
@@ -178,24 +183,5 @@ moviesRouter.get('/download/:id', async (req, res) => {
 //     OpenSubtitles.api.SearchSubtitles({sublanguageid: 'eng', hash: `${torrents[0].hash}`, filesize: `${downloadingFile.length}`, filename: `${downloadingFile.name}`, imdbid: `${imdbId}`,}).then(if (data.length > 0) {subtitles => {console.log(subtitles)}})
 
 // })
-
-moviesRouter.get('/stream/:id', async (req, res) => {
-  const movieId = req.params.id
-  // Make sure there is a range header.
-  //Otherwise, you won’t be able to tell the client what part of the video you want to send back.
-  const range = req.headers.range
-  console.log('Range', range)
-  if (!range) {
-    res.status(400).send('Requires range header')
-    return
-  }
-  const streamRes = await streamMovie(movieId, range)
-
-  // write a response for the request, sending the respective status code and headers
-  res.writeHead(streamRes.code, streamRes.headers)
-
-  // pipe the stream from streamRes into the response
-  streamRes.stream.pipe(res)
-})
 
 module.exports = moviesRouter
