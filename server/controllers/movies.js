@@ -4,12 +4,12 @@ const { streamMovie } = require('../utils/streaming')
 const path = require('path')
 const fs = require('fs')
 const { Console } = require('console')
-//require torrent-stream https://www.npmjs.com/package/torrent-stream
 var torrentStream = require('torrent-stream')
-const { getSubtitleFiles } = require('../utils/subtitles')
+//const { getSubtitleFiles } = require('../utils/subtitles')
 //require open-subtitles-api https://www.npmjs.com/package/opensubtitles-api
 // const OS = require('opensubtitles-api')
 const querystring = require('node:querystring')
+const db = require('../db/index')
 
 moviesRouter.get('/', async (req, res) => {
   const allMovies = await axios.get(
@@ -68,7 +68,6 @@ moviesRouter.get('/id/:id', async (req, res) => {
 
 moviesRouter.get('/download/:id', async (req, res) => {
   const movieId = req.params.id
-  // console.log(`params: `, req.params)
   let downloadingFile = null
   let resSent = false
 
@@ -140,10 +139,14 @@ moviesRouter.get('/download/:id', async (req, res) => {
       )
       if (files.length > 0) {
         downloadingFile = files[0]
-        // console.log(`downloadingFile: `, downloadingFile)
         console.log(`STARTING download of: `, downloadingFile.path)
-        // console.log('That files full size is: ', downloadingFile.length)
-        // console.log('That files name is: ', downloadingFile.name)
+
+        const fileExt = downloadingFile.name.split('.').pop()
+        const filePath = `downloads/${downloadingFile.path}`
+        db.query(
+          'INSERT INTO downloads (yts_id, file_type, file_size, path) VALUES ($1, $2, $3, $4)',
+          [movieId, fileExt, downloadingFile.length, filePath]
+        )
 
         downloadingFile.select()
       } else {
@@ -172,9 +175,14 @@ moviesRouter.get('/download/:id', async (req, res) => {
       if (downloadingFile === null && !resSent) {
         resSent = true
         res.status(200).json({ error: 'Download failed' })
-      } else if (!resSent) {
-        resSent = true
-        res.status(200).json({ msg: 'Download completed 100%' })
+      } else {
+        db.query(`UPDATE downloads SET completed='true' WHERE yts_id=$1`, [
+          movieId,
+        ])
+        if (!resSent) {
+          resSent = true
+          res.status(200).json({ msg: 'Download completed 100%, stream' })
+        }
       }
       engine.destroy()
     })
@@ -187,22 +195,17 @@ moviesRouter.get('/download/:id', async (req, res) => {
   }
 })
 
-// //subtitles in english and user language, and movie language?
-// moviesRouter.get('/subtitles/:id', async (req, res) => {
+moviesRouter.get('/check/:id', async (req, res) => {
+  const movieId = req.params.id
+  const movieFound = await db.query(
+    "SELECT * FROM downloads WHERE yts_id = $1 AND completed='true'",
+    [movieId]
+  )
 
-//     const imdbId = movieData.imdb_code.substring(2) //should have from yts downloads
-//     let torrent[0] //should have from yts downloads
-//   let downloadingFile //should have from before
+  console.log(movieFound)
 
-//     //require open-subtitles-api https://www.npmjs.com/package/opensubtitles-api
-//     const OS = require('opensubtitles-api')
-//     const OpenSubtitles = new OS('UserAgent')
-
-//     // OpenSubtitles.api.LogIn('username', 'password', 'en', 'UserAgent').then...
-//     sublanguageid: 'eng, fin, esp, slo' ??
-//     OpenSubtitles.api.SearchSubtitles({sublanguageid: 'eng', hash: `${torrents[0].hash}`, filesize: `${downloadingFile.length}`, filename: `${downloadingFile.name}`, imdbid: `${imdbId}`,}).then(if (data.length > 0) {subtitles => {console.log(subtitles)}})
-
-// })
+  res.status(200).json(movieFound)
+})
 
 moviesRouter.get('/stream/:id', async (req, res) => {
   const movieId = req.params.id

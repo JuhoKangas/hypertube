@@ -49,6 +49,7 @@ export const fiFI = {
   e_email_proper: 'Lissää kunnon sähköpostiosote. Pliis.',
   e_email_taken: 'Sähköposti on jo käytössä',
   e_password_match: 'Salasanat ei täsmää!',
+  e_unexpected: 'Ei helevetti! Unexpected error happened!',
 
   // Movie info
   mov_cast: 'Näyttelijät',

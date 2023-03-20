@@ -1,23 +1,15 @@
-//const db = require('../db/index')
+const db = require('../db/index')
 const fs = require('fs')
 //const torrentStream = require('torrent-stream')
 
 const streamMovie = async (movieId, range) => {
-  /*   const movieFound = await db.query(
+  const movieData = await db.query(
     'SELECT * FROM downloads WHERE yts_id = $1',
     [movieId]
-  ) */
+  )
 
-  // hardcoded video info until downloading is done
-  const movieFound = {
-    id: 1,
-    yts_id: 1,
-    file_type: 'mp4',
-    file_size: 9329917,
-    quality: '1080p',
-    path: 'movies/pushthebutton.mp4',
-    completed: true,
-  }
+  const movieFound = movieData.rows[0]
+
   // parse the range, give it 1MB at a time, which is known as a chunk size
   const CHUNK_SIZE = 10 ** 6 // 1MB
   let status = 206 // status code 206 indiciates we are sending partial content
@@ -52,7 +44,6 @@ const streamMovie = async (movieId, range) => {
     stream: videoStream,
   }
 
-  //return { code: status, headers: headers, stream: videoStream }
   return returnInfo
 }
 

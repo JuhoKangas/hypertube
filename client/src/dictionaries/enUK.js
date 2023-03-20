@@ -58,6 +58,7 @@ export const enUK = {
   e_email_taken: 'Email already in use',
   e_password_match: 'Passwords do not match!',
   e_photo_format: 'Only jpg/jpeg or pngs please',
+  e_unexpected: 'Uh-oh! Unexpected error happened!',
 
   // Movie info
   mov_cast: 'Main cast:',
