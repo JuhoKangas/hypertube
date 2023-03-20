@@ -19,7 +19,7 @@ const App = () => {
   const movieId = match ? match.params.id : ''
 
   return (
-    <div>
+    <div className='min-h-screen flex flex-col bg-hyper-black'>
       <LanguageProvider>
         <UserProvider>
           <Navbar />

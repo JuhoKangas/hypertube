@@ -72,10 +72,10 @@ const Movies = () => {
   }
 
   return (
-    <div className='bg-hyper-black'>
+    <div className=''>
       <MovieSearch onSearch={handleSearch} searchParams={sortAndFilter} />
       <InfiniteScroll
-        className='flex flex-wrap gap-16 justify-center px-5 pt-4'
+        className='flex flex-wrap gap-16 justify-center px-5 py-4'
         dataLength={allMovies.length} //This is important field to render the next data
         next={fetchNextMovies}
         hasMore={page < 10 ? true : false}
