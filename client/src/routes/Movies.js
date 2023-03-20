@@ -37,7 +37,6 @@ const Movies = () => {
       }
     }
     getAllMovies()
-<<<<<<< HEAD
 
     const loginFromOauth = async (token) => {
       const res = await userService.loginOauthUser(token)
@@ -51,12 +50,10 @@ const Movies = () => {
       const name = 'oauthLogin'
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
       loginFromOauth(match[2])
-			document.cookie = document.cookie + ';max-age=0'
+      document.cookie = document.cookie + ';max-age=0'
     }
-  }, [])
-=======
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortAndFilter])
->>>>>>> juho-sortingAndFiltering
 
   const fetchNextMovies = async () => {
     const newMovies = await moviesService.getNextMovies(page + 1, sortAndFilter)
