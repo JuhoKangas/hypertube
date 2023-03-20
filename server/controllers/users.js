@@ -30,7 +30,6 @@ usersRouter.post('/', async (request, response) => {
     try {
       //Create Token for the email, use jwt and the email
       const token = jwt.sign({ email: data.email }, process.env.SECRET)
-      console.log(token)
 
       //Send email to the user with the token
       sendEmail('activate', data.email, token)

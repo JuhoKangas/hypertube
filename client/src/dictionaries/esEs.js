@@ -35,6 +35,10 @@ export const esES = {
   m_login_account: 'Inicia sesión con tu cuenta',
   m_password_forgot: 'Se te olvidó la contraseña?',
 
+  // settings TODO
+  update_h: 'Update my information',
+  update_success: 'Your information was updated!',
+
   //Signup errors
   e_firstname_add: 'Por favor, añade un nombre',
   e_firstname_length:
@@ -56,4 +60,5 @@ export const esES = {
 
   // Movie info
   mov_cast: 'TODO:Main cast: ',
+	e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
 }

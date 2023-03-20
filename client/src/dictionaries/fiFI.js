@@ -35,6 +35,10 @@ export const fiFI = {
   m_login_account: 'Log in to your account',
   m_password_forgot: 'Forgot password? Reset it here',
 
+  // settings TODO
+  update_h: 'Update my information',
+  update_success: 'Your information was updated!',
+
   //Signup errors
   e_firstname_add: 'Please add first name',
   e_firstname_length:
@@ -56,4 +60,5 @@ export const fiFI = {
 
   // Movie info
   mov_cast: 'Näyttelijät',
+  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
 }

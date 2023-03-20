@@ -1,6 +1,4 @@
 const express = require('express')
-//var passport = require('passport')
-var GoogleStrategy = require('passport-google-oauth20').Strategy
 
 const app = express()
 const cors = require('cors')
@@ -19,6 +17,7 @@ const activateRouter = require('./controllers/activate')
 const oauthRouter = require('./controllers/oauth')
 const settingsRouter = require('./controllers/settings')
 const uploadRouter = require('./controllers/upload')
+const commentsRouter = require('./controllers/comments')
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
@@ -38,6 +37,7 @@ app.use('/oauth', oauthRouter)
 app.use('/settings', settingsRouter)
 app.use('/upload', uploadRouter)
 app.use('/uploads', express.static('./uploads'))
+app.use('/comments', commentsRouter)
 
 app.use(middleware.unknownEndpoint)
 
