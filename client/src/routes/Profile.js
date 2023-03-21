@@ -8,14 +8,14 @@ const UserProfile = ({ socket, selectedUser }) => {
   const navigate = useNavigate()
   const [selectedUserPhotos, setSelectedUserPhotos] = useState({})
 
-  useEffect(() => {
+/*   useEffect(() => {
     const getUserPhotos = async () => {
       const userPhotos = await photosService.getUserPhotos(selectedUser.id)
       setSelectedUserPhotos(userPhotos.photos.rows)
     }
     getUserPhotos()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []) */
 
   return (
     <div className="flex flex-col ml-32 mr-56 mt-20 text-white">

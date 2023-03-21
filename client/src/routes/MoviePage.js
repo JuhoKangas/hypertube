@@ -9,10 +9,11 @@ import toast from 'react-hot-toast'
 import { useLoggedUser } from '../context/UserContext'
 import commentsServices from '../services/comments'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 const MoviePage = ({ id }) => {
   const [movieData, setMovieData] = useState({})
-  const [allComments, setAllComments] = useState({})
+  const [allComments, setAllComments] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [newComment, setNewComment] = useState('')
   const { language } = useMyLanguage
@@ -29,8 +30,7 @@ const MoviePage = ({ id }) => {
     const getMovieComments = async (id) => {
       const comments = await commentsServices.getAllComments(id)
       if (comments) {
-        setAllComments(comments)
-				console.log("allComments", allComments)
+        setAllComments(comments.allComments)
       }
     }
     getMovieData(id)
@@ -48,20 +48,22 @@ const MoviePage = ({ id }) => {
 
   const submitNewComment = async (e) => {
     e.preventDefault()
-    const loggedUserId = loggedUser.id
+    const loggedUserUsername = loggedUser.username
 
     const comment = {
       text: newComment,
-      sender: loggedUserId,
+      sender: loggedUserUsername,
       movie: id,
     }
 
     if (comment.text !== '') {
       // store comment in db
-      const sentComment = await commentsServices.commentSend(comment)
-      console.log('Comment info', sentComment)
+      if (comment.text.length < 420) {
+        const sentComment = await commentsServices.commentSend(comment)
+        setAllComments([sentComment.data, ...allComments])
+      }
       setNewComment('')
-    } else toast.error('Cannot send an empty comment')
+    } else toast.error('Cannot submit an empty comment')
   }
 
   return (
@@ -73,12 +75,24 @@ const MoviePage = ({ id }) => {
           <MovieHeader movieData={movieData} />
           <MovieInfo movieData={movieData} />
           <VideoPlayer />
-          <h1 className='mt-10 text-2xl font-semibold z-0'>Comments</h1>
-{/*           {allComments?.map((comment) => (
-						<div className='border border-white bg-white'>
-
-						</div>
-					))} */}
+          <h1 className='mt-10 text-2xl font-semibold z-0 mb-3'>Comments</h1>
+          {Object.values(allComments)?.map((comment) => (
+            <div className='text-white z-0' key={comment.id}>
+              <div className='flex gap-3 items-baseline'>
+                <Link
+                  className='text-dark-red font-semibold text-lg'
+                  to={`/${comment.username}`}
+                >
+                  {comment.username}
+                </Link>
+                <div className='text-xs font-thin'>
+                  {moment(comment.created_at).format('hh:mm a')}
+                </div>
+              </div>
+              <hr className='md:w-64 h-0.5 bg-white border-0 rounded mb-0.5' />
+              <div className='ml-3 mb-5'>{comment.text}</div>
+            </div>
+          ))}
           <h1 className='mt-10 text-xl font-semibold z-0'>Submit a Comment</h1>
           <div className='border-gray-300 rounded-lg border bg-white flex justify-between font-montserrat z-0 m-5'>
             <input
