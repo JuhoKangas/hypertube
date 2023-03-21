@@ -7,6 +7,7 @@ import { useMyLanguage } from '../context/LanguageContext'
 import { translate } from '../dictionaries/translate'
 import downloadService from '../services/download'
 import toast from 'react-hot-toast'
+import { useLoggedUser } from '../context/UserContext'
 
 const MoviePage = ({ id }) => {
   const [movieData, setMovieData] = useState({})
@@ -14,6 +15,7 @@ const MoviePage = ({ id }) => {
   const [isDownloading, setDownloading] = useState(false)
   const { language } = useMyLanguage
   const dictionary = translate(language)
+  const { loggedUser } = useLoggedUser()
 
   useEffect(() => {
     const getMovieData = async (id) => {
@@ -26,7 +28,6 @@ const MoviePage = ({ id }) => {
   }, [id])
 
   const downloadMovie = async () => {
-    //TODO: Set movie_watched to database in stream (with date)
     const downloaded = await downloadService.checkDownloaded(id)
     if (downloaded.rowCount === 0) {
       const response = await downloadService.startDownload(id)
@@ -37,6 +38,10 @@ const MoviePage = ({ id }) => {
       }
     } else {
       setDownloading(true)
+    }
+    //TODO: delete if statement? here so no crash because MoviePage is unprotected
+    if (loggedUser.id) {
+      downloadService.updateWatched(id, loggedUser.id)
     }
   }
 

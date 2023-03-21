@@ -31,6 +31,21 @@ moviesRouter.post('/', async (req, res) => {
   res.status(200).json(JSON.parse(stringified))
 })
 
+moviesRouter.post('/updateWatched', async (req, res) => {
+  const params = req.body
+
+  await db.query(`DELETE FROM watched_movies WHERE yts_id=$1 AND user_id=$2`, [
+    params.movieId,
+    params.loggedUserId,
+  ])
+  await db.query(
+    `INSERT INTO watched_movies (yts_id, user_id) VALUES ($1, $2)`,
+    [params.movieId, params.loggedUserId]
+  )
+
+  res.status(200)
+})
+
 moviesRouter.post('/page/:page', async (req, res) => {
   const page = req.params.page
   const params = querystring.stringify(req.body)
