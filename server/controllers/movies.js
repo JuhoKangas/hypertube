@@ -144,7 +144,7 @@ moviesRouter.get('/download/:id', async (req, res) => {
         const fileExt = downloadingFile.name.split('.').pop()
         const filePath = `downloads/${downloadingFile.path}`
         db.query(
-          'INSERT INTO downloads (yts_id, file_type, file_size, path) VALUES ($1, $2, $3, $4)',
+          'INSERT INTO downloads (yts_id, file_type, file_size, path) VALUES ($1, $2, $3, $4) ON CONFLICT DO NOTHING',
           [movieId, fileExt, downloadingFile.length, filePath]
         )
 
