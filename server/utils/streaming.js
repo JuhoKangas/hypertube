@@ -1,8 +1,32 @@
 const db = require('../db/index')
 const fs = require('fs')
 //const torrentStream = require('torrent-stream')
+const path = require('path')
 
 const streamMovie = async (movieId, range) => {
+  const checkFileSize = (filePath) => {
+    const checkFileSize = () => {
+      const stats = fs.statSync(`${filePath}`)
+      return stats.size
+    }
+
+    if (fs.existsSync(`${filePath}`)) {
+      return checkFileSize()
+    }
+    return 0
+  }
+
+  const waitForNeededFileSize = async (sizeNeeded, path) => {
+    return await new Promise((resolve) => {
+      const interval = setInterval(() => {
+        if (sizeNeeded <= checkFileSize(path)) {
+          clearInterval(interval)
+          resolve()
+        }
+      }, 10000)
+    })
+  }
+
   const movieData = await db.query(
     'SELECT * FROM downloads WHERE yts_id = $1',
     [movieId]
@@ -16,6 +40,24 @@ const streamMovie = async (movieId, range) => {
   // parse the starting byte from the range headers; it is a string, so you need to convert it to a number
   let start = Number(range.replace(/\D/g, ''))
   const end = Math.min(start + CHUNK_SIZE, movieFound.file_size - 1)
+
+  const sizeNeeded = Math.min(
+    start + CHUNK_SIZE + 1000,
+    movieFound.file_size - 1
+  )
+  if (
+    sizeNeeded >=
+    checkFileSize(`${path.resolve(__dirname, '../')}/${movieFound.path}`)
+  ) {
+    try {
+      await waitForNeededFileSize(
+        sizeNeeded,
+        `${path.resolve(__dirname, '../')}/${movieFound.path}`
+      )
+    } catch {
+      return
+    }
+  }
 
   // create the response headers that we’ll return
   // first, calculate content length
