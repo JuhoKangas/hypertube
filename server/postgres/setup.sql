@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS downloads (
 	file_type VARCHAR(10) NOT NULL,
 	file_size BIGINT NOT NULL,
 	path VARCHAR(255) NOT NULL,
-	completed BOOLEAN DEFAULT 'f' 
+	completed BOOLEAN DEFAULT 'f',
+	last_watched TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS watched_movies (

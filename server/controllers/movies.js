@@ -42,6 +42,10 @@ moviesRouter.post('/updateWatched', async (req, res) => {
     `INSERT INTO watched_movies (yts_id, user_id) VALUES ($1, $2)`,
     [params.movieId, params.loggedUserId]
   )
+  await db.query(
+    `UPDATE downloads SET last_watched = NOW() WHERE yts_id = $1`,
+    [params.movieId]
+  )
 
   res.status(200)
 })
@@ -191,9 +195,10 @@ moviesRouter.get('/download/:id', async (req, res) => {
         resSent = true
         res.status(200).json({ error: 'Download failed' })
       } else {
-        db.query(`UPDATE downloads SET completed='true' WHERE yts_id=$1`, [
-          movieId,
-        ])
+        db.query(
+          `UPDATE downloads SET completed='true', last_watched=NOW() WHERE yts_id=$1`,
+          [movieId]
+        )
         if (!resSent) {
           resSent = true
           res.status(200).json({ msg: 'Download completed 100%, stream' })
