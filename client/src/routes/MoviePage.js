@@ -8,6 +8,7 @@ import { translate } from '../dictionaries/translate'
 import downloadService from '../services/download'
 import toast from 'react-hot-toast'
 import { useLoggedUser } from '../context/UserContext'
+import Comments from '../components/Comments'
 
 const MoviePage = ({ id }) => {
   const [movieData, setMovieData] = useState({})
@@ -60,6 +61,7 @@ const MoviePage = ({ id }) => {
               Not yet Downloading, button here :D
             </p>
           )}
+          <Comments id={id}/>
         </div>
       )}
     </div>

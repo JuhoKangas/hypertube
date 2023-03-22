@@ -13,10 +13,14 @@ import ResetPassword from './routes/ResetPassword'
 import MoviePage from './routes/MoviePage'
 import { UserProvider } from './context/UserContext'
 import Settings from './routes/Settings'
+import Profile from './routes/Profile'
 
 const App = () => {
   const match = useMatch('/movies/:id')
   const movieId = match ? match.params.id : ''
+
+  const matchProfile = useMatch('/:username')
+  const selectedUser = matchProfile ? matchProfile.params.username : ''
 
   return (
     <div className='min-h-screen flex flex-col bg-hyper-black'>
@@ -32,6 +36,10 @@ const App = () => {
             <Route path={'/signup'} element={<Signup />}></Route>
             <Route path={'/reset_password'} element={<ResetPassword />}></Route>
             <Route path={'/settings'} element={<Settings />}></Route>
+            <Route
+              path={'/:username'}
+              element={<Profile selectedUser={selectedUser}/>}
+            ></Route>
           </Routes>
           <Footer />
         </UserProvider>

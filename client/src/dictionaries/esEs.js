@@ -35,6 +35,10 @@ export const esES = {
   m_login_account: 'Inicia sesión con tu cuenta',
   m_password_forgot: 'Se te olvidó la contraseña?',
 
+  // settings TODO
+  update_h: 'Update my information',
+  update_success: 'Your information was updated!',
+
   //Signup errors
   e_firstname_add: 'Por favor, añade un nombre',
   e_firstname_length:
@@ -72,4 +76,16 @@ export const esES = {
   mov_order_desc: 'TODO:Descending',
   mov_order_asc: 'TODO:Ascending',
   mov_search: 'TODO:Search',
+  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
+
+  // comments TODO
+  comment_section: 'TODO:Comments',
+  submit_comment: 'TODO:Submit a Comment',
+  submit_btn: 'TODO:Submit',
+  write_comment: 'TODO:Write a comment',
+  long_comment: 'TODO:The comment is too long',
+  empty_comment: 'TODO:Cannot submit an empty comment',
+
+  //user profile TODO
+  name: 'TODO:Name:',
 }
