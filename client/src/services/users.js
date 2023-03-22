@@ -51,6 +51,12 @@ const getUserData = (selectedUser) => {
   return axios.get(`${baseUrl}/selected/${selectedUser}`)
 }
 
+const hasWatched = (userId, ytsId) => {
+  return axios
+    .get(`http://localhost:3001/movies/watched/${userId}/${ytsId}`)
+    .then((res) => res.data)
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   create,
