@@ -74,7 +74,7 @@ const Comments = ({ id }) => {
         </div>
       ))}
       <h1 className='mt-10 text-xl font-semibold ml-5'>{dictionary.submit_comment}</h1>
-      <div className='border-gray-300 rounded-lg border bg-white flex justify-between z-0 mb-16 ml-10 mr-10'>
+      <div className='border-gray-300 rounded-lg border bg-white flex justify-between z-0 mb-16 ml-5 mr-10'>
         <input
           type='text'
           placeholder={dictionary.write_comment}
