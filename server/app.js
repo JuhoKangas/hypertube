@@ -5,6 +5,9 @@ const cors = require('cors')
 const middleware = require('./utils/middleware')
 require('dotenv').config()
 
+const cron = require('node-cron')
+require('./utils/movieCleanup')
+
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
@@ -18,6 +21,7 @@ const oauthRouter = require('./controllers/oauth')
 const settingsRouter = require('./controllers/settings')
 const uploadRouter = require('./controllers/upload')
 const commentsRouter = require('./controllers/comments')
+const { deleteUnwatchedMovies } = require('./utils/movieCleanup')
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
@@ -38,6 +42,17 @@ app.use('/settings', settingsRouter)
 app.use('/upload', uploadRouter)
 app.use('/uploads', express.static('./uploads'))
 app.use('/comments', commentsRouter)
+
+cron.schedule(
+  '0 0 * * *',
+  () => {
+    console.log('CRON EXECUTING')
+    deleteUnwatchedMovies()
+  },
+  {
+    scheduled: true,
+  }
+)
 
 app.use(middleware.unknownEndpoint)
 

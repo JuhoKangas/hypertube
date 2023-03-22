@@ -19,6 +19,7 @@ export const enUK = {
   signUp: 'Sign up',
   search: 'Search',
   sortBy: 'Sort by',
+  submit_btn: 'Submit',
 
   //messages
   m_landing: 'WATCH THE LATEST MOVIES ON HYPERTUBE',
@@ -38,8 +39,8 @@ export const enUK = {
   // settings
   update_h: 'Update my information',
   update_success: 'Your information was updated!',
-  preferred_lang: 'Preferred Language',
   profile_pic: 'Profile Picture',
+  preferred_lang: 'Preferred Language',
 
   //Signup errors
   e_firstname_add: 'Please add first name',
@@ -79,12 +80,10 @@ export const enUK = {
   mov_order_desc: 'Descending',
   mov_order_asc: 'Ascending',
   mov_search: 'Search',
-  e_photo_format: 'Only jpg/jpeg or pngs please',
 
   // comments
   comment_section: 'Comments',
   submit_comment: 'Submit a Comment',
-  submit_btn: 'Submit',
   write_comment: 'Write a comment',
   long_comment: 'The comment is too long',
   empty_comment: 'Cannot submit an empty comment',

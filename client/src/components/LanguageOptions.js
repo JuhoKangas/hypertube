@@ -6,7 +6,6 @@ const LanguageOptions = () => {
       <LanguageButton>en</LanguageButton>
       <LanguageButton>fi</LanguageButton>
       <LanguageButton>es</LanguageButton>
-      <LanguageButton>sk</LanguageButton>
     </div>
   )
 }
