@@ -54,7 +54,7 @@ const Comments = ({ id }) => {
   }
 
   return (
-    <div className='z-0'>
+    <div className='z-0 font-montserrat'>
       <h1 className='mt-16 text-3xl font-semibold  mb-3'>{dictionary.comment_section}</h1>
       {Object.values(allComments)?.map((comment) => (
         <div className='text-white ' key={comment.id}>
@@ -74,7 +74,7 @@ const Comments = ({ id }) => {
         </div>
       ))}
       <h1 className='mt-10 text-xl font-semibold '>{dictionary.submit_comment}</h1>
-      <div className='border-gray-300 rounded-lg border bg-white flex justify-between font-montserrat z-0 mb-16'>
+      <div className='border-gray-300 rounded-lg border bg-white flex justify-between z-0 mb-16'>
         <input
           type='text'
           placeholder={dictionary.write_comment}
@@ -83,7 +83,7 @@ const Comments = ({ id }) => {
           onChange={handleCommentChange}
         />
         <button
-          className='text-white bg-dark-red p-2 rounded-lg focus:outline-none focus:shadow-outline font-montserrat font-semibold text-lg cursor-pointer'
+          className='text-white bg-dark-red p-2 rounded-lg focus:outline-none focus:shadow-outline font-semibold text-lg cursor-pointer'
           onClick={submitNewComment}
         >
           {dictionary.submit_btn}

@@ -7,7 +7,6 @@ const commentSend = (comment) => {
 }
 
 const getAllComments = (id) => {
-  console.log('ID in services', id)
   return axios.get(baseUrl, { params: { id: id }}).then((res) => res.data)
 }
 
