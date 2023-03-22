@@ -14,7 +14,6 @@ const Movies = () => {
   const { language, changeLanguage } = useMyLanguage()
   const dictionary = translate(language)
   const { changeLoggedUser } = useLoggedUser()
-	console.log("Language from movies", language)
 
   const [allMovies, setAllMovies] = useState([])
   const [page, setPage] = useState(1)
