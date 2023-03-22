@@ -2,6 +2,10 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import emailService from '../services/email'
 import { toast } from 'react-hot-toast'
+import { useMyLanguage } from '../context/LanguageContext'
+import { translate } from '../dictionaries/translate'
+const { language } = useMyLanguage
+const dictionary = translate(language)
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams()
@@ -29,11 +33,11 @@ const ResetPassword = () => {
 
   const validatePassword = (password) => {
     if (!password) {
-      return 'Please enter a password'
+      return dictionary.e_password_add
     } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-      return 'Password has to be at least 8 characters and contain letters and numbers'
+      return dictionary.e_password_requirements
     } else if (password !== newPasswordAgain) {
-      return "Passwords don't match"
+      return dictionary.e_password_match
     } else {
       return null
     }
@@ -47,7 +51,7 @@ const ResetPassword = () => {
       toast.error(user.error)
     } else {
       toast.success(
-        `Hello ${user.userFound.rows[0].username}! Please check your email`
+        `${dictionary.email_success_msg_start} ${user.userFound.rows[0].username} ${dictionary.email_success_msg_end}`
       )
     }
   }
@@ -66,7 +70,7 @@ const ResetPassword = () => {
       if (response.error) {
         toast.error(response.error)
       } else {
-        toast.success(`Congrats! ${response.msg}`)
+        toast.success(`${dictionary.reset_success_msg} ${response.msg}`)
       }
     } else {
       toast.error(errors)
@@ -77,14 +81,14 @@ const ResetPassword = () => {
     return (
       <div className='bg-hyper-black flex flex-col gap-5 justify-center items-center h-screen'>
         <p className='text-xl text-gray-500'>{'<Succezione! />'}</p>
-        <h1 className='text-3xl text-white'>Time to change the password!</h1>
-        <p className='text-l text-gray-500'>Type in your new password!</p>
+        <h1 className='text-3xl text-white'>{dictionary.change_pwd}</h1>
+        <p className='text-l text-gray-500'>{dictionary.type_pwd}</p>
         <form onSubmit={handlePasswordSubmit} className='flex flex-col'>
           <input
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             type='password'
-            placeholder='New Password'
+            placeholder={dictionary.new_pwd_placeholder}
             className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
             required
           />
@@ -92,21 +96,21 @@ const ResetPassword = () => {
             value={newPasswordAgain}
             onChange={(e) => setNewPasswordAgain(e.target.value)}
             type='password'
-            placeholder='New Password again'
+            placeholder={dictionary.new_pwd_again_placeholder}
             className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
             required
           />
           <input
             className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
             type='submit'
-            value='Reset Password'
+            value={dictionary.reset_pwd}
           />
         </form>
         <Link
           to='/login'
           className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
         >
-          Back to login
+          {dictionary.navigate_login}
         </Link>
       </div>
     )
@@ -115,23 +119,21 @@ const ResetPassword = () => {
   return (
     <div className='bg-hyper-black flex flex-col gap-5 justify-center items-center h-screen'>
       <p className='text-xl text-gray-500'>{'<Attenzione />'}</p>
-      <h1 className='text-3xl text-white'>So you forgot your password?</h1>
-      <p className='text-l text-gray-500'>
-        Please give us your email and we'll get it sorted out
-      </p>
+      <h1 className='text-3xl text-white'>{dictionary.forgot_pwd}</h1>
+      <p className='text-l text-gray-500'>{dictionary.enter_email}</p>
       <form onSubmit={handleSubmit} className='flex flex-col'>
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type='email'
-          placeholder='Email'
+          placeholder={dictionary.email}
           className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
           required
         />
         <input
           className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
           type='submit'
-          value='Reset Password'
+          value={dictionary.reset_pwd}
         />
       </form>
       <hr />
@@ -139,7 +141,7 @@ const ResetPassword = () => {
         to='/login'
         className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
       >
-        Back to login
+        {dictionary.navigate_login}
       </Link>
     </div>
   )

@@ -38,6 +38,8 @@ export const enUK = {
   // settings
   update_h: 'Update my information',
   update_success: 'Your information was updated!',
+  preferred_lang: 'Preferred Language',
+  update: 'Update',
 
   //Signup errors
   e_firstname_add: 'Please add first name',
@@ -90,4 +92,22 @@ export const enUK = {
   //user profile
   name: 'Name:',
   movies_watched: 'Movies watched in the last 30 days:',
+
+  // password reset
+  email_success_msg_start: 'Hello ',
+  email_success_msg_end: '! Please check your email',
+  reset_success_msg: 'Congrats! ',
+  change_pwd: 'Time to change the password!',
+  type_pwd: 'Type in your new password!',
+  new_pwd_placeholder: 'New Password',
+  new_pwd_again_placeholder: 'New Password again',
+  reset_pwd: 'Reset Password',
+  navigate_login: 'Back to login',
+  forgot_pwd: 'So you forgot your password?',
+  enter_email: 'Please give us your email and we will get it sorted out',
+
+  // navbar
+  movies: 'Movies',
+  settings: 'Settings',
+  sign_out: 'Sign out',
 }

@@ -18,7 +18,6 @@ const Settings = () => {
   const initialLastname = useField('text', loggedUser.lastname)
   const initialUsername = useField('text', loggedUser.username)
   const initialEmail = useField('email', loggedUser.email)
-  //const initialPassword = useField('password')
 
   const [confirmPassword, setConfirmPassword] = useState('')
   const [file, setFile] = useState('')
@@ -187,7 +186,7 @@ const Settings = () => {
                 type='text'
                 id='username'
                 name='username'
-                placeholder='e.g. Joel'
+                placeholder='Joel'
                 className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.username}
                 onChange={handleChange}
@@ -205,7 +204,7 @@ const Settings = () => {
                 type='email'
                 id='email'
                 name='email'
-                placeholder='e.g pedro.pascal@hotttdaddy.com'
+                placeholder='pedro.pascal@hotttdaddy.com'
                 className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.email}
                 onChange={handleChange}
@@ -258,7 +257,7 @@ const Settings = () => {
                 type='text'
                 id='first-name'
                 name='firstname'
-                placeholder='e.g Pedro'
+                placeholder='Pedro'
                 className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.firstname}
                 onChange={handleChange}
@@ -277,7 +276,7 @@ const Settings = () => {
                 type='text'
                 id='last-name'
                 name='lastname'
-                placeholder='e.g. Pascal'
+                placeholder='Pascal'
                 className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.lastname}
                 onChange={handleChange}
@@ -289,7 +288,7 @@ const Settings = () => {
                 className='font-montserrat font-medium mb-2 text-white'
                 htmlFor='language'
               >
-                Preferred Language {/* add to dictionary */}
+                {dictionary.preferred_lang}
               </label>
               <div className='flex'>
                 <LanguageOptions></LanguageOptions>
@@ -328,7 +327,7 @@ const Settings = () => {
             <input
               className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
               type='submit'
-              value='Update' /* add to dictionary */
+              value={dictionary.update}
             />
           </div>
         </form>

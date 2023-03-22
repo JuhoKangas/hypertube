@@ -88,4 +88,23 @@ export const esES = {
 
   //user profile TODO
   name: 'TODO:Name:',
+  movies_watched: 'TODO:Movies watched in the last 30 days:',
+
+  // password reset TODO
+  email_success_msg_start: 'TODO:Hello ',
+  email_success_msg_end: 'TODO:! Please check your email',
+  reset_success_msg: 'TODO;Congrats! ',
+  change_pwd: 'TODO:Time to change the password!',
+  type_pwd: 'TODO:Type in your new password!',
+  new_pwd_placeholder: 'TODO:New Password',
+  new_pwd_again_placeholder: 'TODO:New Password again',
+  reset_pwd: 'TODO:Reset Password',
+  navigate_login: 'TODO:Back to login',
+  forgot_pwd: 'TODO:So you forgot your password?',
+  enter_email: 'TODO:Please give us your email and we will get it sorted out',
+
+  // navbar
+  movies: 'Películas',
+  settings: 'TODO:Settings',
+  sign_out: 'TODO:Sign out',
 }

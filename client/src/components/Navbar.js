@@ -3,12 +3,16 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useLoggedUser } from '../context/UserContext'
+import { useMyLanguage } from '../context/LanguageContext'
+import { translate } from '../dictionaries/translate'
 
 const Navbar = () => {
   const navigate = useNavigate()
   const { loggedUser, changeLoggedUser } = useLoggedUser()
+	const { language } = useMyLanguage
+  const dictionary = translate(language)
 
-  const navigation = [{ name: 'Movies', href: '/movies' }]
+  const navigation = [{ name: dictionary.movies, href: '/movies' }]
 
   const handleLogout = async (event) => {
     event.preventDefault()
@@ -86,7 +90,7 @@ const Navbar = () => {
                             to='/settings'
                             className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                           >
-                            Settings
+                            {dictionary.settings}
                           </Link>
                         )}
                       </Menu.Item>
@@ -96,7 +100,7 @@ const Navbar = () => {
                             onClick={handleLogout}
                             className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                           >
-                            Sign out
+                            {dictionary.sign_out}
                           </Link>
                         )}
                       </Menu.Item>
