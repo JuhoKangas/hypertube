@@ -36,8 +36,9 @@ export const esES = {
   m_password_forgot: 'Se te olvidó la contraseña?',
 
   // settings TODO
-  update_h: 'Update my information',
-  update_success: 'Your information was updated!',
+  update_h: 'TODO:Update my information',
+  update_success: 'TODO:Your information was updated!',
+  profile_pic: 'TODO:Profile Picture',
 
   //Signup errors
   e_firstname_add: 'Por favor, añade un nombre',

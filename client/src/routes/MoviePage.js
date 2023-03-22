@@ -61,7 +61,10 @@ const MoviePage = ({ id }) => {
               Not yet Downloading, button here :D
             </p>
           )}
-          <Comments id={id}/>
+          <Comments id={id} />
+          {/*           <div className='mt-40'> 
+            <Comments id={id} />
+          </div> */}
         </div>
       )}
     </div>

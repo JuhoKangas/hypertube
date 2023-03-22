@@ -40,6 +40,7 @@ export const enUK = {
   update_success: 'Your information was updated!',
   preferred_lang: 'Preferred Language',
   update: 'Update',
+  profile_pic: 'Profile Picture',
 
   //Signup errors
   e_firstname_add: 'Please add first name',
