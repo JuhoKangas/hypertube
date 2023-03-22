@@ -17,8 +17,6 @@ export const fiFI = {
   //Buttons
   logIn: 'Kirjaudu sisään',
   signUp: 'Rekisteröidy',
-  search: 'Haku',
-  sortBy: 'Lajittele',
   submit_btn: 'TODO:Submit',
 
   //messages
@@ -38,7 +36,6 @@ export const fiFI = {
   // settings TODO
   update_h: 'TODO:Update my information',
   update_success: 'TODO:Your information was updated!',
-  profile_pic: 'TODO:Profile Picture',
   preferred_lang: 'TODO:Preferred Language',
 
   //Signup errors
@@ -85,13 +82,13 @@ export const fiFI = {
   empty_comment: 'TODO:Cannot submit an empty comment',
 
   //user profile TODO
-  name: 'TODO:Name:',
+  name: 'TODO:Nimi:',
   movies_watched: 'TODO:Movies watched in the last 30 days:',
 
   // password reset TODO
-  email_success_msg_start: 'TODO:Hello ',
+  email_success_msg_start: 'TODO:Moikka moi ',
   email_success_msg_end: 'TODO:! Please check your email',
-  reset_success_msg: 'TODO;Congrats! ',
+  reset_success_msg: 'TODO;Congrats! Nonii!',
   change_pwd: 'TODO:Time to change the password!',
   type_pwd: 'TODO:Type in your new password!',
   new_pwd_placeholder: 'TODO:New Password',
@@ -102,7 +99,7 @@ export const fiFI = {
   enter_email: 'TODO:Please give us your email and we will get it sorted out',
 
   // navbar
-  movies: 'TODO:Movies',
+  movies: 'TODO:Elokuvat',
   settings: 'TODO:Settings',
-  sign_out: 'TODO:Sign out',
+  sign_out: 'TODO:Sign out Helvettiin',
 }

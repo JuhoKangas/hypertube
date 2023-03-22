@@ -299,7 +299,7 @@ const Settings = () => {
                 className=' font-montserrat font-medium mb-2 text-white'
                 htmlFor='profilepicture'
               >
-                {dictionary.profile_pic}
+                {dictionary.profile_picture}
               </label>
               <div className='flex flex-col items-center justify-center gap-12 md:mb-0 mb-10 mt-10'>
                 {file ? (

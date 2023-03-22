@@ -5,7 +5,7 @@ export const esES = {
   lastname: 'Apellido',
   email: 'Correo electrónico',
   password: 'Contraseña',
-  password_repeat: 'Repite contraseña',
+  password_repeat: 'Repita contraseña',
   profile_picture: 'Foto de perfil',
   language: 'Idioma',
 
@@ -17,14 +17,12 @@ export const esES = {
   //Buttons
   logIn: 'Iniciar sesión',
   signUp: 'Registrar',
-  search: 'Buscar',
-  sortBy: 'Ordenar',
-  submit_btn: 'TODO:Submit',
+  submit_btn: 'Enviar',
 
   //messages
   m_landing: 'MIRA LAS ÚLTIMAS PELÍCULAS EN HYPERTUBE',
   m_movies_search: 'Busca tus películas aquí',
-  m_loading: 'Espera coño...',
+  m_loading: 'Dame un segundo...',
   m_page_end:
     'Has llegado al final de la página! Si no encontraste lo que buscabas, utiliza la barra de búsqueda, por favor',
   m_link_sent: 'Te hemos enviado un enlace',
@@ -36,11 +34,10 @@ export const esES = {
   m_login_account: 'Inicia sesión con tu cuenta',
   m_password_forgot: 'Se te olvidó la contraseña?',
 
-  // settings TODO
-  update_h: 'TODO:Update my information',
-  update_success: 'TODO:Your information was updated!',
-  profile_pic: 'TODO:Profile Picture',
-  preferred_lang: 'TODO:Preferred Language',
+  // settings
+  update_h: 'Actualiza mi información',
+  update_success: 'Tu información ha sido actualizada!',
+  preferred_lang: 'Idioma preferido',
 
   //Signup errors
   e_firstname_add: 'Por favor, añade un nombre',
@@ -60,53 +57,53 @@ export const esES = {
   e_email_proper: 'Por favor, pon un correo electrónico real',
   e_email_taken: 'Ese correo electrónico no está disponible',
   e_password_match: 'Las contraseñas no son iguales!',
-  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
-  e_unexpected: 'TODO:Dios mio! Unexpected error happened!',
+  e_photo_format: 'Solo jpg/jpeg o pngs por favor',
+  e_unexpected: 'Dios mío! Error inesperado!',
 
   // Movie info
-  mov_cast: 'TODO:Main cast: ',
-  mov_director: 'TODO:Director(s): ',
-  mov_writer: 'TODO:Writer(s): ',
-  mov_genre: 'TODO:Movie Genre',
-  mov_choose_genre: 'TODO:Choose a genre',
-  mov_min_rating: 'TODO:Minimum rating',
-  mov_choose_value: 'TODO:Choose a value',
-  mov_sort_by: 'TODO:Sort by',
-  mov_like_count: 'TODO:Like count',
-  mov_title: 'TODO:Title',
-  mov_year: 'TODO:Year',
-  mov_rating: 'TODO:Rating',
-  mov_order_by: 'TODO:Order by',
-  mov_order_desc: 'TODO:Descending',
-  mov_order_asc: 'TODO:Ascending',
-  mov_search: 'TODO:Search',
+  mov_cast: 'Reparto principal: ',
+  mov_director: 'Director(es): ',
+  mov_writer: 'Guionista(s): ',
+  mov_genre: 'Género de la película',
+  mov_choose_genre: 'Elige un género',
+  mov_min_rating: 'Puntuación mínima',
+  mov_choose_value: 'Elige un valor',
+  mov_sort_by: 'Ordenar por',
+  mov_like_count: 'Puntuación',
+  mov_title: 'Título',
+  mov_year: 'Año',
+  mov_rating: 'Puntuación',
+  mov_order_by: 'Ordenar por',
+  mov_order_desc: 'Descendente',
+  mov_order_asc: 'Ascendente',
+  mov_search: 'Buscar',
 
-  // comments TODO
-  comment_section: 'TODO:Comments',
-  submit_comment: 'TODO:Submit a Comment',
-  write_comment: 'TODO:Write a comment',
-  long_comment: 'TODO:The comment is too long',
-  empty_comment: 'TODO:Cannot submit an empty comment',
+  // comments
+  comment_section: 'Comentarios',
+  submit_comment: 'Enviar un comentario',
+  write_comment: 'Escribir un comentario',
+  long_comment: 'El comentario es demasiado largo',
+  empty_comment: 'No puede enviar comentarios vacíos',
 
-  //user profile TODO
-  name: 'TODO:Name:',
-  movies_watched: 'TODO:Movies watched in the last 30 days:',
+  //user profile
+  name: 'Nombre:',
+  movies_watched: 'Películas vistas en los últimos 30 días:',
 
-  // password reset TODO
-  email_success_msg_start: 'TODO:Hello ',
-  email_success_msg_end: 'TODO:! Please check your email',
-  reset_success_msg: 'TODO;Congrats! ',
-  change_pwd: 'TODO:Time to change the password!',
-  type_pwd: 'TODO:Type in your new password!',
-  new_pwd_placeholder: 'TODO:New Password',
-  new_pwd_again_placeholder: 'TODO:New Password again',
-  reset_pwd: 'TODO:Reset Password',
-  navigate_login: 'TODO:Back to login',
-  forgot_pwd: 'TODO:So you forgot your password?',
-  enter_email: 'TODO:Please give us your email and we will get it sorted out',
+  // password reset
+  email_success_msg_start: 'Hola ',
+  email_success_msg_end: '! Por favor revise su correo electrónico',
+  reset_success_msg: 'Enhorabuena! ',
+  change_pwd: 'Hora de cambiar la contraseña!',
+  type_pwd: 'Escriba su nueva contraseña!',
+  new_pwd_placeholder: 'Nueva contraseña',
+  new_pwd_again_placeholder: 'Nueva contraseña otra vez',
+  reset_pwd: 'Restaurar contraseña',
+  navigate_login: 'Volver a Iniciar sesión',
+  forgot_pwd: 'Asi que se olvidó la contraseña?',
+  enter_email: 'Por favor, denos su email y lo arreglaremos',
 
   // navbar
   movies: 'Películas',
-  settings: 'TODO:Settings',
-  sign_out: 'TODO:Sign out',
+  settings: 'Ajustes',
+  sign_out: 'Cerrar sesión',
 }

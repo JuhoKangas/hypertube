@@ -17,8 +17,6 @@ export const enUK = {
   //Buttons
   logIn: 'Log in',
   signUp: 'Sign up',
-  search: 'Search',
-  sortBy: 'Sort by',
   submit_btn: 'Submit',
 
   //messages
@@ -39,7 +37,6 @@ export const enUK = {
   // settings
   update_h: 'Update my information',
   update_success: 'Your information was updated!',
-  profile_pic: 'Profile Picture',
   preferred_lang: 'Preferred Language',
 
   //Signup errors
