@@ -19,6 +19,7 @@ export const fiFI = {
   signUp: 'Rekisteröidy',
   search: 'Haku',
   sortBy: 'Lajittele',
+  submit_btn: 'TODO:Submit',
 
   //messages
   m_landing: 'KATSO UUSIMMAT ELOKUVAT HYPERTUBESTA',
@@ -39,7 +40,6 @@ export const fiFI = {
   update_success: 'TODO:Your information was updated!',
   profile_pic: 'TODO:Profile Picture',
   preferred_lang: 'TODO:Preferred Language',
-  submit: 'TODO:Submit',
 
   //Signup errors
   e_firstname_add: 'Pliis lisää etunimi',
@@ -56,6 +56,7 @@ export const fiFI = {
   e_email_proper: 'Lissää kunnon sähköpostiosote. Pliis.',
   e_email_taken: 'Sähköposti on jo käytössä',
   e_password_match: 'Salasanat ei täsmää!',
+  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
   e_unexpected: 'Ei helevetti! Unexpected error happened!',
 
   // Movie info
@@ -75,12 +76,10 @@ export const fiFI = {
   mov_order_desc: 'Paras eka',
   mov_order_asc: 'Paras vika',
   mov_search: 'Etsi',
-  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
 
   // comments TODO
   comment_section: 'TODO:Comments',
   submit_comment: 'TODO:Submit a Comment',
-  submit_btn: 'TODO:Submit',
   write_comment: 'TODO:Write a comment',
   long_comment: 'TODO:The comment is too long',
   empty_comment: 'TODO:Cannot submit an empty comment',

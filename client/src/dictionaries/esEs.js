@@ -19,6 +19,7 @@ export const esES = {
   signUp: 'Registrar',
   search: 'Buscar',
   sortBy: 'Ordenar',
+  submit_btn: 'TODO:Submit',
 
   //messages
   m_landing: 'MIRA LAS ÚLTIMAS PELÍCULAS EN HYPERTUBE',
@@ -40,7 +41,6 @@ export const esES = {
   update_success: 'TODO:Your information was updated!',
   profile_pic: 'TODO:Profile Picture',
   preferred_lang: 'TODO:Preferred Language',
-  submit: 'TODO:Submit',
 
   //Signup errors
   e_firstname_add: 'Por favor, añade un nombre',
@@ -60,6 +60,7 @@ export const esES = {
   e_email_proper: 'Por favor, pon un correo electrónico real',
   e_email_taken: 'Ese correo electrónico no está disponible',
   e_password_match: 'Las contraseñas no son iguales!',
+  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
   e_unexpected: 'TODO:Dios mio! Unexpected error happened!',
 
   // Movie info
@@ -79,12 +80,10 @@ export const esES = {
   mov_order_desc: 'TODO:Descending',
   mov_order_asc: 'TODO:Ascending',
   mov_search: 'TODO:Search',
-  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
 
   // comments TODO
   comment_section: 'TODO:Comments',
   submit_comment: 'TODO:Submit a Comment',
-  submit_btn: 'TODO:Submit',
   write_comment: 'TODO:Write a comment',
   long_comment: 'TODO:The comment is too long',
   empty_comment: 'TODO:Cannot submit an empty comment',
