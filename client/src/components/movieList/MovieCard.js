@@ -7,7 +7,7 @@ const MovieCard = ({ movie }) => {
   const [coverImage, setCoverImage] = useState('')
   const navigate = useNavigate()
   const { loggedUser } = useLoggedUser()
-  const [hasWatched, setHasWatched] = useState(true)
+  const [hasWatched, setHasWatched] = useState(false)
 
   const checkIfImageExists = (url, callback) => {
     const img = new Image()
@@ -35,11 +35,16 @@ const MovieCard = ({ movie }) => {
       }
     })
 
-    // const checkWatched = async () => {
-    //   const hasWatchedData = usersService.hasWatched(loggedUser.id, movie.id)
-    //   console.log(hasWatchedData)
-    // }
-    // checkWatched()
+    const checkWatched = async () => {
+      const hasWatchedData = await usersService.hasWatched(
+        loggedUser.id,
+        movie.id
+      )
+      if (hasWatchedData) {
+        setHasWatched(true)
+      }
+    }
+    checkWatched()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

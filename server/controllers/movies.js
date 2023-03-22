@@ -231,10 +231,12 @@ moviesRouter.get('/watched/:userId/:id', async (req, res) => {
     [userId, ytsId]
   )
 
+  console.log(watched.rowCount)
+
   if (watched.rowCount !== 0) {
-    res.send(false)
-  } else {
     res.send(true)
+  } else {
+    res.send(false)
   }
 })
 
