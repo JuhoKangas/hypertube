@@ -33,7 +33,7 @@ const Movies = () => {
       if (movieData.movie_count > 0) {
         setAllMovies(movieData.movies)
       } else {
-        toast.error('No movies found!')
+        toast.error('No movies found!') /* add to dictionary */
       }
     }
     getAllMovies()
