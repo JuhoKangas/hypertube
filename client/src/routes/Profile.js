@@ -1,40 +1,49 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import photosService from '../services/photos'
+import userServices from '../services/users'
+import { useMyLanguage } from '../context/LanguageContext'
+import { translate } from '../dictionaries/translate'
 
-import { toast } from 'react-hot-toast'
+const UserProfile = ({ selectedUser }) => {
+  const [userData, setUserData] = useState({})
+  const { language } = useMyLanguage
+  const dictionary = translate(language)
 
-const UserProfile = ({ socket, selectedUser }) => {
-  const navigate = useNavigate()
-  const [selectedUserPhotos, setSelectedUserPhotos] = useState({})
-
-/*   useEffect(() => {
-    const getUserPhotos = async () => {
-      const userPhotos = await photosService.getUserPhotos(selectedUser.id)
-      setSelectedUserPhotos(userPhotos.photos.rows)
+  useEffect(() => {
+    const getUserData = async (selectedUser) => {
+      const foundUserData = await userServices.getUserData(selectedUser)
+      setUserData(foundUserData.data)
     }
-    getUserPhotos()
+    getUserData(selectedUser)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) */
+  }, [selectedUser])
 
   return (
-    <div className="flex flex-col ml-32 mr-56 mt-20 text-white">
-      <div className="flex flex-col items-center justify-center">
-        <img
-          src={`http://localhost:3001/uploads/dog.png`} // remove hardcoded profile photo
-          className="object-cover rounded-full h-60 w-60 border border-white mb-10"
-          alt="profile-pic"
-        ></img>
-      </div>
-      <div className="flex justify-center mb-3">
-        <p className="text-dark-red text-3xl">{selectedUser.username}</p>
-      </div>
-      <div className="flex justify-center mb-3"></div>
-      <div className="flex justify-center text-xl mt-10">
-        <div className="flex flex-col justify-center">
-          <div className="mb-3 flex items-center">
-            <div className="text-dark-red flex w-80">Name:</div>{' '}
-            {selectedUser.firstname} {selectedUser.lastname}
+    <div className='bg-hyper-black flex flex-col h-screen p-20'>
+      <div className='flex flex-col items-center justify-center'>
+{        userData.profilePicture ? <img
+          src={`http://localhost:3001/uploads/${userData.profilePicture}`}
+          className='object-cover rounded-full h-60 w-60 border border-white mb-10'
+          alt='profile-pic'
+        ></img> : <></>}
+        <div className='flex mb-3 w-auto'>
+          <p className='text-dark-red md:text-3xl text-2xl'>
+            {userData.username}
+          </p>
+        </div>
+        <div className='mb-3 flex text-xl mt-10 flex-col'>
+          <div className='text-dark-red flex w-80 pl-12'>
+            {dictionary.name}
+            <div className='text-white pl-5'>
+              {userData.firstname} {userData.lastname}
+            </div>
+          </div>
+          <div className='mb-3 flex text-xl mt-10 flex-col'>
+            <div className='text-dark-red flex pl-12 md:w-auto w-5/6'>
+              {dictionary.movies_watched}
+              <div className='text-white pl-5 flex items-center'>
+                {userData.moviesWatched}
+              </div>
+            </div>
           </div>
         </div>
       </div>

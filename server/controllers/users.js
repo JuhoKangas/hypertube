@@ -66,12 +66,51 @@ usersRouter.get('/:id', async (request, response) => {
     ])
 
     const user = data.rows[0]
-		console.log(user)
+    console.log(user)
     response.json({
       ...user,
       profilePicture: user.profile_picture,
       password: '',
     })
+  } catch (e) {
+    console.log(e)
+  }
+})
+
+usersRouter.get('/selected/:username', async (req, res) => {
+  const username = req.params.username
+  let userId = 0
+  //console.log("Username from db", username)
+  try {
+    const data = await db.query(
+      'SELECT id, github_id, fortytwo_id, username, profile_picture, firstname, lastname FROM users WHERE username = $1',
+      [username]
+    )
+
+    if (data.rows[0].github_id === null && data.rows[0].fortytwo_id === null)
+      userId = data.rows[0].id
+    else if (
+      data.rows[0].github_id !== null &&
+      data.rows[0].fortytwo_id === null
+    )
+      userId = data.rows[0].github_id
+    else if (
+      data.rows[0].github_id === null &&
+      data.rows[0].fortytwo_id !== null
+    )
+      userId = data.rows[0].fortytwo_id
+
+    const movieData = await db.query(
+      'SELECT * FROM watched_movies WHERE user_id = $1',
+      [userId]
+    )
+
+    const user = data.rows[0]
+    const moviesWatched = movieData.rowCount
+
+    res
+      .status(200)
+      .json({ ...user, profilePicture: user.profile_picture, moviesWatched })
   } catch (e) {
     console.log(e)
   }

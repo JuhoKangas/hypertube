@@ -60,5 +60,16 @@ export const esES = {
 
   // Movie info
   mov_cast: 'TODO:Main cast: ',
-	e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
+  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
+
+  // comments TODO
+  comment_section: 'TODO:Comments',
+  submit_comment: 'TODO:Submit a Comment',
+  submit_btn: 'TODO:Submit',
+  write_comment: 'TODO:Write a comment',
+  long_comment: 'TODO:The comment is too long',
+  empty_comment: 'TODO:Cannot submit an empty comment',
+
+  //user profile TODO
+  name: 'TODO:Name:',
 }

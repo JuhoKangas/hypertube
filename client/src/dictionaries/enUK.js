@@ -61,4 +61,16 @@ export const enUK = {
   // Movie info
   mov_cast: 'Main cast:',
   e_photo_format: 'Only jpg/jpeg or pngs please',
+
+  // comments
+  comment_section: 'Comments',
+  submit_comment: 'Submit a Comment',
+  submit_btn: 'Submit',
+  write_comment: 'Write a comment',
+  long_comment: 'The comment is too long',
+  empty_comment: 'Cannot submit an empty comment',
+
+  //user profile
+  name: 'Name:',
+  movies_watched: 'Movies watched in the last 30 days:',
 }

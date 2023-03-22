@@ -47,6 +47,10 @@ const getUserByUsername = (username) => {
   return axios.get(`${baseUrl}/user/${username}`)
 }
 
+const getUserData = (selectedUser) => {
+  return axios.get(`${baseUrl}/selected/${selectedUser}`)
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   create,
@@ -56,4 +60,5 @@ export default {
   upload,
   uploadPhoto,
   loginOauthUser,
+  getUserData,
 }
