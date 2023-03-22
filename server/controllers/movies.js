@@ -222,6 +222,22 @@ moviesRouter.get('/check/:id', async (req, res) => {
   res.status(200).json(movieFound)
 })
 
+moviesRouter.get('/watched/:userId/:id', async (req, res) => {
+  const userId = req.params.userId
+  const ytsId = req.params.id
+
+  const watched = await db.query(
+    'SELECT * FROM watched_movies WHERE user_id = $1 AND yts_id = $2',
+    [userId, ytsId]
+  )
+
+  if (watched.rowCount !== 0) {
+    res.send(false)
+  } else {
+    res.send(true)
+  }
+})
+
 moviesRouter.get('/stream/:id', async (req, res) => {
   const movieId = req.params.id
   // Make sure there is a range header.
