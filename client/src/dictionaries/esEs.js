@@ -39,6 +39,8 @@ export const esES = {
   update_h: 'TODO:Update my information',
   update_success: 'TODO:Your information was updated!',
   profile_pic: 'TODO:Profile Picture',
+  preferred_lang: 'TODO:Preferred Language',
+  submit: 'TODO:Submit',
 
   //Signup errors
   e_firstname_add: 'Por favor, añade un nombre',

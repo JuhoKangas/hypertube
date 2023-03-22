@@ -327,7 +327,7 @@ const Settings = () => {
             <input
               className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
               type='submit'
-              value={dictionary.update}
+              value={dictionary.submit}
             />
           </div>
         </form>
