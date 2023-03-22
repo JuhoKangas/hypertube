@@ -14,9 +14,10 @@ const MoviePage = ({ id }) => {
   const [movieData, setMovieData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [isDownloading, setDownloading] = useState(false)
-  const { language } = useMyLanguage
+  const { language } = useMyLanguage()
   const dictionary = translate(language)
   const { loggedUser } = useLoggedUser()
+	console.log(language)
 
   useEffect(() => {
     const getMovieData = async (id) => {

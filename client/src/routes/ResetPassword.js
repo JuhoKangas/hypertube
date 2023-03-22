@@ -4,10 +4,10 @@ import emailService from '../services/email'
 import { toast } from 'react-hot-toast'
 import { useMyLanguage } from '../context/LanguageContext'
 import { translate } from '../dictionaries/translate'
-const { language } = useMyLanguage
-const dictionary = translate(language)
 
 const ResetPassword = () => {
+  const { language } = useMyLanguage()
+  const dictionary = translate(language)
   const [searchParams] = useSearchParams()
   const resetToken = searchParams.get('token')
   const [email, setEmail] = useState('')

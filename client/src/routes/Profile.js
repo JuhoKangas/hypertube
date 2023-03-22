@@ -5,8 +5,9 @@ import { translate } from '../dictionaries/translate'
 
 const UserProfile = ({ selectedUser }) => {
   const [userData, setUserData] = useState({})
-  const { language } = useMyLanguage
+  const { language } = useMyLanguage()
   const dictionary = translate(language)
+	console.log("LANGUAGE", language)
 
   useEffect(() => {
     const getUserData = async (selectedUser) => {
@@ -20,11 +21,15 @@ const UserProfile = ({ selectedUser }) => {
   return (
     <div className='bg-hyper-black flex flex-col h-screen p-20 font-montserrat'>
       <div className='flex flex-col items-center justify-center'>
-{        userData.profilePicture ? <img
-          src={`http://localhost:3001/uploads/${userData.profilePicture}`}
-          className='object-cover rounded-full h-60 w-60 border border-white mb-10'
-          alt='profile-pic'
-        ></img> : <></>}
+        {userData.profilePicture ? (
+          <img
+            src={`http://localhost:3001/uploads/${userData.profilePicture}`}
+            className='object-cover rounded-full h-60 w-60 border border-white mb-10'
+            alt='profile-pic'
+          ></img>
+        ) : (
+          <></>
+        )}
         <div className='flex mb-3 w-auto'>
           <p className='text-dark-red md:text-3xl text-2xl'>
             {userData.username}

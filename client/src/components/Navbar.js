@@ -9,7 +9,7 @@ import { translate } from '../dictionaries/translate'
 const Navbar = () => {
   const navigate = useNavigate()
   const { loggedUser, changeLoggedUser } = useLoggedUser()
-	const { language } = useMyLanguage
+	const { language } = useMyLanguage()
   const dictionary = translate(language)
 
   const navigation = [{ name: dictionary.movies, href: '/movies' }]

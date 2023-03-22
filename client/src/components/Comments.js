@@ -11,7 +11,7 @@ const Comments = ({ id }) => {
   const { loggedUser } = useLoggedUser()
   const [allComments, setAllComments] = useState([])
   const [newComment, setNewComment] = useState('')
-	const { language } = useMyLanguage
+	const { language } = useMyLanguage()
 	const dictionary = translate(language)
 
   useEffect(() => {
