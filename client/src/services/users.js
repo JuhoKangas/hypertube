@@ -67,4 +67,5 @@ export default {
   uploadPhoto,
   loginOauthUser,
   getUserData,
+  hasWatched,
 }
