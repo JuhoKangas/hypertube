@@ -7,11 +7,6 @@ const MovieInfo = ({ movieData }) => {
 
   return (
     <>
-      <img
-        className='absolute top-0 left-0 z-0 w-full min-w-[1600px] max-h-[95vh]'
-        src={movieData.background_image}
-        alt=''
-      />
       <div className='z-10 px-12 ml-5'>
         <div className='flex font-bold gap-4 text-sm mb-5'>
           <div>{movieData.year}</div>

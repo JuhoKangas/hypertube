@@ -47,25 +47,32 @@ const MoviePage = ({ id }) => {
   }
 
   return (
-    <div className='text-gray-300 bg-hyper-black min-h-[97vh] relative'>
+    <div className='text-gray-300 bg-hyper-black min-h-[97vh] relative overflow-x-hidden'>
       {isLoading ? (
         <div>{dictionary.m_loading}</div>
       ) : (
-        <div className='flex flex-col max-w-screen-2xl mx-auto'>
-          <MovieHeader movieData={movieData} />
-          <MovieInfo movieData={movieData} />
-          {isDownloading ? (
-            <VideoPlayer movieId={id} />
-          ) : (
-            <p className='text-gray-300 z-10' onClick={downloadMovie}>
-              Not yet Downloading, button here :D
-            </p>
-          )}
-          <Comments id={id} />
-          {/*           <div className='mt-40'> 
+        <>
+          <img
+            className='absolute h-[97vh]'
+            src={movieData.background_image}
+            alt=''
+          />
+          <div className='flex flex-col max-w-screen-2xl mx-auto'>
+            <MovieHeader movieData={movieData} />
+            <MovieInfo movieData={movieData} />
+            {isDownloading ? (
+              <VideoPlayer movieId={id} />
+            ) : (
+              <p className='text-gray-300 z-10' onClick={downloadMovie}>
+                Not yet Downloading, button here :D
+              </p>
+            )}
+            <Comments id={id} />
+            {/*           <div className='mt-40'> 
             <Comments id={id} />
           </div> */}
-        </div>
+          </div>
+        </>
       )}
     </div>
   )
