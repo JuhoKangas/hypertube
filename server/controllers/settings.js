@@ -13,37 +13,49 @@ settingsRouter.put('/', async (req, res) => {
   try {
     let results = ''
     if (hashedPassword !== '') {
-      results = await db.query(
-        'UPDATE users SET firstname = $1, lastname = $2, username = $3, password = $4, email = $5, profile_picture = $6, language = $7 WHERE id = $8 returning *',
-        [
-          formData.firstname,
-          formData.lastname,
-          formData.username,
-          hashedPassword,
-          sanitizedEmail,
-          formData.profilePicture,
-          formData.language,
-          formData.id,
-        ]
+        results = await db.query(
+          'UPDATE users SET firstname = $1, lastname = $2, username = $3, password = $4, email = $5, profile_picture = $6, language = $7 WHERE user_id = $8 returning *',
+          [
+            formData.firstname,
+            formData.lastname,
+            formData.username,
+            hashedPassword,
+            sanitizedEmail,
+            formData.profilePicture,
+            formData.language,
+            formData.id,
+          ]
+        )
+
+      await db.query(
+        'UPDATE comments SET username = $1 WHERE user_id = $2',
+        [formData.username, formData.id]
       )
     } else {
-      results = await db.query(
-        'UPDATE users SET firstname = $1, lastname = $2, username = $3, email = $4, profile_picture = $5, language = $6 WHERE id = $7 returning *',
-        [
-          formData.firstname,
-          formData.lastname,
-          formData.username,
-          sanitizedEmail,
-          formData.profilePicture,
-          formData.language,
-          formData.id,
-        ]
+        results = await db.query(
+          'UPDATE users SET firstname = $1, lastname = $2, username = $3, email = $4, profile_picture = $5, language = $6 WHERE user_id = $7 returning *',
+          [
+            formData.firstname,
+            formData.lastname,
+            formData.username,
+            sanitizedEmail,
+            formData.profilePicture,
+            formData.language,
+            formData.id,
+          ]
+        )
+
+      await db.query(
+        'UPDATE comments SET username = $1 WHERE user_id = $2',
+        [formData.username, formData.id]
       )
     }
 
-    const user = await db.query('SELECT * FROM users WHERE id = $1', [
+    const user = await db.query('SELECT * FROM users WHERE user_id = $1', [
       formData.id,
     ])
+
+		console.log("USER from baxckend", formData.id)
 
     res.status(200).json({
       status: 'success',

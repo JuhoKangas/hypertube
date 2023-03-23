@@ -71,6 +71,7 @@ loginRouter.post('/', async (req, res) => {
   res.status(200).send({
     token,
     id: updatedUser.id,
+    user_id: updatedUser.id,
     language: updatedUser.language,
     profilePicture: updatedUser.profile_picture,
     username: updatedUser.username,
@@ -105,9 +106,21 @@ loginRouter.post('/oauth', async (req, res) => {
 
   const updatedUser = userData.rows[0]
 
+  if (
+    userData.rows[0].github_id !== null &&
+    userData.rows[0].fortytwo_id === null
+  )
+    updatedUser.id = userData.rows[0].github_id
+  else if (
+    userData.rows[0].github_id === null &&
+    userData.rows[0].fortytwo_id !== null
+  )
+    updatedUser.id = userData.rows[0].fortytwo_id
+
   const token = jwt.sign(userForToken, process.env.SECRET)
   res.status(200).send({
     token,
+    user_id: updatedUser.id,
     id: updatedUser.id,
     language: updatedUser.language,
     profilePicture: updatedUser.profile_picture,

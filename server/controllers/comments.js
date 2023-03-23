@@ -7,8 +7,8 @@ commentsRouter.post('/', async (req, res) => {
   if (data.text && data.sender && data.movie) {
     try {
       const result = await db.query(
-        'INSERT INTO comments (username, movie_id, text) VALUES ($1, $2, $3) returning id, username, movie_id, text, created_at',
-        [data.sender, data.movie, data.text]
+        'INSERT INTO comments (username, user_id, movie_id, text) VALUES ($1, $2, $3, $4) returning id, user_id, username, movie_id, text, created_at',
+        [data.sender, data.senderId, data.movie, data.text]
       )
 
       const commentInfo = result.rows[0]

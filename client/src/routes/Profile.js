@@ -7,7 +7,6 @@ const UserProfile = ({ selectedUser }) => {
   const [userData, setUserData] = useState({})
   const { language } = useMyLanguage()
   const dictionary = translate(language)
-	console.log("LANGUAGE", language)
 
   useEffect(() => {
     const getUserData = async (selectedUser) => {

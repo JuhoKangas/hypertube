@@ -41,9 +41,9 @@ const MoviePage = ({ id }) => {
     } else {
       setDownloading(true)
     }
-    //TODO: delete if statement? here so no crash because MoviePage is unprotected
+
     if (loggedUser.id) {
-      downloadService.updateWatched(id, loggedUser.id)
+      downloadService.updateWatched(id, loggedUser.user_id)
     }
   }
 

@@ -39,9 +39,9 @@ const Settings = () => {
       setFormImage(e.target.files[0])
       setPictureChanged(true)
     } else {
-      setFile('')
-      setFormImage('')
-      setDbPhotoFile('')
+      setFile(loggedUser.profilePicture)
+      setFormImage(loggedUser.profilePicture)
+      setDbPhotoFile(loggedUser.profilePicture)
       toast.error(dictionary.e_photo_format)
     }
   }
@@ -108,7 +108,7 @@ const Settings = () => {
     e.preventDefault()
 
     const updatedUserInfo = {
-      id: loggedUser.id,
+      id: loggedUser.user_id,
       firstname: initialFirstname.value,
       lastname: initialLastname.value,
       username: initialUsername.value,

@@ -73,6 +73,7 @@ export const fiFI = {
   mov_order_desc: 'Paras eka',
   mov_order_asc: 'Paras vika',
   mov_search: 'Etsi',
+  mov_not_found: 'TODO:No movies found!',
 
   // comments TODO
   comment_section: 'TODO:Comments',

@@ -72,7 +72,7 @@ const createUser = async (user, response, checker) => {
   let userForToken = {}
   checker === 1
     ? (newUser = await db.query(
-        'INSERT INTO users (fortytwo_id, username, firstname, lastname, email, password, completed) VALUES ($1, $2, $3, $4, $5, $6, true) RETURNING *',
+        'INSERT INTO users (fortytwo_id, username, firstname, lastname, email, password, completed, user_id) VALUES ($1, $2, $3, $4, $5, $6, true, $7) RETURNING *',
         [
           user.id,
           user.username,
@@ -80,10 +80,11 @@ const createUser = async (user, response, checker) => {
           user.lastname,
           user.email,
           password,
+					user.id,
         ]
       ))
     : (newUser = await db.query(
-        'INSERT INTO users (github_id, username, firstname, lastname, email, password, completed) VALUES ($1, $2, $3, $4, $5, $6, true) RETURNING *',
+        'INSERT INTO users (github_id, username, firstname, lastname, email, password, completed, user_id) VALUES ($1, $2, $3, $4, $5, $6, true, $7) RETURNING *',
         [
           user.id,
           user.username,
@@ -91,6 +92,7 @@ const createUser = async (user, response, checker) => {
           user.lastname,
           user.email,
           password,
+					user.id,
         ]
       ))
 

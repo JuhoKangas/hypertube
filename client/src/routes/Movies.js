@@ -33,7 +33,7 @@ const Movies = () => {
       if (movieData.movie_count > 0) {
         setAllMovies(movieData.movies)
       } else {
-        toast.error('No movies found!') /* add to dictionary */
+        toast.error(dictionary.mov_not_found)
       }
     }
     getAllMovies()
@@ -41,6 +41,7 @@ const Movies = () => {
     const loginFromOauth = async (token) => {
       const res = await userService.loginOauthUser(token)
       const user = res.data
+			console.log("USER", user)
       localStorage.setItem('loggedUser', JSON.stringify(user))
       changeLoggedUser(user)
       //check login worked?

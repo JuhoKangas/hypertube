@@ -50,6 +50,16 @@ usersRouter.post('/', async (request, response) => {
           data.language,
         ]
       )
+
+      const user = await db.query('SELECT id FROM users WHERE username = $1', [
+        data.username,
+      ])
+      const userId = user.rows[0].id
+
+      await db.query('UPDATE users SET user_id = $1 WHERE username = $2', [
+        userId,
+        data.username,
+      ])
       response.status(201).json({ results })
     } catch (err) {
       console.log(err)
@@ -77,14 +87,14 @@ usersRouter.get('/:id', async (request, response) => {
   }
 })
 
-usersRouter.get('/selected/:username', async (req, res) => {
-  const username = req.params.username
+usersRouter.get('/selected/:id', async (req, res) => {
+  const id = req.params.id
   let userId = 0
-  //console.log("Username from db", username)
+
   try {
     const data = await db.query(
-      'SELECT id, github_id, fortytwo_id, username, profile_picture, firstname, lastname FROM users WHERE username = $1',
-      [username]
+      'SELECT user_id, github_id, fortytwo_id, username, profile_picture, firstname, lastname FROM users WHERE user_id = $1',
+      [id]
     )
 
     if (data.rows[0].github_id === null && data.rows[0].fortytwo_id === null)

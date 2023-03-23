@@ -10,11 +10,13 @@ CREATE TABLE IF NOT EXISTS users (
 	profile_picture VARCHAR(1000) DEFAULT 'dog.png',
 	completed BOOLEAN DEFAULT 'f',
 	token VARCHAR(1000),
-	language VARCHAR(255) DEFAULT 'en'
+	language VARCHAR(255) DEFAULT 'en',
+	user_id INT
 );
 
 CREATE TABLE IF NOT EXISTS comments (
 	id SERIAL NOT NULL PRIMARY KEY,
+	user_id INT NOT NULL,
 	username VARCHAR(1000) NOT NULL,
 	movie_id VARCHAR(255) NOT NULL,
 	text VARCHAR(1000) NOT NULL,

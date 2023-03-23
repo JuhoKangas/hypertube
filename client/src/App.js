@@ -19,8 +19,8 @@ const App = () => {
   const match = useMatch('/movies/:id')
   const movieId = match ? match.params.id : ''
 
-  const matchProfile = useMatch('/:username')
-  const selectedUser = matchProfile ? matchProfile.params.username : ''
+  const matchProfile = useMatch('/:id')
+  const selectedUser = matchProfile ? matchProfile.params.id : ''
 
   return (
     <div className='min-h-screen flex flex-col bg-hyper-black'>
@@ -37,7 +37,7 @@ const App = () => {
             <Route path={'/reset_password'} element={<ResetPassword />}></Route>
             <Route path={'/settings'} element={<Settings />}></Route>
             <Route
-              path={'/:username'}
+              path={'/:id'}
               element={<Profile selectedUser={selectedUser}/>}
             ></Route>
           </Routes>

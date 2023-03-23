@@ -11,8 +11,8 @@ const Comments = ({ id }) => {
   const { loggedUser } = useLoggedUser()
   const [allComments, setAllComments] = useState([])
   const [newComment, setNewComment] = useState('')
-	const { language } = useMyLanguage()
-	const dictionary = translate(language)
+  const { language } = useMyLanguage()
+  const dictionary = translate(language)
 
   useEffect(() => {
     const getMovieComments = async (id) => {
@@ -36,9 +36,11 @@ const Comments = ({ id }) => {
   const submitNewComment = async (e) => {
     e.preventDefault()
     const loggedUserUsername = loggedUser.username
+    const loggedUserId = loggedUser.user_id
 
     const comment = {
       text: newComment,
+      senderId: loggedUserId,
       sender: loggedUserUsername,
       movie: id,
     }
@@ -55,13 +57,15 @@ const Comments = ({ id }) => {
 
   return (
     <div className='z-0 font-montserrat'>
-      <h1 className='mt-16 text-3xl font-semibold mb-3 ml-3'>{dictionary.comment_section}</h1>
+      <h1 className='mt-16 text-3xl font-semibold mb-3 ml-3'>
+        {dictionary.comment_section}
+      </h1>
       {Object.values(allComments)?.map((comment) => (
         <div className='text-white ml-10 mr-10' key={comment.id}>
           <div className='flex gap-3 items-baseline'>
             <Link
               className='text-dark-red font-semibold text-lg'
-              to={`/${comment.username}`}
+              to={`/${comment.user_id}`}
             >
               {comment.username}
             </Link>
@@ -73,7 +77,9 @@ const Comments = ({ id }) => {
           <div className='ml-3 mb-5'>{comment.text}</div>
         </div>
       ))}
-      <h1 className='mt-10 text-xl font-semibold ml-5'>{dictionary.submit_comment}</h1>
+      <h1 className='mt-10 text-xl font-semibold ml-5'>
+        {dictionary.submit_comment}
+      </h1>
       <div className='border-gray-300 rounded-lg border bg-white flex justify-between z-0 mb-16 ml-5 mr-10'>
         <input
           type='text'

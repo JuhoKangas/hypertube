@@ -77,6 +77,7 @@ export const enUK = {
   mov_order_desc: 'Descending',
   mov_order_asc: 'Ascending',
   mov_search: 'Search',
+  mov_not_found: 'No movies found!',
 
   // comments
   comment_section: 'Comments',
