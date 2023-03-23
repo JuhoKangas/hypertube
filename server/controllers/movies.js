@@ -12,12 +12,16 @@ const querystring = require('node:querystring')
 const db = require('../db/index')
 
 moviesRouter.get('/', async (req, res) => {
-  const allMovies = await axios.get(
-    'https://yts.mx/api/v2/list_movies.json?sort_by=like_count'
-  )
-  const stringified = JSON.stringify(allMovies.data.data)
-
-  res.status(200).json(JSON.parse(stringified))
+	try {
+		const allMovies = await axios.get(
+			'https://yts.mx/api/v2/list_movies.json?sort_by=like_count'
+		)
+		const stringified = JSON.stringify(allMovies.data.data)
+	
+		res.status(200).json(JSON.parse(stringified))
+	} catch (e) {
+		console.log(e)
+	}
 })
 
 moviesRouter.post('/', async (req, res) => {
@@ -62,25 +66,38 @@ moviesRouter.post('/page/:page', async (req, res) => {
 
 moviesRouter.get('/id/:id', async (req, res) => {
   const movieId = req.params.id
-  const movieData = await axios.get(
-    `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`
-  )
 
-  const additionalData = process.env.OMDB_API_KEY
-    ? await axios.get(
-        `http://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&i=${movieData.data.data.movie.imdb_code}`
-      )
-    : {}
+	if (isNaN(movieId)) {
+		return res.status(200).json({error: "Id not a number"})
+	}
 
-  const stringified = JSON.stringify(movieData.data.data)
+	try {
+		const movieData = await axios.get(
+			`https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`
+		)
+	
+		const additionalData = process.env.OMDB_API_KEY
+			? await axios.get(
+					`http://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&i=${movieData.data.data.movie.imdb_code}`
+				)
+			: {}
+	
+		const stringified = JSON.stringify(movieData.data.data)
+	
+		let returnData = JSON.parse(stringified)
+		returnData = {
+			...returnData.movie,
+			additionalData: { ...additionalData.data },
+		}
 
-  let returnData = JSON.parse(stringified)
-  returnData = {
-    ...returnData.movie,
-    additionalData: { ...additionalData.data },
-  }
-
-  res.status(200).json(returnData)
+		if (returnData.id === 0) {
+			return res.status(200).json({error: "Not found"})
+		}
+	
+		res.status(200).json(returnData)
+	} catch (e) {
+		console.log(e)
+	}
 })
 
 moviesRouter.get('/download/:id', async (req, res) => {
@@ -227,16 +244,20 @@ moviesRouter.get('/watched/:userId/:id', async (req, res) => {
   const userId = req.params.userId
   const ytsId = req.params.id
 
-  const watched = await db.query(
-    'SELECT * FROM watched_movies WHERE user_id = $1 AND yts_id = $2',
-    [userId, ytsId]
-  )
-
-  if (watched.rowCount !== 0) {
-    res.send(true)
-  } else {
-    res.send(false)
-  }
+	try {
+		const watched = await db.query(
+			'SELECT * FROM watched_movies WHERE user_id = $1 AND yts_id = $2',
+			[userId, ytsId]
+		)
+	
+		if (watched.rowCount !== 0) {
+			res.send(true)
+		} else {
+			res.send(false)
+		}
+	} catch (e) {
+		console.log(e)
+	}
 })
 
 moviesRouter.get('/stream/:id', async (req, res) => {

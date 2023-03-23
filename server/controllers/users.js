@@ -90,11 +90,20 @@ usersRouter.get('/selected/:id', async (req, res) => {
   const id = req.params.id
   let userId = 0
 
+	if (isNaN(id)) {
+		res.status(200).json({error: "Id not a number"})
+	}
+
   try {
     const data = await db.query(
       'SELECT id, user_id, github_id, fortytwo_id, username, profile_picture, firstname, lastname FROM users WHERE user_id = $1',
       [id]
     )
+
+		if (data.rowCount === 0) {
+			res.status(200).json({error: "User Not found"})
+		}
+
     if (data.rows[0].github_id === null && data.rows[0].fortytwo_id === null)
       userId = data.rows[0].id
     else if (

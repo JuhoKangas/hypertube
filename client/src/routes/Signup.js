@@ -92,7 +92,6 @@ const Signup = () => {
     }
 
     const errors = await validateForm(formData)
-    console.log(errors)
 
     if (errors !== {}) {
       for (const error in errors) {

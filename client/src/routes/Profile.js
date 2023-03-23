@@ -23,11 +23,15 @@ const UserProfile = ({ selectedUser }) => {
   useEffect(() => {
     const getUserData = async (selectedUser) => {
       const foundUserData = await userServices.getUserData(selectedUser)
-      setUserData(foundUserData.data)
+			if (foundUserData.data.error) {
+				navigate('/')
+			} else {
+				setUserData(foundUserData.data)
+			}
     }
     getUserData(selectedUser)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedUser])
+  }, [])
 
   return (
     <div className='bg-hyper-black flex flex-col h-screen p-20 font-montserrat'>

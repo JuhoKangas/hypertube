@@ -31,10 +31,15 @@ const MoviePage = ({ id }) => {
   useEffect(() => {
     const getMovieData = async (id) => {
       const fetchedMovieData = await moviesServices.getMovieData(id)
-      setMovieData(fetchedMovieData)
-      setIsLoading(false)
+			if (fetchedMovieData.error) {
+				navigate('/')
+			} else {
+				setMovieData(fetchedMovieData)
+				setIsLoading(false)
+			}
     }
     getMovieData(id)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   const downloadMovie = async () => {
@@ -54,7 +59,6 @@ const MoviePage = ({ id }) => {
       downloadService.updateWatched(id, loggedUser.user_id)
     }
   }
-
 
   return (
     <div className='text-gray-300 bg-hyper-black min-h-[97vh] relative overflow-x-hidden'>

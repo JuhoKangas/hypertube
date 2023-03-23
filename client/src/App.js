@@ -38,10 +38,10 @@ const App = () => {
               path={'/:id'}
               element={<Profile selectedUser={selectedUser} />}
             ></Route>
-            <Route path={'/'} element={<Landing />}></Route>
-            <Route path={'/login'} element={<Login />}></Route>
-            <Route path={'/signup'} element={<Signup />}></Route>
-            <Route path={'/reset_password'} element={<ResetPassword />}></Route>
+            <Route path={'/'} element={loggedUser.token ? <Navigate to='/movies' /> : <Landing />}></Route>
+            <Route path={'/login'} element={loggedUser.token ? <Navigate to='/movies' /> : <Login />}></Route>
+            <Route path={'/signup'} element={loggedUser.token ? <Navigate to='/movies' />  : <Signup />}></Route>
+            <Route path={'/reset_password'} element={loggedUser.token ? <Navigate to='/movies' /> : <ResetPassword />}></Route>
             <Route path='*' element={<Navigate replace to='/' />} />
           </Routes>
           <Footer />

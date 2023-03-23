@@ -31,7 +31,13 @@ const MovieCard = ({ movie }) => {
       if (exists) {
         setCoverImage(movie.large_cover_image)
       } else {
-        setCoverImage(movie.medium_cover_image)
+				checkIfImageExists(movie.medium_cover_image, (exists) => {
+					if (exists) {
+						setCoverImage(movie.medium_cover_image)
+					} else {
+						setCoverImage('http://localhost:3001/uploads/dog.png')
+					}
+				})
       }
     })
 

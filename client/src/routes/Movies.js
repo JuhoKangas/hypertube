@@ -15,7 +15,7 @@ const Movies = () => {
   const { language, changeLanguage } = useMyLanguage()
   const dictionary = translate(language)
   const { changeLoggedUser } = useLoggedUser()
-	const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [allMovies, setAllMovies] = useState([])
   const [page, setPage] = useState(1)
@@ -33,7 +33,7 @@ const Movies = () => {
     const getAllMovies = async () => {
       const movieData = await moviesService.getFilteredMovies(sortAndFilter)
       if (movieData.movie_count > 0) {
-        setAllMovies(movieData.movies)
+        setAllMovies(movieData.movies.filter((movie) => movie.year < 2024))
       } else {
         toast.error(dictionary.mov_not_found)
       }
@@ -42,34 +42,39 @@ const Movies = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortAndFilter])
-	
-	useEffect(() => {
-		const loginFromOauth = async (token) => {
-			const res = await userService.loginOauthUser(token)
-			const user = res.data
-			console.log("USER", user)
-			localStorage.setItem('loggedUser', JSON.stringify(user))
-			changeLoggedUser(user)
-			//check login worked?
-			changeLanguage(user.language)
-		}
-		if (document.cookie) {
-			const name = 'oauthLogin'
-			var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
-			loginFromOauth(match[2])
-			document.cookie = document.cookie + ';max-age=0'
-		} else {
-			if (!localStorage.getItem('loggedUser')) {
-				navigate('/')
-			}
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+
+  useEffect(() => {
+    const loginFromOauth = async (token) => {
+      const res = await userService.loginOauthUser(token)
+      const user = res.data
+      localStorage.setItem('loggedUser', JSON.stringify(user))
+      changeLoggedUser(user)
+      //check login worked?
+      changeLanguage(user.language)
+    }
+    if (document.cookie) {
+      const name = 'oauthLogin'
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+      loginFromOauth(match[2])
+      document.cookie = document.cookie + ';max-age=0'
+    } else {
+      if (!localStorage.getItem('loggedUser')) {
+        navigate('/')
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const fetchNextMovies = async () => {
     const newMovies = await moviesService.getNextMovies(page + 1, sortAndFilter)
     if (newMovies.movies) {
-      setAllMovies(allMovies.concat(newMovies.movies))
+      const allMoviesList = allMovies.concat(newMovies.movies)
+      const removedDuplicatesList = allMoviesList.filter(
+        (obj, index, self) =>
+          index ===
+          self.findIndex((o) => o.id === obj.id)
+      )
+      setAllMovies(removedDuplicatesList)
       setPage((prev) => prev + 1)
     } else {
       setPage(10)
