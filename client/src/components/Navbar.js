@@ -9,7 +9,7 @@ import { translate } from '../dictionaries/translate'
 const Navbar = () => {
   const navigate = useNavigate()
   const { loggedUser, changeLoggedUser } = useLoggedUser()
-	const { language } = useMyLanguage()
+  const { language } = useMyLanguage()
   const dictionary = translate(language)
 
   const navigation = [{ name: dictionary.movies, href: '/movies' }]
@@ -18,7 +18,7 @@ const Navbar = () => {
     event.preventDefault()
     window.localStorage.clear()
     changeLoggedUser({})
-    navigate('/')
+    navigate(0)
   }
 
   if (!loggedUser.id) return
@@ -59,7 +59,7 @@ const Navbar = () => {
                 <div className='flex gap-4 mr-2'>
                   <p className='font-montserrat text-white pt-1 uppercase'>
                     {loggedUser.username}
-                  </p> 
+                  </p>
                 </div>
                 {/* Profile dropdown */}
                 <Menu as='div' className='relative ml-3'>
