@@ -21,11 +21,12 @@ const Login = () => {
     if (await checkUser(username, password)) {
       const res = await userService.loginUser(username, password)
       const user = res.data
-      localStorage.setItem('loggedUser', JSON.stringify(user))
-      changeLoggedUser(user)
-      //check login worked?
-      changeLanguage(user.language)
-      navigate('/movies')
+			if (!user.error) {
+				localStorage.setItem('loggedUser', JSON.stringify(user))
+				changeLoggedUser(user)
+				changeLanguage(user.language)
+				navigate('/movies')
+			}
     } else {
       toast.error('Username or password was incorrect')
     }

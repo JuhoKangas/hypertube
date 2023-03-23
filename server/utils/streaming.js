@@ -1,6 +1,5 @@
 const db = require('../db/index')
 const fs = require('fs')
-//const torrentStream = require('torrent-stream')
 const path = require('path')
 
 const streamMovie = async (movieId, range) => {

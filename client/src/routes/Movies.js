@@ -47,10 +47,11 @@ const Movies = () => {
     const loginFromOauth = async (token) => {
       const res = await userService.loginOauthUser(token)
       const user = res.data
-      localStorage.setItem('loggedUser', JSON.stringify(user))
-      changeLoggedUser(user)
-      //check login worked?
-      changeLanguage(user.language)
+			if (!user.error) {
+				localStorage.setItem('loggedUser', JSON.stringify(user))
+				changeLoggedUser(user)
+				changeLanguage(user.language)
+			}
     }
     if (document.cookie) {
       const name = 'oauthLogin'

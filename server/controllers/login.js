@@ -37,48 +37,53 @@ loginRouter.post('/check', async (req, res) => {
 loginRouter.post('/', async (req, res) => {
   const { username, password } = req.body
 
-  const data = await db.query('SELECT * FROM users WHERE username = $1', [
-    username,
-  ])
-  const user = data.rows[0]
+	try {
 
-  if (!user) {
-    return res.status(401).json({
-      error: 'invalid username or password',
-    })
-  }
-
-  const passwordCorrect = await bcrypt.compare(password, user.password)
-
-  if (!passwordCorrect) {
-    return res.status(401).json({
-      error: 'invalid username or password',
-    })
-  }
-
-  db.query('UPDATE users SET token = 0 WHERE username = $1', [username])
-  const userForToken = {
-    username: user.username,
-    id: user.id,
-  }
-  const userData = await db.query('SELECT * FROM users WHERE username = $1', [
-    username,
-  ])
-
-  const updatedUser = userData.rows[0]
-
-  const token = jwt.sign(userForToken, process.env.SECRET)
-  res.status(200).send({
-    token,
-    id: updatedUser.id,
-    user_id: updatedUser.id,
-    language: updatedUser.language,
-    profilePicture: updatedUser.profile_picture,
-    username: updatedUser.username,
-    firstname: updatedUser.firstname,
-    lastname: updatedUser.lastname,
-    email: updatedUser.email,
-  })
+		const data = await db.query('SELECT * FROM users WHERE username = $1', [
+			username,
+		])
+		const user = data.rows[0]
+	
+		if (!user) {
+			return res.status(401).json({
+				error: 'invalid username or password',
+			})
+		}
+	
+		const passwordCorrect = await bcrypt.compare(password, user.password)
+	
+		if (!passwordCorrect) {
+			return res.status(401).json({
+				error: 'invalid username or password',
+			})
+		}
+	
+		db.query('UPDATE users SET token = 0 WHERE username = $1', [username])
+		const userForToken = {
+			username: user.username,
+			id: user.id,
+		}
+		const userData = await db.query('SELECT * FROM users WHERE username = $1', [
+			username,
+		])
+	
+		const updatedUser = userData.rows[0]
+	
+		const token = jwt.sign(userForToken, process.env.SECRET)
+		res.status(200).send({
+			token,
+			id: updatedUser.id,
+			user_id: updatedUser.id,
+			language: updatedUser.language,
+			profilePicture: updatedUser.profile_picture,
+			username: updatedUser.username,
+			firstname: updatedUser.firstname,
+			lastname: updatedUser.lastname,
+			email: updatedUser.email,
+		})
+	} catch (e) { 
+		console.log(e)
+	}
 })
 
 loginRouter.post('/oauth', async (req, res) => {

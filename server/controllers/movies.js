@@ -5,9 +5,6 @@ const path = require('path')
 const fs = require('fs')
 const { Console } = require('console')
 var torrentStream = require('torrent-stream')
-//const { getSubtitleFiles } = require('../utils/subtitles')
-//require open-subtitles-api https://www.npmjs.com/package/opensubtitles-api
-// const OS = require('opensubtitles-api')
 const querystring = require('node:querystring')
 const db = require('../db/index')
 
