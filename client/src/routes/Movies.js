@@ -9,11 +9,13 @@ import MovieCard from '../components/movieList/MovieCard'
 import MovieSearch from '../components/movieList/MovieSearch'
 import { useMyLanguage } from '../context/LanguageContext'
 import { translate } from '../dictionaries/translate'
+import { useNavigate } from 'react-router-dom'
 
 const Movies = () => {
   const { language, changeLanguage } = useMyLanguage()
   const dictionary = translate(language)
   const { changeLoggedUser } = useLoggedUser()
+	const navigate = useNavigate()
 
   const [allMovies, setAllMovies] = useState([])
   const [page, setPage] = useState(1)
@@ -38,23 +40,31 @@ const Movies = () => {
     }
     getAllMovies()
 
-    const loginFromOauth = async (token) => {
-      const res = await userService.loginOauthUser(token)
-      const user = res.data
-			console.log("USER", user)
-      localStorage.setItem('loggedUser', JSON.stringify(user))
-      changeLoggedUser(user)
-      //check login worked?
-      changeLanguage(user.language)
-    }
-    if (document.cookie) {
-      const name = 'oauthLogin'
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
-      loginFromOauth(match[2])
-      document.cookie = document.cookie + ';max-age=0'
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortAndFilter])
+	
+	useEffect(() => {
+		const loginFromOauth = async (token) => {
+			const res = await userService.loginOauthUser(token)
+			const user = res.data
+			console.log("USER", user)
+			localStorage.setItem('loggedUser', JSON.stringify(user))
+			changeLoggedUser(user)
+			//check login worked?
+			changeLanguage(user.language)
+		}
+		if (document.cookie) {
+			const name = 'oauthLogin'
+			var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+			loginFromOauth(match[2])
+			document.cookie = document.cookie + ';max-age=0'
+		} else {
+			if (!localStorage.getItem('loggedUser')) {
+				navigate('/')
+			}
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
   const fetchNextMovies = async () => {
     const newMovies = await moviesService.getNextMovies(page + 1, sortAndFilter)
