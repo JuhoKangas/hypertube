@@ -77,6 +77,7 @@ export const esES = {
   mov_order_desc: 'Descendente',
   mov_order_asc: 'Ascendente',
   mov_search: 'Buscar',
+  mov_button: 'Ver película',
 
   // comments
   comment_section: 'Comentarios',

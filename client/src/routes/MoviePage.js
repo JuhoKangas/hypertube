@@ -17,7 +17,7 @@ const MoviePage = ({ id }) => {
   const { language } = useMyLanguage()
   const dictionary = translate(language)
   const { loggedUser } = useLoggedUser()
-	console.log(language)
+  console.log(language)
 
   useEffect(() => {
     const getMovieData = async (id) => {
@@ -64,14 +64,14 @@ const MoviePage = ({ id }) => {
             {isDownloading ? (
               <VideoPlayer movieId={id} />
             ) : (
-              <p className='text-gray-300 z-10' onClick={downloadMovie}>
-                Not yet Downloading, button here :D
-              </p>
+              <button
+                className='text-white z-10 bg-dark-red p-4 mt-12 self-center rounded-lg font-semibold'
+                onClick={downloadMovie}
+              >
+                {dictionary.mov_button}
+              </button>
             )}
             <Comments id={id} />
-            {/*           <div className='mt-40'> 
-            <Comments id={id} />
-          </div> */}
           </div>
         </>
       )}
