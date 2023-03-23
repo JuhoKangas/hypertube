@@ -78,6 +78,7 @@ export const esES = {
   mov_order_asc: 'Ascendente',
   mov_search: 'Buscar',
   mov_not_found: 'TODO:No movies found!',
+  mov_button: 'Ver película',
 
   // comments
   comment_section: 'Comentarios',

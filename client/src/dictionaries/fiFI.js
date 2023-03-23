@@ -34,9 +34,9 @@ export const fiFI = {
   m_password_forgot: 'Unohtuko salasana? Painappa tästä',
 
   // settings TODO
-  update_h: 'TODO:Update my information',
-  update_success: 'TODO:Your information was updated!',
-  preferred_lang: 'TODO:Preferred Language',
+  update_h: 'Päivitä tietojasi',
+  update_success: 'Tiedot päivitetty!',
+  preferred_lang: 'Kieli',
 
   //Signup errors
   e_firstname_add: 'Pliis lisää etunimi',
@@ -53,8 +53,8 @@ export const fiFI = {
   e_email_proper: 'Lissää kunnon sähköpostiosote. Pliis.',
   e_email_taken: 'Sähköposti on jo käytössä',
   e_password_match: 'Salasanat ei täsmää!',
-  e_photo_format: 'TODO:Only jpg/jpeg or pngs please',
-  e_unexpected: 'Ei helevetti! Unexpected error happened!',
+  e_photo_format: 'Pelkästään jpg tai png kuvia kiitos',
+  e_unexpected: 'Ei helevetti! Tapahtu unexpected error!',
 
   // Movie info
   mov_cast: 'Näyttelijät',
@@ -74,33 +74,34 @@ export const fiFI = {
   mov_order_asc: 'Paras vika',
   mov_search: 'Etsi',
   mov_not_found: 'TODO:No movies found!',
+  mov_button: 'Katso Elokuva!',
 
   // comments TODO
-  comment_section: 'TODO:Comments',
-  submit_comment: 'TODO:Submit a Comment',
-  write_comment: 'TODO:Write a comment',
-  long_comment: 'TODO:The comment is too long',
-  empty_comment: 'TODO:Cannot submit an empty comment',
+  comment_section: 'Kommentit',
+  submit_comment: 'Lähetä kommentti',
+  write_comment: 'Kirjoita kommentti',
+  long_comment: 'Kommentti on liian pitkä',
+  empty_comment: 'Kommentti ei voi olla tyhjä',
 
   //user profile TODO
-  name: 'TODO:Nimi:',
-  movies_watched: 'TODO:Movies watched in the last 30 days:',
+  name: 'Nimi:',
+  movies_watched: 'Viimeisen 30 päivän aikana katsotut elokuvat:',
 
   // password reset TODO
-  email_success_msg_start: 'TODO:Moikka moi ',
-  email_success_msg_end: 'TODO:! Please check your email',
-  reset_success_msg: 'TODO;Congrats! Nonii!',
-  change_pwd: 'TODO:Time to change the password!',
-  type_pwd: 'TODO:Type in your new password!',
-  new_pwd_placeholder: 'TODO:New Password',
-  new_pwd_again_placeholder: 'TODO:New Password again',
-  reset_pwd: 'TODO:Reset Password',
-  navigate_login: 'TODO:Back to login',
-  forgot_pwd: 'TODO:So you forgot your password?',
-  enter_email: 'TODO:Please give us your email and we will get it sorted out',
+  email_success_msg_start: 'Moikka moi ',
+  email_success_msg_end: 'Katso sähköpostisi',
+  reset_success_msg: 'Nonii!',
+  change_pwd: 'Aika vaihtaa salasana!',
+  type_pwd: 'Kirjoita uusi salasanasi!',
+  new_pwd_placeholder: 'Uusi salasana',
+  new_pwd_again_placeholder: 'Uusi salasana uudestaan',
+  reset_pwd: 'Päivitä salasana',
+  navigate_login: 'Kirjaudu sisään',
+  forgot_pwd: 'Unohtuiko salasana?',
+  enter_email: 'Kerro sähköpostiosoitteesi ja me hoidamme asian kuntoon',
 
   // navbar
-  movies: 'TODO:Elokuvat',
-  settings: 'TODO:Settings',
-  sign_out: 'TODO:Sign out Helvettiin',
+  movies: 'Elokuvat',
+  settings: 'Elokuvat',
+  sign_out: 'Kirjaudu ulos',
 }
