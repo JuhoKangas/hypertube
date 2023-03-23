@@ -53,7 +53,7 @@ settingsRouter.put('/', async (req, res) => {
 
     const user = await db.query('SELECT * FROM users WHERE user_id = $1', [
       formData.id,
-    ])('USER from baxckend', formData.id)
+    ])
 
     res.status(200).json({
       status: 'success',

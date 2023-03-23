@@ -11,7 +11,7 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import ResetPassword from './routes/ResetPassword'
 import MoviePage from './routes/MoviePage'
-import { UserProvider } from './context/UserContext'
+import { useLoggedUser, UserProvider } from './context/UserContext'
 import Settings from './routes/Settings'
 import Profile from './routes/Profile'
 
@@ -21,6 +21,8 @@ const App = () => {
 
   const matchProfile = useMatch('/:id')
   const selectedUser = matchProfile ? matchProfile.params.id : ''
+
+	const {loggedUser} = useLoggedUser()
 
   return (
     <div className='min-h-screen flex flex-col bg-hyper-black'>

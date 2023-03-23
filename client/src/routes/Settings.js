@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { useField } from '../hooks'
@@ -31,6 +31,13 @@ const Settings = () => {
     password: '',
     email: '',
   })
+
+	useEffect(() => {
+		if (!loggedUser.token) {
+			navigate('/')
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
   const handlePhotoChange = async (e) => {
     if (await isImage(e.target.files[0])) {
@@ -311,7 +318,7 @@ const Settings = () => {
                 ) : (
                   <img
                     className='object-cover rounded-full h-60 w-60'
-                    src={`http://localhost:3001/uploads/${loggedUser.profilePicture}`}
+                    src={loggedUser.token ? `http://localhost:3001/uploads/${loggedUser.profilePicture}` : ''}
                     alt=''
                   />
                 )}

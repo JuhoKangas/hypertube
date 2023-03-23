@@ -2,11 +2,23 @@ import React, { useEffect, useState } from 'react'
 import userServices from '../services/users'
 import { useMyLanguage } from '../context/LanguageContext'
 import { translate } from '../dictionaries/translate'
+import { useNavigate } from 'react-router-dom'
+import { useLoggedUser } from '../context/UserContext'
 
 const UserProfile = ({ selectedUser }) => {
   const [userData, setUserData] = useState({})
   const { language } = useMyLanguage()
   const dictionary = translate(language)
+
+	const navigate = useNavigate()
+	const { loggedUser } = useLoggedUser()
+
+	useEffect(() => {
+	if (!loggedUser.token) {
+		navigate('/')
+	}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
   useEffect(() => {
     const getUserData = async (selectedUser) => {

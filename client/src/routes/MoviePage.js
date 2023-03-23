@@ -9,6 +9,7 @@ import downloadService from '../services/download'
 import toast from 'react-hot-toast'
 import { useLoggedUser } from '../context/UserContext'
 import Comments from '../components/Comments'
+import { useNavigate } from 'react-router-dom'
 
 const MoviePage = ({ id }) => {
   const [movieData, setMovieData] = useState({})
@@ -17,6 +18,15 @@ const MoviePage = ({ id }) => {
   const { language } = useMyLanguage()
   const dictionary = translate(language)
   const { loggedUser } = useLoggedUser()
+
+	const navigate = useNavigate()
+
+	useEffect(() => {
+	if (!loggedUser.token) {
+		navigate('/')
+	}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
   useEffect(() => {
     const getMovieData = async (id) => {
@@ -44,6 +54,7 @@ const MoviePage = ({ id }) => {
       downloadService.updateWatched(id, loggedUser.user_id)
     }
   }
+
 
   return (
     <div className='text-gray-300 bg-hyper-black min-h-[97vh] relative overflow-x-hidden'>
