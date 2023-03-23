@@ -18,6 +18,8 @@ export const esES = {
   logIn: 'Iniciar sesión',
   signUp: 'Registrar',
   submit_btn: 'Enviar',
+	login_with: "Iniciar sesión con:",
+
 
   //messages
   m_landing: 'MIRA LAS ÚLTIMAS PELÍCULAS EN HYPERTUBE',

@@ -17,7 +17,8 @@ export const fiFI = {
   //Buttons
   logIn: 'Kirjaudu sisään',
   signUp: 'Rekisteröidy',
-  submit_btn: 'TODO:Submit',
+  submit_btn: 'Submittaa',
+	login_with: "Kirjaudu sisään tällä:",
 
   //messages
   m_landing: 'KATSO UUSIMMAT ELOKUVAT HYPERTUBESTA',
@@ -33,7 +34,7 @@ export const fiFI = {
   m_login_account: 'Kirjaudu omilla tunnuksilla',
   m_password_forgot: 'Unohtuko salasana? Painappa tästä',
 
-  // settings TODO
+  // settings
   update_h: 'Päivitä tietojasi',
   update_success: 'Tiedot päivitetty!',
   preferred_lang: 'Kieli',
@@ -76,18 +77,18 @@ export const fiFI = {
   mov_not_found: 'Voi vitsi! Ei löytynyt!',
   mov_button: 'Katso Elokuva!',
 
-  // comments TODO
+  // comments
   comment_section: 'Kommentit',
   submit_comment: 'Lähetä kommentti',
   write_comment: 'Kirjoita kommentti',
   long_comment: 'Kommentti on liian pitkä',
   empty_comment: 'Kommentti ei voi olla tyhjä',
 
-  //user profile TODO
+  //user profile
   name: 'Nimi:',
   movies_watched: 'Viimeisen 30 päivän aikana katsotut elokuvat:',
 
-  // password reset TODO
+  // password reset
   email_success_msg_start: 'Moikka moi ',
   email_success_msg_end: 'Katso sähköpostisi',
   reset_success_msg: 'Nonii!',
@@ -104,4 +105,5 @@ export const fiFI = {
   movies: 'Elokuvat',
   settings: 'Elokuvat',
   sign_out: 'Kirjaudu ulos',
+
 }

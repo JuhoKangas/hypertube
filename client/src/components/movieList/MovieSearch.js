@@ -1,4 +1,3 @@
-// TODO translate
 import { useState } from 'react'
 import { useMyLanguage } from '../../context/LanguageContext'
 import { translate } from '../../dictionaries/translate'

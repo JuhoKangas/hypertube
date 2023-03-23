@@ -89,7 +89,7 @@ const Login = () => {
           <hr />
           <div className='flex items-center justify-center mt-5 mb-5'>
             <p className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red font-montserrat'>
-              Log in with:
+              {dictionary.login_with}
             </p>
           </div>
           <div className='flex items-center justify-center mt-5 mb-5'>
@@ -117,7 +117,6 @@ const Login = () => {
           </div>
           <hr />
           <div className='flex items-center justify-center mt-5 mb-5'>
-            {/* TODO: Create a path for forgot password */}
             <Link
               className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red font-montserrat'
               to='/reset_password'

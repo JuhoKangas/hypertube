@@ -18,6 +18,7 @@ export const enUK = {
   logIn: 'Log in',
   signUp: 'Sign up',
   submit_btn: 'Submit',
+	login_with: "Log in with:",
 
   //messages
   m_landing: 'WATCH THE LATEST MOVIES ON HYPERTUBE',
