@@ -40,6 +40,20 @@ const Movies = () => {
     }
     getAllMovies()
 
+    const loginFromOauth = async (token) => {
+      const res = await userService.loginOauthUser(token)
+      const user = res.data
+      localStorage.setItem('loggedUser', JSON.stringify(user))
+      changeLoggedUser(user)
+      //check login worked?
+      changeLanguage(user.language)
+    }
+    if (document.cookie) {
+      const name = 'oauthLogin'
+      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+      loginFromOauth(match[2])
+      document.cookie = document.cookie + ';max-age=0'
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortAndFilter])
 	
@@ -68,7 +82,6 @@ const Movies = () => {
 
   const fetchNextMovies = async () => {
     const newMovies = await moviesService.getNextMovies(page + 1, sortAndFilter)
-    console.log(newMovies)
     if (newMovies.movies) {
       setAllMovies(allMovies.concat(newMovies.movies))
       setPage((prev) => prev + 1)

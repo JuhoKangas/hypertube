@@ -22,7 +22,6 @@ moviesRouter.get('/', async (req, res) => {
 
 moviesRouter.post('/', async (req, res) => {
   const params = querystring.stringify(req.body)
-  console.log(params)
   const allMovies = await axios.get(
     `https://yts.mx/api/v2/list_movies.json?${params}`
   )
@@ -80,7 +79,6 @@ moviesRouter.get('/id/:id', async (req, res) => {
     ...returnData.movie,
     additionalData: { ...additionalData.data },
   }
-  console.log(returnData)
 
   res.status(200).json(returnData)
 })
@@ -222,8 +220,6 @@ moviesRouter.get('/check/:id', async (req, res) => {
     [movieId]
   )
 
-  console.log(movieFound)
-
   res.status(200).json(movieFound)
 })
 
@@ -235,8 +231,6 @@ moviesRouter.get('/watched/:userId/:id', async (req, res) => {
     'SELECT * FROM watched_movies WHERE user_id = $1 AND yts_id = $2',
     [userId, ytsId]
   )
-
-  console.log(watched.rowCount)
 
   if (watched.rowCount !== 0) {
     res.send(true)
@@ -250,7 +244,6 @@ moviesRouter.get('/stream/:id', async (req, res) => {
   // Make sure there is a range header.
   //Otherwise, you won’t be able to tell the client what part of the video you want to send back.
   const range = req.headers.range
-  console.log('Range', range)
   if (!range) {
     res.status(400).send('Requires range header')
     return

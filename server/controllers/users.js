@@ -76,7 +76,6 @@ usersRouter.get('/:id', async (request, response) => {
     ])
 
     const user = data.rows[0]
-    console.log(user)
     response.json({
       ...user,
       profilePicture: user.profile_picture,
@@ -93,10 +92,9 @@ usersRouter.get('/selected/:id', async (req, res) => {
 
   try {
     const data = await db.query(
-      'SELECT user_id, github_id, fortytwo_id, username, profile_picture, firstname, lastname FROM users WHERE user_id = $1',
+      'SELECT id, user_id, github_id, fortytwo_id, username, profile_picture, firstname, lastname FROM users WHERE user_id = $1',
       [id]
     )
-
     if (data.rows[0].github_id === null && data.rows[0].fortytwo_id === null)
       userId = data.rows[0].id
     else if (
