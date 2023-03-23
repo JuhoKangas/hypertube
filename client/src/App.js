@@ -1,6 +1,6 @@
 import React from 'react'
 import { LanguageProvider } from './context/LanguageContext'
-import { Routes, Route, useMatch } from 'react-router-dom'
+import { Routes, Route, useMatch, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
 import Landing from './routes/Landing'
@@ -11,7 +11,7 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import ResetPassword from './routes/ResetPassword'
 import MoviePage from './routes/MoviePage'
-import { UserProvider } from './context/UserContext'
+import { useLoggedUser, UserProvider } from './context/UserContext'
 import Settings from './routes/Settings'
 import Profile from './routes/Profile'
 
@@ -22,6 +22,8 @@ const App = () => {
   const matchProfile = useMatch('/:id')
   const selectedUser = matchProfile ? matchProfile.params.id : ''
 
+  const { loggedUser } = useLoggedUser()
+
   return (
     <div className='min-h-screen flex flex-col bg-hyper-black'>
       <LanguageProvider>
@@ -29,17 +31,25 @@ const App = () => {
           <Navbar />
           <Toaster position='top-center' reverseOrder={false} />
           <Routes>
-            <Route path='/movies/:id' element={<MoviePage id={movieId} />} />
+            {loggedUser.token ? (
+              <>
+                <Route
+                  path='/movies/:id'
+                  element={<MoviePage id={movieId} />}
+                />
+                <Route path={'/movies'} element={<Movies />} />
+                <Route path={'/settings'} element={<Settings />}></Route>
+                <Route
+                  path={'/:id'}
+                  element={<Profile selectedUser={selectedUser} />}
+                ></Route>
+              </>
+            ) : null}
             <Route path={'/'} element={<Landing />}></Route>
-            <Route path={'/movies'} element={<Movies />} />
             <Route path={'/login'} element={<Login />}></Route>
             <Route path={'/signup'} element={<Signup />}></Route>
             <Route path={'/reset_password'} element={<ResetPassword />}></Route>
-            <Route path={'/settings'} element={<Settings />}></Route>
-            <Route
-              path={'/:id'}
-              element={<Profile selectedUser={selectedUser}/>}
-            ></Route>
+            <Route path='*' element={<Navigate replace to='/' />} />
           </Routes>
           <Footer />
         </UserProvider>
