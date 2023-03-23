@@ -41,7 +41,6 @@ const Movies = () => {
     const loginFromOauth = async (token) => {
       const res = await userService.loginOauthUser(token)
       const user = res.data
-			console.log("USER", user)
       localStorage.setItem('loggedUser', JSON.stringify(user))
       changeLoggedUser(user)
       //check login worked?
@@ -58,7 +57,6 @@ const Movies = () => {
 
   const fetchNextMovies = async () => {
     const newMovies = await moviesService.getNextMovies(page + 1, sortAndFilter)
-    console.log(newMovies)
     if (newMovies.movies) {
       setAllMovies(allMovies.concat(newMovies.movies))
       setPage((prev) => prev + 1)

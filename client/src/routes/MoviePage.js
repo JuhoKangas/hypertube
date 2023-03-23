@@ -17,12 +17,10 @@ const MoviePage = ({ id }) => {
   const { language } = useMyLanguage()
   const dictionary = translate(language)
   const { loggedUser } = useLoggedUser()
-  console.log(language)
 
   useEffect(() => {
     const getMovieData = async (id) => {
       const fetchedMovieData = await moviesServices.getMovieData(id)
-      console.log(fetchedMovieData)
       setMovieData(fetchedMovieData)
       setIsLoading(false)
     }
