@@ -107,6 +107,12 @@ const Navbar = () => {
                     </Menu.Items>
                   </Transition>
                 </Menu>
+                <Link
+                  onClick={handleLogout}
+                  className='px-4 py-2 text-sm text-gray-700 '
+                >
+                  X
+                </Link>
               </div>
             </div>
           </div>

@@ -21,12 +21,12 @@ const Login = () => {
     if (await checkUser(username, password)) {
       const res = await userService.loginUser(username, password)
       const user = res.data
-			if (!user.error) {
-				localStorage.setItem('loggedUser', JSON.stringify(user))
-				changeLoggedUser(user)
-				changeLanguage(user.language)
-				navigate('/movies')
-			}
+      if (!user.error) {
+        localStorage.setItem('loggedUser', JSON.stringify(user))
+        changeLoggedUser(user)
+        changeLanguage(user.language)
+        navigate('/movies')
+      }
     } else {
       toast.error(dictionary.e_password)
     }
@@ -47,10 +47,7 @@ const Login = () => {
           className='bg-hyper-black shadow-sm rounded-md px-10 pt-10 mb-4'
         >
           <div className='mb-4'>
-            <label
-              className='text-white font-medium mb-2'
-              htmlFor='username'
-            >
+            <label className='text-white font-medium mb-2' htmlFor='username'>
               {dictionary.username}
             </label>
             <input
@@ -64,10 +61,7 @@ const Login = () => {
           </div>
 
           <div className='mb-6'>
-            <label
-              className='text-white font-medium mb-2'
-              htmlFor='password'
-            >
+            <label className='text-white font-medium mb-2' htmlFor='password'>
               {dictionary.password}
             </label>
             <input
@@ -84,7 +78,7 @@ const Login = () => {
             <input
               className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-semibold text-2xl cursor-pointer'
               type='submit'
-              value='Login'
+              value={dictionary.logIn}
             />
           </div>
           <hr />

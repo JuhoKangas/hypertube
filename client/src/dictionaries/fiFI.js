@@ -5,7 +5,7 @@ export const fiFI = {
   lastname: 'Sukunimi',
   email: 'Sähköposti',
   password: 'Salasana',
-  password_repeat: 'Repeat password',
+  password_repeat: 'Salasana taas kiitos',
   profile_picture: 'Profiilikuva',
   language: 'Kieli',
 
@@ -57,7 +57,7 @@ export const fiFI = {
   e_password_match: 'Salasanat ei täsmää!',
   e_photo_format: 'Pelkästään jpg tai png kuvia kiitos',
   e_unexpected: 'Ei helevetti! Tapahtu unexpected error!',
-  e_password: 'Username or password was incorrect',
+  e_password: 'Väärä salasanaa tai käyttäjänimeä',
 
   // Movie info
   mov_cast: 'Näyttelijät',
@@ -105,6 +105,6 @@ export const fiFI = {
 
   // navbar
   movies: 'Elokuvat',
-  settings: 'Elokuvat',
+  settings: 'Asetukset',
   sign_out: 'Kirjaudu ulos',
 }
