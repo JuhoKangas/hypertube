@@ -61,6 +61,7 @@ export const esES = {
   e_password_match: 'Las contraseñas no son iguales!',
   e_photo_format: 'Solo jpg/jpeg o pngs por favor',
   e_unexpected: 'Dios mío! Error inesperado!',
+  e_password: 'Nombre de usuario o contraseña incorrectos',
 
   // Movie info
   mov_cast: 'Reparto principal: ',

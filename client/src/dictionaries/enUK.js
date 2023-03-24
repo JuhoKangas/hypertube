@@ -61,6 +61,7 @@ export const enUK = {
   e_password_match: 'Passwords do not match!',
   e_photo_format: 'Only jpg/jpeg or pngs please',
   e_unexpected: 'Uh-oh! Unexpected error happened!',
+  e_password: 'Väärä salasanaa tai käyttäjänimeä',
 
   // Movie info
   mov_cast: 'Main cast:',

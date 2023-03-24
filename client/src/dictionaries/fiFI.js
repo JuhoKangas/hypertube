@@ -57,6 +57,7 @@ export const fiFI = {
   e_password_match: 'Salasanat ei täsmää!',
   e_photo_format: 'Pelkästään jpg tai png kuvia kiitos',
   e_unexpected: 'Ei helevetti! Tapahtu unexpected error!',
+  e_password: 'Username or password was incorrect',
 
   // Movie info
   mov_cast: 'Näyttelijät',
