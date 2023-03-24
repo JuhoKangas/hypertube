@@ -27,7 +27,7 @@ const Navbar = () => {
     <Disclosure as='nav' className='bg-hyper-black'>
       {({ open }) => (
         <>
-          <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 font-montserrat'>
+          <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
             <div className='relative flex h-16 items-center justify-between'>
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
                 {/* Mobile menu button*/}
@@ -57,7 +57,7 @@ const Navbar = () => {
               </div>
               <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
                 <div className='flex gap-4 mr-2'>
-                  <p className='font-montserrat text-white pt-1 uppercase'>
+                  <p className='text-white pt-1 uppercase'>
                     {loggedUser.username}
                   </p>
                 </div>

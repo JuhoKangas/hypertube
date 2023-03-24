@@ -61,7 +61,7 @@ const MovieCard = ({ movie }) => {
   return (
     <div
       onClick={handleClick}
-      className='rounded-md w-96 font-montserrat text-white hover:scale-105 transition-all cursor-pointer group'
+      className='rounded-md w-96 text-white hover:scale-105 transition-all cursor-pointer group'
     >
       <div className='relative w-full h-full'>
         <img className='rounded-lg w-full h-full' src={coverImage} alt='' />

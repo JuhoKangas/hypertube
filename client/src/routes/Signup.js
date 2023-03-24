@@ -128,7 +128,7 @@ const Signup = () => {
     <div className='md:h-screen h-full flex flex-col bg-hyper-black'>
       <LanguageOptions></LanguageOptions>
       <div>
-        <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-10'>
+        <h1 className='text-center  font-bold leading-tight text-white text-4xl mt-20 mb-10'>
           {dictionary.m_create_account}
         </h1>
       </div>
@@ -140,7 +140,7 @@ const Signup = () => {
           <div className='mb-4'>
             <div className='mb-4'>
               <label
-                className='font-montserrat font-medium mb-2 text-white'
+                className=' font-medium mb-2 text-white'
                 htmlFor='username'
               >
                 {dictionary.username}
@@ -150,17 +150,14 @@ const Signup = () => {
                 id='username'
                 name='username'
                 placeholder='e.g. Joel'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.username}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className='mb-4'>
-              <label
-                className='font-montserrat font-medium mb-2 text-white'
-                htmlFor='email'
-              >
+              <label className=' font-medium mb-2 text-white' htmlFor='email'>
                 {dictionary.email}
               </label>
               <input
@@ -168,7 +165,7 @@ const Signup = () => {
                 id='email'
                 name='email'
                 placeholder='e.g pedro.pascal@hotttdaddy.com'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -176,7 +173,7 @@ const Signup = () => {
             </div>
             <div className='mb-4'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='password'
               >
                 {dictionary.password}
@@ -185,7 +182,7 @@ const Signup = () => {
                 type='password'
                 name='password'
                 placeholder='******************'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.password}
                 onChange={handleChange}
                 required
@@ -194,7 +191,7 @@ const Signup = () => {
 
             <div className='mb-4'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='password'
               >
                 {dictionary.password_repeat}
@@ -204,7 +201,7 @@ const Signup = () => {
                 id='password-check'
                 name='password-check'
                 placeholder='******************'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
@@ -213,7 +210,7 @@ const Signup = () => {
 
             <div className='mb-4'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='firstname'
               >
                 {dictionary.firstname}
@@ -223,7 +220,7 @@ const Signup = () => {
                 id='first-name'
                 name='firstname'
                 placeholder='e.g Pedro'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.firstname}
                 onChange={handleChange}
                 required
@@ -232,7 +229,7 @@ const Signup = () => {
 
             <div className='mb-4'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='lastname'
               >
                 {dictionary.lastname}
@@ -242,7 +239,7 @@ const Signup = () => {
                 id='last-name'
                 name='lastname'
                 placeholder='e.g. Pascal'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.lastname}
                 onChange={handleChange}
                 required
@@ -251,7 +248,7 @@ const Signup = () => {
           </div>
           <div className='flex items-center justify-center'>
             <input
-              className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
+              className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline  font-semibold text-2xl cursor-pointer'
               type='submit'
               value={dictionary.signUp}
             />
@@ -261,7 +258,7 @@ const Signup = () => {
       </div>
       <div className='flex items-center justify-center mb-5'>
         <Link
-          className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
+          className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red '
           to='/login'
         >
           {dictionary.m_already_account}

@@ -56,7 +56,7 @@ const Comments = ({ id }) => {
   }
 
   return (
-    <div className='z-0 font-montserrat'>
+    <div className='z-0'>
       <h1 className='mt-16 text-3xl font-semibold mb-3 ml-3'>
         {dictionary.comment_section}
       </h1>

@@ -28,7 +28,7 @@ const Login = () => {
 				navigate('/movies')
 			}
     } else {
-      toast.error('Username or password was incorrect')
+      toast.error(dictionary.e_password)
     }
   }
 
@@ -36,7 +36,7 @@ const Login = () => {
     <div className='md:h-screen h-full flex flex-col bg-hyper-black'>
       <LanguageOptions></LanguageOptions>
       <div>
-        <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-20'>
+        <h1 className='text-center font-bold leading-tight text-white text-4xl mt-20 mb-20'>
           {dictionary.m_login_account}
         </h1>
       </div>
@@ -48,7 +48,7 @@ const Login = () => {
         >
           <div className='mb-4'>
             <label
-              className='text-white font-montserrat font-medium mb-2'
+              className='text-white font-medium mb-2'
               htmlFor='username'
             >
               {dictionary.username}
@@ -58,14 +58,14 @@ const Login = () => {
               name='username'
               id='username'
               placeholder='Username'
-              className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+              className='p-2 mt-1 mb-10 w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
               required
             />
           </div>
 
           <div className='mb-6'>
             <label
-              className='text-white font-montserrat font-medium mb-2'
+              className='text-white font-medium mb-2'
               htmlFor='password'
             >
               {dictionary.password}
@@ -75,21 +75,21 @@ const Login = () => {
               name='password'
               id='password'
               placeholder='******************'
-              className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+              className='p-2 mt-1 w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
               required
             />
           </div>
 
           <div className='flex items-center justify-center mb-5'>
             <input
-              className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
+              className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-semibold text-2xl cursor-pointer'
               type='submit'
               value='Login'
             />
           </div>
           <hr />
           <div className='flex items-center justify-center mt-5 mb-5'>
-            <p className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red font-montserrat'>
+            <p className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red '>
               {dictionary.login_with}
             </p>
           </div>
@@ -119,7 +119,7 @@ const Login = () => {
           <hr />
           <div className='flex items-center justify-center mt-5 mb-5'>
             <Link
-              className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red font-montserrat'
+              className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red'
               to='/reset_password'
             >
               {dictionary.m_password_forgot}
@@ -128,7 +128,7 @@ const Login = () => {
           <hr />
           <div className='flex items-center justify-center mt-5'>
             <a
-              className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red font-montserrat'
+              className='text-white inline-block align-baseline font-bold text-sm hover:text-light-red'
               href='/signup'
             >
               {dictionary.m_create_account_join}

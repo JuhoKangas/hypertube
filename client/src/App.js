@@ -25,7 +25,7 @@ const App = () => {
 	const {loggedUser} = useLoggedUser()
 
   return (
-    <div className='min-h-screen flex flex-col bg-hyper-black'>
+    <div className='min-h-screen flex flex-col bg-hyper-black font-montserrat'>
       <LanguageProvider>
         <UserProvider>
           <Navbar />

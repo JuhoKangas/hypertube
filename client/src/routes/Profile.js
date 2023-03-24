@@ -34,7 +34,7 @@ const UserProfile = ({ selectedUser }) => {
   }, [])
 
   return (
-    <div className='bg-hyper-black flex flex-col h-screen p-20 font-montserrat'>
+    <div className='bg-hyper-black flex flex-col h-screen p-20'>
       <div className='flex flex-col items-center justify-center'>
         {userData.profilePicture ? (
           <img

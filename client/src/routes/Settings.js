@@ -172,7 +172,7 @@ const Settings = () => {
   return (
     <div className='md:h-full flex flex-col bg-hyper-black'>
       <div>
-        <h1 className='text-center font-montserrat font-bold leading-tight text-white text-4xl mt-20 mb-10'>
+        <h1 className='text-center  font-bold leading-tight text-white text-4xl mt-20 mb-10'>
           {dictionary.update_h} {/* add to dictionary */}
         </h1>
       </div>
@@ -184,7 +184,7 @@ const Settings = () => {
           <div className='mb-4'>
             <div className='mb-4'>
               <label
-                className='font-montserrat font-medium mb-2 text-white'
+                className=' font-medium mb-2 text-white'
                 htmlFor='username'
               >
                 {dictionary.username}
@@ -194,7 +194,7 @@ const Settings = () => {
                 id='username'
                 name='username'
                 placeholder='Joel'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.username}
                 onChange={handleChange}
                 {...initialUsername}
@@ -202,7 +202,7 @@ const Settings = () => {
             </div>
             <div className='mb-4'>
               <label
-                className='font-montserrat font-medium mb-2 text-white'
+                className=' font-medium mb-2 text-white'
                 htmlFor='email'
               >
                 {dictionary.email}
@@ -212,7 +212,7 @@ const Settings = () => {
                 id='email'
                 name='email'
                 placeholder='pedro.pascal@hotttdaddy.com'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.email}
                 onChange={handleChange}
                 {...initialEmail}
@@ -220,7 +220,7 @@ const Settings = () => {
             </div>
             <div className='mb-4'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='password'
               >
                 {dictionary.password}
@@ -229,7 +229,7 @@ const Settings = () => {
                 type='password'
                 name='password'
                 placeholder='******************'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.password}
                 onChange={handleChange}
               />
@@ -237,7 +237,7 @@ const Settings = () => {
 
             <div className='mb-4'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='password'
               >
                 {dictionary.password_repeat}
@@ -247,7 +247,7 @@ const Settings = () => {
                 id='password-check'
                 name='password-check'
                 placeholder='******************'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -255,7 +255,7 @@ const Settings = () => {
 
             <div className='mb-4'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='firstname'
               >
                 {dictionary.firstname}
@@ -265,7 +265,7 @@ const Settings = () => {
                 id='first-name'
                 name='firstname'
                 placeholder='Pedro'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.firstname}
                 onChange={handleChange}
                 {...initialFirstname}
@@ -274,7 +274,7 @@ const Settings = () => {
 
             <div className='mb-4'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='lastname'
               >
                 {dictionary.lastname}
@@ -284,7 +284,7 @@ const Settings = () => {
                 id='last-name'
                 name='lastname'
                 placeholder='Pascal'
-                className='p-2 mt-1 mb-10 font-montserrat w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+                className='p-2 mt-1 mb-10  w-full h-10 rounded-md border-gray-300 shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
                 value={formData.lastname}
                 onChange={handleChange}
                 {...initialLastname}
@@ -292,7 +292,7 @@ const Settings = () => {
             </div>
             <div className='mb-4'>
               <label
-                className='font-montserrat font-medium mb-2 text-white'
+                className=' font-medium mb-2 text-white'
                 htmlFor='language'
               >
                 {dictionary.preferred_lang}
@@ -303,7 +303,7 @@ const Settings = () => {
             </div>
             <div className='flex flex-col'>
               <label
-                className=' font-montserrat font-medium mb-2 text-white'
+                className='  font-medium mb-2 text-white'
                 htmlFor='profilepicture'
               >
                 {dictionary.profile_picture}
@@ -332,7 +332,7 @@ const Settings = () => {
           </div>
           <div className='flex items-center justify-center'>
             <input
-              className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
+              className='text-white bg-dark-red py-3 px-5 mt-5 mb-10 rounded focus:outline-none focus:shadow-outline  font-semibold text-2xl cursor-pointer'
               type='submit'
               value={dictionary.submit_btn}
             />

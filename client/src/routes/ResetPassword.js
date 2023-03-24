@@ -89,7 +89,7 @@ const ResetPassword = () => {
             onChange={(e) => setNewPassword(e.target.value)}
             type='password'
             placeholder={dictionary.new_pwd_placeholder}
-            className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+            className='p-2 mt-1 w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
             required
           />
           <input
@@ -97,18 +97,18 @@ const ResetPassword = () => {
             onChange={(e) => setNewPasswordAgain(e.target.value)}
             type='password'
             placeholder={dictionary.new_pwd_again_placeholder}
-            className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+            className='p-2 mt-1 w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
             required
           />
           <input
-            className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
+            className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-semibold text-2xl cursor-pointer'
             type='submit'
             value={dictionary.reset_pwd}
           />
         </form>
         <Link
           to='/login'
-          className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
+          className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red'
         >
           {dictionary.navigate_login}
         </Link>
@@ -127,11 +127,11 @@ const ResetPassword = () => {
           onChange={(e) => setEmail(e.target.value)}
           type='email'
           placeholder={dictionary.email}
-          className='p-2 mt-1 font-montserrat w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
+          className='p-2 mt-1 w-full h-10 rounded-md shadow-sm focus:outline-none text-gray-700 focus:border-dark-red focus:ring focus:ring-dark-red focus:ring-opacity-20'
           required
         />
         <input
-          className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-montserrat font-semibold text-2xl cursor-pointer'
+          className='text-white bg-dark-red py-3 px-5 mt-10 mb-5 rounded focus:outline-none focus:shadow-outline font-semibold text-2xl cursor-pointer'
           type='submit'
           value={dictionary.reset_pwd}
         />
@@ -139,7 +139,7 @@ const ResetPassword = () => {
       <hr />
       <Link
         to='/login'
-        className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red font-montserrat'
+        className='text-white inline-block align-baseline font-bold text-sm text-chitty-chitty hover:text-light-red'
       >
         {dictionary.navigate_login}
       </Link>
