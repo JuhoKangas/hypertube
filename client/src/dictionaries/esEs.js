@@ -13,13 +13,13 @@ export const esES = {
   comments: 'Comentarios',
   resolution: 'Resolución',
   subtitles: 'Subtitulos',
+  wait: 'Relájate y espera!',
 
   //Buttons
   logIn: 'Iniciar sesión',
   signUp: 'Registrar',
   submit_btn: 'Enviar',
-	login_with: "Iniciar sesión con:",
-
+  login_with: 'Iniciar sesión con:',
 
   //messages
   m_landing: 'MIRA LAS ÚLTIMAS PELÍCULAS EN HYPERTUBE',

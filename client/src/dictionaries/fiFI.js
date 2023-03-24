@@ -13,12 +13,13 @@ export const fiFI = {
   comments: 'Kommentit',
   resolution: 'Resoluutio',
   subtitles: 'Tekstitykset',
+  wait: 'Ota rennosti ja odota että elokuvasi alkaa!',
 
   //Buttons
   logIn: 'Kirjaudu sisään',
   signUp: 'Rekisteröidy',
   submit_btn: 'Submittaa',
-	login_with: "Kirjaudu sisään tällä:",
+  login_with: 'Kirjaudu sisään tällä:',
 
   //messages
   m_landing: 'KATSO UUSIMMAT ELOKUVAT HYPERTUBESTA',
@@ -105,5 +106,4 @@ export const fiFI = {
   movies: 'Elokuvat',
   settings: 'Elokuvat',
   sign_out: 'Kirjaudu ulos',
-
 }

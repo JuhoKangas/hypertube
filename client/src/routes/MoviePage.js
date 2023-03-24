@@ -19,30 +19,31 @@ const MoviePage = ({ id }) => {
   const dictionary = translate(language)
   const { loggedUser } = useLoggedUser()
 
-	const navigate = useNavigate()
+  const navigate = useNavigate()
 
-	useEffect(() => {
-	if (!loggedUser.token) {
-		navigate('/')
-	}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+  useEffect(() => {
+    if (!loggedUser.token) {
+      navigate('/')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const getMovieData = async (id) => {
       const fetchedMovieData = await moviesServices.getMovieData(id)
-			if (fetchedMovieData.error) {
-				navigate('/')
-			} else {
-				setMovieData(fetchedMovieData)
-				setIsLoading(false)
-			}
+      if (fetchedMovieData.error) {
+        navigate('/')
+      } else {
+        setMovieData(fetchedMovieData)
+        setIsLoading(false)
+      }
     }
     getMovieData(id)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   const downloadMovie = async () => {
+    toast.success(dictionary.wait)
     const downloaded = await downloadService.checkDownloaded(id)
     if (downloaded.rowCount === 0) {
       const response = await downloadService.startDownload(id)

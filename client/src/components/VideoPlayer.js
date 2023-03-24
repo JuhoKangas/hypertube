@@ -5,7 +5,8 @@ const VideoPlayer = ({ movieId }) => {
     <div className='z-10'>
       <ReactPlayer
         url={`http://localhost:3001/movies/stream/${movieId}`}
-        autoPlay={true}
+        playing={true}
+        muted={true}
         controls
       />
     </div>
